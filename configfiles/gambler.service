@@ -1,0 +1,20 @@
+[Unit]
+Description=Gunicorn instance to serve Gambler
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/gambler/flask
+Environment="PATH=/var/www/gambler/.venv/bin"
+Environment="DB_NAME=Gambler"
+Environment="DB_USER=-username-"
+Environment="DB_PW=-passowrd-"
+Environment="SECRET_KEY=-secret-"
+Environment="UPLOAD_FOLDER_GP=/var/www/gambler/flask/static/images/"
+ExecStart=/var/www/gambler/.venv/bin/gunicorn --config /var/www/gambler/configfiles/gunicorn.py wsgi:application
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=gambler
+
+[Install]
+WantedBy=multi-user.target

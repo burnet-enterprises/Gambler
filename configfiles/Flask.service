@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn instance to serve Flask
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/Flask
+Environment="PATH=/home/ubuntu/flaskvenv/bin"
+ExecStart=/home/ubuntu/flaskvenv/bin/gunicorn --workers 3 --bind 127.0.0.1:8006 -m 007 flask.mainapp:mainapp
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+[Install]
+WantedBy=multi-user.target
+

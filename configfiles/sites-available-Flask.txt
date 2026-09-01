@@ -1,0 +1,35 @@
+upstream gnx{
+	server  127.0.0.1:8006;
+}
+server {
+    listen 80;
+    server_name ec2-18-237-99-39.us-west-2.compute.amazonaws.com;
+    listen [::]:80;
+#    listen 8006;
+#    listen [::]:8006;
+    listen [::1];
+    access_log /var/log/nginx/site_access.log;
+    error_log /var/log/nginx/site_error.log;
+
+    location /gambler/ {
+        include proxy_params;
+#       proxy_pass 34.215.33.211;
+#        proxy_pass http://unix:/tmp/Flask.sock;
+	proxy_pass http://gnx;
+	proxy_redirect off;
+    }
+    location ^~ /gambler/static/  {
+        #root  /home/ubuntu/Flask/static/;
+    	#proxy_pass http://gnx;
+
+        proxy_redirect http://127.0.0.1:8006/static/ http://$host/static/;
+	alias /home/ubuntu/Flask/static;
+	}
+
+#     location ^~  /gambler/docs/  {
+	#include proxy_params;
+#	proxy_redirect http://127.0.0.1:8006/docs/ http://$host/docs/;
+#        alias /home/ubuntu/Flask/docs/build/html;
+	#index index.html;
+ #}
+} 

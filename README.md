@@ -17,11 +17,6 @@ wwww. mywebsite. com/gamblersetup <- Go to the url and start there
 wwww. mywebsite. com/gambler/   
 wwww. mywebsite. com/gambler/gamblersetup  <- Go to the url and start there
 
-## Application
-Update: December 12, 2023
-There are applications within the bundle for Macintosh and Windows with a Linux version assumed and indirectly built between the two applications
-Go to the application folder and select the Windows version for Windows and Mac version for MacOS
-
 Happy trails and I wish you luck.
 
 AJ

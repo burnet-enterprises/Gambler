@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class = "container" >
+<form method="POST" id="GamblerSetup" action="" enctype="multipart/form-data">
+<div class="jumbotron">
+This form will help create and maintain langauge.</br>  Please make sure to follow the directions as they will guide in making the final Gambler form.
+</div>
+{{form.csrf_token }}
+<p>First The Language code and the Language. A list of language codes with countries <a href="https://www.andiamo.co.uk/resources/iso-language-codes/">can be viewed here,</a> </p>
+<div class="row">{{wtf.form_field(form.dlanguage)}}  </div>
+<div class="row">{{wtf.form_field(form.dlanguage_name)}}  </div>
+<p>Please fill in the translation text. </br>To make sure translation works well, keep anything within the brackets (i.e. {% raw %} {{ }} {% endraw %}) in English as seen in the reference material.</p>
+<div class="row">{{wtf.form_field(form.dGreeting_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dContinue_Button)}}  </div>  
+<div class="row">{{wtf.form_field(form.dShow_Less_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dShow_More_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dTitle_Title_Program)}}  </div>  
+<div class="row">{{wtf.form_field(form.dTitle_Project_Name)}}  </div>  
+<div class="row">{{wtf.form_field(form.dTitle_Status_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dTitle_Start_Button)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSInfo_Icon_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSInfo_HS_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSInfo_HSA_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSInfo_Status_Info)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSInfo_Information_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSInfo_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dOR_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dOR_Video_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dOR_Incorrect_Function_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dVAS_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dVAS_Alert_Selection_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dVAS_Video_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSG_Video_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSG_HS_Video_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dTTO_Video_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dTTO_HS_Video_Instruction_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_HS_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_OR_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_VAS_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_SG_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_TTO_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_CSV_Export_Button)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_Finish_Button)}}  </div>  
+<div class="row">{{wtf.form_field(form.dEnd_Greeting_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_userid_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_firstname_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_lastname_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_age_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_hld_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_gender_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_race_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_videoinstructions_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_firstname_warn_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_lastname_warn_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_age_warn_text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dDemo_Information_Text)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSG_Shake_Button)}}  </div>  
+<div class="row">{{wtf.form_field(form.dSG_Pill_Text)}}  </div>
+<div class="row">{{wtf.form_field(form.dTTO_Month_Text)}}  </div>
+<div class="row">{{wtf.form_field(form.dTTO_Year_Text)}}  </div>
+<p>Finally fill in the demographic tranlation in a JSON format as provided below.</p>
+<div class="row">{{wtf.form_field(form.ddemographics_gender)}}  </div>
+<div class="row">{{wtf.form_field(form.ddemographics_gender_default)}}  </div>
+<div class="row">{{wtf.form_field(form.ddemographics_race)}}  </div>
+<div class="row">{{wtf.form_field(form.ddemographics_race_default)}}  </div>
+</div>
+<div style="display:flex;justify-content:center;align-items:center;">
+  <div><input class="btn btn-primary" type="submit" value = "submit"></div>
+</div>
+{% if form.errors %}
+    {{ form.errors }}
+{% endif %}
+</d1>
+</form>
+</div>
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+<script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+<!-- In <body> -->
+<script type="text/javascript">
+
+</script>
+{% endblock %}
+
+

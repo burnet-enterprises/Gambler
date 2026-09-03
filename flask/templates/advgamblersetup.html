@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="container">
+<h2>Hello, this is the advanced Gambler Edit page.  DO NOT USE unless authorized to do so.</h2>
+  {{form.csrf_token }}
+  
+<h1>Select the Gambler project you want to export.</h1>
+
+<form method="POST" id="GamblerNew"  enctype="multipart/form-data">
+<div class="row"><p><div class="col-md-3 col-md-offset-4">{{wtf.form_field(form.gamblertitle)}} </div></p></div>
+
+<p><input class="btn btn-primary" type="submit" name = "Export" value = "Export"></p>
+
+<h1>Upload the Gambler project you want to import. </h1>
+<p>NOTE: Only uploads text and not the images or videos which needs interfacing through Gambler Setup</p>
+
+<div class="row"><p><div class="col-md-3 col-md-offset-4">  <input type="file" name="filename"> </div></p></div>
+
+<p><input class="btn btn-primary" type="submit" value = "Upload" name="Upload"></p>
+
+</div>
+</form>
+
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        
+
+<script type="text/javascript">
+</script>
+{% endblock %}

@@ -1,0 +1,429 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles %}
+{{super()}}
+<!-- In <head> -->
+<style type="text/css" >
+#imagedis {
+	display: inline-block;
+}
+#textinfo {
+	display: flex;
+	width: 320px;
+    padding: 10px;
+    margin: 0;
+}
+
+.heightSet {
+    max-height: 50px;
+}
+
+</style>
+{% endblock%}
+{% block content %}
+<div class="container">
+
+<h2><p>User Information Portal</p></h2>
+<p>Please enter information in the following cells to retrieve data.</p>
+
+<div class="row"><div class="col-md-4 col-md-offset-2">{{wtf.form_field(form.gamblertitle)}}</div><div class="col-md-4"> <div class="input-group mb-3">
+<label class="control-label" for="UserID">User/Patient ID</label>  <input type="text" id="UserID" class="form-control" placeholder="User ID" aria-label="Username" aria-describedby="basic-addon1"></div></div>
+<div class="row"><br><br></div>
+<div class="row"> <div class="col-md-2 col-md-offset-2"><input type="button" class="btn btn-primary"  id="UserData" value="View User Data"></div>
+ <div class="col-md-2"><input type="button" class="btn btn-primary" id="LastUserData" value="View Last User Data"></div>
+ <div class="col-md-2"><button type="button" class="btn btn-danger" id = "DeleteUser" name="DeleteUser" data-toggle="modal" data-target="#deleteModal">Delete User Data</button> </div></div>
+
+<div id="UserResults">
+
+<div class="row"><div class="jumbotron">
+    <p><h3 style="text-align: center;">Thank you for completing the assessemnt.  Here are the results.</h3></p>
+  </div> </div>
+<table class="table table-bordered table-hover" align="center">
+	<thead>
+		<tr>
+			<th>Health State</th>
+			<th class = "Order">Order Scale</th> 
+			<th class="Intensity">Visual Analog Scale</th> 
+			<th class="Gamble">Standard Reference Gamble</th> 
+			<th class="Time"> Time Trade Off</th> 
+			</tr>
+	</thead>
+	<tbody>
+		<tr id="setup1">
+			<td>  <img id="image1" class="heightSet"src=""><br/><span id="First_Condition"></span></td>
+			<td><span id="FirstConditionOrder" class = "Order"></span></td>
+			<td><span id="FirstConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="FirstConditionGamble" class = "Gamble"></span></td>
+			<td><span id="FirstConditionTime" class = "Time"></span></td>
+		</tr>
+		<tr id="setup2">
+			<td>  <img id="image2" class="heightSet"src=""><br /><span id="Second_Condition"></span></td> 
+			<td><span id="SecondConditionOrder" class = "Order"></span></td>
+			<td><span id="SecondConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="SecondConditionGamble" class = "Gamble"></span></td>
+			<td><span id="SecondConditionTime" class = "Time"></span></td>
+		</tr>
+		<tr id="setup3">
+			<td>  <img id="image3"class="heightSet"src=""><br/><span id="Third_Condition"></span></td>
+			<td><span id="ThirdConditionOrder" class = "Order"></span></td>
+			<td><span id="ThirdConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="ThirdConditionGamble" class = "Gamble"></span></td>
+			<td><span id="ThirdConditionTime" class = "Time"></span></td>
+		</tr>
+		<tr id="setup4">
+			<td>  <img id="image4" class="heightSet"src=""><br/><span id="Fourth_Condition"></span></td>
+			<td><span id="FourthConditionOrder" class = "Order"></span></td>
+			<td><span id="FourthConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="FourthConditionGamble" class = "Gamble"></span></td>
+			<td><span id="FourthConditionTime" class = "Time"></span></td>
+		</tr>
+
+		<tr id = "setup5">
+			<td>  <img id="image5" class="heightSet"src=""><br/><span id="Fifth_Condition"></span></td>
+			<td><span id="FifthConditionOrder" class = "Order"></span></td>
+			<td><span id="FifthConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="FifthConditionGamble" class = "Gamble"></span></td>
+			<td><span id="FifthConditionTime" class = "Time"></span></td>
+		</tr>
+
+		<tr id = "setup6">
+			<td>  <img id="image6" class="heightSet"src=""><br/><span id="Sixth_Condition"></span></td>
+			<td><span id="SixthConditionOrder" class = "Order"></span></td>
+			<td><span id="SixthConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="SixthConditionGamble" class = "Gamble"></span></td>
+			<td><span id="SixthConditionTime" class = "Time"></span></td>
+		</tr>
+
+		<tr id ="setup7">
+			<td>  <img id="image7" class="heightSet"src=""><br/><span id="Seventh_Condition"></span></td>
+			<td><span id="SeventhConditionOrder" class = "Order"></span></td>
+			<td><span id="SeventhConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="SeventhConditionGamble" class = "Gamble"></span></td>
+			<td><span id="SeventhConditionTime" class = "Time"></span></td>
+		</tr>
+
+		<tr id ="setup8">
+			<td>  <img id="image8" class="heightSet"src=""><br/><span id="Eighth_Condition"></span></td>
+			<td><span id="EighthConditionOrder" class = "Order"></span></td>
+			<td><span id="EighthConditionIntensity" class = "Intensity"></span></td>
+			<td><span id="EighthConditionGamble" class = "Gamble"></span></td>
+			<td><span id="EighthConditionTime" class = "Time"></span></td>
+		</tr>
+
+</tbody>
+</table>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal" > 
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="text-align: center;">Are you sure you want to delete user <div id="guserdelete"></div> </p>  <p style="text-align: center;"> from the following project: <div id="gtitledelete"></div></p>
+        <p style="text-align: center;">Once deleted, it cannot be retrieved again. </p>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" name = "Delete" id="ConfirmDeleteUserData" class="btn btn-danger">Delete Project</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"><div class="col-md-4 col-md-offset-2"><a href="/admin/userdata/project/<titleid>/export" class="btn btn-primary" role="button" align="center" id="UserInfoExport">Export User Info</a></div>
+<div class="row"><div class="col-md-4 col-md-offset-2"><a href="/admin/userdata/project/<titleid>/export" class="btn btn-primary" role="button" align="center" id="UserMetaInfoExport">Export User Metadata Info</a></div>
+
+<div class="row"><div class="col-md-4 col-md-offset-2"><a href="/admin/userdata/project/<titleid>/export" class="btn btn-primary" role="button" align="center" id="DataTableExport">Export Project Users Data</a></div>
+
+<div class="row"><div class="col-md-4 col-md-offset-2"><a href="/admin/userdata/project/<titleid>/export" class="btn btn-primary" role="button" align="center" id="DataMetaTableExport">Export Project Users Metadata</a></div>
+</div>
+</div>
+</div>
+
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+
+<script type="text/javascript">
+altertablerow = function(ord,vas,sg,tto){
+	var checkrow = 0
+	if (ord !=0) {checkrow = ord}
+	else if (vas !=0) {checkrow = vas}
+	else if (sg !=0) {checkrow = sg}
+	else {checkrow = tto}
+	if (checkrow >=1) {$("#setup1").show()} else{$("#setup1").hide()}
+
+	if (checkrow >=2) {$("#setup2").show()} else{$("#setup2").hide()}
+
+	if (checkrow >=3) {$("#setup3").show()} else{$("#setup3").hide()}
+
+	if (checkrow >=4) {$("#setup4").show()} else{$("#setup4").hide()}
+
+	if (checkrow >=5) {$("#setup5").show()} else{$("#setup5").hide()}
+
+	if (checkrow >=6) {$("#setup6").show()} else{$("#setup6").hide()}
+
+	if (checkrow >=7) {$("#setup7").show()} else{$("#setup7").hide()}
+
+	if (checkrow >=8) {$("#setup8").show()} else{$("#setup8").hide()}
+}
+
+altertablecolumn = function(ord,vas,sg,tto){
+	if (ord ==0){
+		$(".Order").hide()
+	}
+	else {
+		$(".Order").show()
+	}
+
+	if (ord ==0){
+		$(".Intensity").hide()
+	}
+	else {
+		$(".Intensity").show()
+	}
+	if (ord ==0){
+		$(".Gamble").hide()
+	}
+	else {
+		$(".Gamble").show()
+	}
+	if (tto ==0){
+		$(".Time").hide()
+	}
+	else {
+		$(".Time").show()
+	}
+}
+altertabletext = function(ord,vas,sg,tto,utildata){
+//console.log(utildata['finalconditionOrderOne'])
+
+if (ord != 0 && ord>=1){$("#FirstConditionOrder").text(utildata['finalconditionOrderOne'])}
+if (vas != 0 && vas>=1){$("#FirstConditionIntensity").text(utildata['finalconditionIntensityOne'])}
+if (sg != 0 && sg>=1){$("#FirstConditionGamble").text(utildata['finalconditionGambOne'])}
+if (tto != 0 && tto>=1){$("#FirstConditionTime").text(utildata['finalconditionTimeTOne'])}
+
+if (ord != 0 && ord>=2){$("#SecondConditionOrder").text(utildata['finalconditionOrderTwo'])}
+if (vas != 0 && vas>=2){$("#SecondConditionIntensity").text(utildata['finalconditionIntensityTwo'])}
+if (sg != 0 && sg>=2){$("#SecondConditionGamble").text(utildata['finalconditionGambTwo'])}
+if (tto != 0 && tto>=2){$("#SecondConditionTime").text(utildata['finalconditionTimeTTwo'])}
+
+if (ord != 0 && ord>=3){$("#ThirdConditionOrder").text(utildata['finalconditionOrderThree'])}
+if (vas != 0 && vas>=3){$("#ThirdConditionIntensity").text(utildata['finalconditionIntensityThree'])}
+if (sg != 0 && sg>=3){$("#ThirdConditionGamble").text(utildata['finalconditionGambThree'])}
+if (tto != 0 && tto>=3){$("#ThirdConditionTime").text(utildata['finalconditionTimeTThree'])}
+
+if (ord != 0 && ord>=4){$("#FourthConditionOrder").text(utildata['finalconditionOrderFour'])}
+if (vas != 0 && vas>=4){$("#FourthConditionIntensity").text(utildata['finalconditionIntensityFour'])}
+if (sg != 0 && sg>=4){$("#FourthConditionGamble").text(utildata['finalconditionGambFour'])}
+if (tto != 0 && tto>=4){$("#FourthConditionTime").text(utildata['finalconditionTimeTFour'])}
+
+if (ord != 0 && ord>=5){$("#FifthConditionOrder").text(utildata['finalconditionOrderFive'])}
+if (vas != 0 && vas>=5){$("#FifthConditionIntensity").text(utildata['finalconditionIntensityFive'])}
+if (sg != 0 && sg>=5){$("#FifthConditionGamble").text(utildata['finalconditionGambFive'])}
+if (tto != 0 && tto>=5){$("#FifthConditionTime").text(utildata['finalconditionTimeTFive'])}
+
+if (ord != 0 && ord>=6){$("#SixthConditionOrder").text(utildata['finalconditionOrderSix'])}
+if (vas != 0 && vas>=6){$("#SixthConditionIntensity").text(utildata['finalconditionIntensitySix'])}
+if (sg != 0 && sg>=6){$("#SixthConditionGamble").text(utildata['finalconditionGambSix'])}
+if (tto != 0 && tto>=6){$("#SixthConditionTime").text(utildata['finalconditionTimeTSix'])}
+
+if (ord != 0 && ord>=7){$("#SeventhConditionOrder").text(utildata['finalconditionOrderSeven'])}
+if (vas != 0 && vas>=7){$("#SeventhConditionIntensity").text(utildata['finalconditionIntensitySeven'])}
+if (sg != 0 && sg>=7){$("#SeventhConditionGamble").text(utildata['finalconditionGambSeven'])}
+if (tto != 0 && tto>=7){$("#SeventhConditionTime").text(utildata['finalconditionTimeTSeven'])}
+
+if (ord != 0 && ord>=8){$("#EighthConditionOrder").text(utildata['finalconditionOrderEight'])}
+if (vas != 0 && vas>=8){$("#EighthConditionIntensity").text(utildata['finalconditionIntensityEight'])}
+if (sg != 0 && sg>=8){$("#EighthConditionGamble").text(utildata['finalconditionGambEight'])}
+if (tto != 0 && tto>=8){$("#EighthConditionTime").text(utildata['finalconditionTimeTEight'])}
+
+
+
+}
+
+altercondtext = function(ord,vas,sg,tto,prtitle,projdata){
+if (ord >= 1|| vas >= 1|| sg >= 1|| tto >= 1) {$("#First_Condition").text(projdata['condOne'])}
+
+if (ord >= 2|| vas >= 2|| sg >= 2|| tto >= 2) {$("#Second_Condition").text(projdata['condTwo'])}
+
+if (ord >= 3|| vas >= 3|| sg >= 3|| tto >= 3) {$("#Third_Condition").text(projdata['condThree'])}
+
+if (ord >= 4|| vas >= 4|| sg >= 4|| tto >= 4) {$("#Fourth_Condition").text(projdata['condFour'])}
+
+if (ord >= 5|| vas >= 5|| sg >= 5|| tto >= 5) {$("#Fifth_Condition").text(projdata['condFive'])}
+
+if (ord >= 6|| vas >= 6|| sg >= 6|| tto >= 6) {$("#Sixth_Condition").text(projdata['condSix'])}
+
+if (ord >= 7|| vas >= 7|| sg >= 7|| tto >= 7) {$("#Seventh_Condition").text(projdata['condSeven'])}
+
+if (ord >= 8|| vas >= 8|| sg >= 8|| tto >= 8) {$("#Eighth_Condition").text(projdata['condEight'])}
+
+if (ord >= 1|| vas >= 1|| sg >= 1|| tto >= 1) {$("#image1").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condOneImage );}
+
+if (ord >= 2|| vas >= 2|| sg >= 2|| tto >= 2) {$("#image2").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condTwoImage );}
+
+if (ord >= 3|| vas >= 3|| sg >= 3|| tto >= 3) {$("#image3").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condThreeImage );}
+
+if (ord >= 4|| vas >= 4|| sg >= 4|| tto >= 4) {$("#image4").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condFourImage );}
+
+if (ord >= 5|| vas >= 5|| sg >= 5|| tto >= 5) {$("#image5").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condFiveImage );}
+
+if (ord >= 6|| vas >= 6|| sg >= 6|| tto >= 6) {$("#image6").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condSixImage );}
+
+if (ord >= 7|| vas >= 7|| sg >= 7|| tto >= 7) {$("#image7").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condSevenImage );}
+
+if (ord >= 8|| vas >= 8|| sg >= 8|| tto >= 8) {$("#image8").attr('src',"{{url_for('static', filename='images/')}}" + prtitle + "/" + projdata.condEightImage );}
+}
+
+$( document ).ready(function() {
+	var utildata = [];
+	var projdata = [];
+	var ord = 0;
+	var tto = 0;
+	var sg = 0;
+	var vas = 0;
+	})
+
+$("#UserResults").hide();
+$("#UserData").click(function() {
+	$("#UserResults").fadeIn(500);
+	//console.log("Hi");
+	//$('#Test').text('Hi');
+	var projectname = $( "#gamblertitle	 option:selected" ).val();
+	var username = $('#UserID').val();
+	$.ajax({
+		url: '{{url_for('api.retrieveprojectinfoapi')}}',
+		type: 'POST',
+		data: JSON.stringify({"project":projectname}),
+		contentType: 'application/json; charset=utf-8',
+		dataType: 'json',
+		async: false,
+		success: function(msg) {
+		projdata = msg
+			//alert("Got it Project");
+			}
+	});
+	$.ajax({
+		url: '{{url_for('api.retrieveprojectuserapi')}}',
+		type: 'POST',
+		data: JSON.stringify({"project":projectname,"user":username}),
+		contentType: 'application/json; charset=utf-8',
+		dataType: 'json',
+		async: false,
+		success: function(msg) {
+		utildata = msg
+			//alert("Got it");
+			}
+		});
+	ord = Number(projdata['mechgamb'].substring(0, 1))
+	vas = Number(projdata['mechgamb'].substring(1,2))
+	sg = Number(projdata['mechgamb'].substring(2,3))
+	tto = Number(projdata['mechgamb'].substring(3,4))
+	var fullname = utildata.firstname + " " + utildata.lastname
+	$("#namedisplay").text(fullname)
+	altercondtext(ord,vas,sg,tto,projectname,projdata);
+	altertablecolumn(ord,vas,sg,tto);
+	altertablerow(ord,vas,sg,tto);
+	altertabletext(ord,vas,sg,tto,utildata);
+	//Reset variables
+	$("#UserInfoExport").attr('href', {{url_for("index")}} + projectname + "/" + username + "/export");
+	$("#DataTableExport").attr('href', {{url_for("index")}} + "admin/userdata/project/" + projectname + "/export");
+	$("#UserMetaInfoExport").attr('href', {{url_for("index")}} + projectname + "/" + username + "/meta/export");
+	$("#DataMetaTableExport").attr('href',{{url_for("index")}} +  "admin/userdata/project/" + projectname + "/meta/export");
+	ord = 0;
+	tto = 0;
+	sg = 0;
+	vas = 0;
+	})
+	  
+$("#LastUserData").click(function() {
+	$("#UserResults").fadeIn(500);
+	//console.log($('#ProjectData').val());
+	//$('#Test').text('Hello');
+	var projectname = $( "#gamblertitle	 option:selected" ).val();
+	$.ajax({
+		url: '{{url_for('api.retrieveprojectinfoapi')}}',
+		type: 'POST',
+		data: JSON.stringify({"project":projectname}),
+		contentType: 'application/json; charset=utf-8',
+		dataType: 'json',
+		async: false,
+		success: function(msg) {
+		projdata = msg
+	//		alert("Got it Project");
+			}
+		});
+	$.ajax({
+		url: '{{url_for('api.retrieveprojectlastuserapi')}}',
+		type: 'POST',
+		data: JSON.stringify({"project":projectname}),
+		contentType: 'application/json; charset=utf-8',
+		dataType: 'json',
+		async: false,
+		success: function(msg) {
+		utildata = msg
+	//		alert("Got it");
+				}
+			});
+	ord = Number(projdata['mechgamb'].substring(0, 1))
+	vas = Number(projdata['mechgamb'].substring(1,2))
+	sg = Number(projdata['mechgamb'].substring(2,3))
+	tto = Number(projdata['mechgamb'].substring(3,4))
+	altercondtext(ord,vas,sg,tto,projectname,projdata);
+	altertablecolumn(ord,vas,sg,tto);
+	altertablerow(ord,vas,sg,tto);
+	altertabletext(ord,vas,sg,tto,utildata);
+	var username = utildata['userid']
+	//Reset variables
+	$("#UserInfoExport").attr('href', {{url_for("index")}} + projectname + "/" + username + "/export");
+	$("#DataTableExport").attr('href', {{url_for("index")}} + "admin/userdata/project/" + projectname + "/export");
+	$("#UserMetaInfoExport").attr('href', {{url_for("index")}} + projectname + "/" + username + "/meta/export");
+	$("#DataMetaTableExport").attr('href',{{url_for("index")}} +  "admin/userdata/project/" + projectname + "/meta/export");
+
+	ord = 0;
+	tto = 0;
+	sg = 0;
+	vas = 0;
+	$('#UserID').val(username);
+
+		
+		 });
+$("#ConfirmDeleteUserData").click(function() {
+	$("#UserResults").fadeIn(500);
+	//console.log($('#ProjectData').val());
+	//$('#Test').text('Hello');
+	var projectname =  $( "#gamblertitle	 option:selected" ).val();
+	var username = $('#UserID').val();
+
+	$.ajax({
+		url: '{{url_for('api.deleteprojectuserapi')}}',
+		type: 'POST',
+		data: JSON.stringify({"project":projectname, "user":username}),
+		contentType: 'application/json; charset=utf-8',
+		dataType: 'json',
+		async: false,
+		success: function(msg) {
+		projdata = msg
+	//		alert("Got it Project");
+			}
+		});
+	$('#deleteModal').modal('hide');
+  })
+
+$('#deleteModal').on('shown.bs.modal', function () {
+	var projectname = $('#ProjectData').val();
+	var username = $('#UserID').val();
+  $('#deleteModal').trigger('focus')
+  
+  gtitle = $("#gamblertitle").children("option").filter(":selected").text();
+  $('#gtitledelete').html('<p "text-align: center;"><b>' + projectname + '</b> </p>');
+  $('#guserdelete').html('<p "text-align: center;"><b>' + username + '</b> </p>');
+})
+  </script>
+{% endblock %}
+

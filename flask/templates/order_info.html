@@ -1,0 +1,699 @@
+{% extends "base.html" %}
+{%block title %}{{Title_Program}}{%endblock%}
+
+{% block styles %}
+{{super()}}
+<!-- This is the order utility -->
+<!-- In <head> -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<style type="text/css" >
+
+.popover-content {
+    word-wrap: break-word;
+}
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ .centering {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+.GamblerOrderSource, .GamblerOrderTarget{
+  margin: 0px 25px 10px 0px;
+  padding: 2px;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  list-style-type: none;
+  list-style-position: inside;
+}
+
+.popover{
+    max-width: 34%; /* Max Width of the popover (depending on the container!) */
+    z-index: 2001;
+}
+
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.modalDialog > div {
+	width: 440px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+
+
+.heightSet {
+    max-height: 60px;
+    max-width: 60px;
+}
+
+.close:hover { background: #00d9ff; }
+
+.centering{
+display:flex;
+justify-content:left;
+align-items:center;
+flex-flow: wrap;
+width: 200%
+}
+img{
+    z-index: 2000;
+
+}
+img.center {
+    display: block;
+    margin: 0 auto;
+
+}
+.content {
+    display: inline-block;
+    margin: 0 auto;
+    z-index:2000
+}
+.GamblerOrderSource {
+  border: 2px dashed #f8e0b1 !important;
+  background-color: #fefcf5 !important;
+    height: 90px !important;
+    width: 90px !important;
+}
+ .GamblerOrderTarget {
+  border: 2px dashed #add38d !important;
+  background-color: #f6fbf4 !important;
+    height: 110px;
+    width: 110px;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+<h2 style="text-align: center;">{{Greeting_Text}} {{patientname}} </h2>
+<div class="jumbotron">
+<p style="text-align: center;"><h3>{{Instruction_Text}}</h3> 
+</p><p style="text-align: center;"> <a href="#openModal">{{Video_Instruction_Text}}</a> </p> </div>
+{% if ce ==1 %}
+<div class="alert alert-danger">
+{% set parse_ast = Incorrect_Function_Text.replace("<br />","<br>").replace("<br/>","<br>").split("<br>") %}
+  {% for paraast in parse_ast %}<strong style="text-align: center;">{{paraast}}</strong> {%endfor%}
+</div>
+{%endif%}
+<form id="orderform" method='POST'>
+<div class="row">
+<div class="col-md-6">
+<div class="centering">
+<!-- This is the starting row for items-->
+<!-- Less is more got rid of titles at the bottom of images-->
+
+
+  <div class='GamblerOrderSource'>
+	<div class="content" data-placement="bottom" id={{Second_ConditionAC}}><img id="Image{{Second_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/' + slug + '/' + Second_Image)}}">  </br>
+ {{Second_ConditionAC}} </div>
+  </div>
+
+ {%if setup != 3 %}
+  <div class='GamblerOrderSource'>
+ <div class="content" data-placement="bottom" id={{Third_ConditionAC}}><img id="Image{{Third_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/' + slug + '/' + Third_Image)}}"></br>{{Third_ConditionAC}}</div>
+<br style="clear: both;">
+</div>
+{% endif %}
+{%if setup >= 4 and setup != 4 %}
+  <div class='GamblerOrderSource'>
+<div class="content" data-placement="bottom" id={{Fourth_ConditionAC}}><img id="Image{{Fourth_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Fourth_Image )}}"></br>
+{{Fourth_ConditionAC}}</div>
+	</div>
+{% endif %}
+
+ 	{%if setup >= 5 and setup != 5 %}
+ 
+ <div class='GamblerOrderSource'>
+<div class="content" data-placement="bottom" id={{Fifth_ConditionAC}}><img id="Image{{Fifth_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Fifth_Image )}}"></br>
+{{Fifth_ConditionAC}}</div>
+	</div>
+<br style="clear: both;">
+	{% endif %}
+
+	{%if setup >= 6 and setup != 6 %}
+  <div class='GamblerOrderSource'>
+<div class="content" data-placement="bottom" id={{Sixth_ConditionAC}}><img id="Image{{Sixth_ConditionAC}}"  class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Sixth_Image )}}"></br>
+{{Sixth_ConditionAC}}</div>
+	</div>
+	{% endif %}
+
+	{%if setup >= 7 and setup != 7 %}
+  <div class='GamblerOrderSource'>
+<div class="content" data-placement="bottom" id={{Seventh_ConditionAC}}><img id="Image{{Seventh_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Seventh_Image )}}"></br>
+{{Seventh_ConditionAC}}</div>
+	</div>
+<br style="clear: both;">
+{% endif %}
+	{%if setup >= 8 and setup != 8 %}
+  <div class='GamblerOrderSource'>
+<div class="content" data-placement="bottom" id={{Eighth_ConditionAC}}><img id="Image{{Eighth_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Eighth_Image )}}"></br>
+{{Eighth_ConditionAC}}</div>
+</div>
+{% endif %}
+</div> 
+</div>
+<!-- This is the item row-->
+
+<div class="col-md-3 col-md-offset-3" style="justify-content:right; align-items:center;">
+	<p><div class='GamblerOrderTarget'id="Rank1"> <div class="content" data-placement="bottom" id={{First_ConditionAC}}><img id="Image{{First_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/' + slug+ '/' + First_Image)}}"></br>{{First_ConditionAC}}</div></div></p> 
+<p><div class='GamblerOrderTarget' id="Rank2"></div></p>
+		   <p><div class='GamblerOrderTarget' id="Rank3">{% if setup ==3 %}  <div class="content" data-placement="bottom" id={{Third_ConditionAC}}><img id="Image{{Third_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/' + slug + '/' + Third_Image)}}"></br>{{Third_ConditionAC}}</div>
+</div>
+ {% endif %}</div></p>
+		{%if setup >= 4 %}	   <p><div class='GamblerOrderTarget' id="Rank4">	   {% if setup ==4 %} <div class="content" data-placement="bottom" id={{Fourth_ConditionAC}}><img id="Image{{Fourth_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Fourth_Image )}}"></br>
+{{Fourth_ConditionAC}}</div>
+ {% endif %}</div></p> {%endif%} 	  	  
+		{%if setup >= 5 %}   <p><div class='GamblerOrderTarget' id="Rank5">		   {% if setup ==5 %} <div class="content" data-placement="bottom" id={{Fifth_ConditionAC}}><img id="Image{{Fifth_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Fifth_Image )}}"></br>
+{{Fifth_ConditionAC}}</div>
+ {% endif %}</div></p> {%endif%} 
+		{%if setup >= 6 %} <p><div class='GamblerOrderTarget' id="Rank6">		   {% if setup ==6 %} <div class="content" data-placement="bottom" id={{Sixth_ConditionAC}}><img id="Image{{Sixth_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Sixth_Image )}}"></br>
+{{Sixth_ConditionAC}}</div>
+ {% endif %}</div></p> {%endif%} 
+		{%if setup >= 7 %}   <p><div class='GamblerOrderTarget' id="Rank7">		   {% if setup ==7 %} <div class="content" data-placement="bottom" id={{Seventh_ConditionAC}}><img id="Image{{Seventh_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Seventh_Image )}}"></br>
+{{Seventh_ConditionAC}}</div>
+ {% endif %}</div></p> {%endif%} 
+		{%if setup >= 8 %}   <p><div class='GamblerOrderTarget' id="Rank8">		   {% if setup ==8 %} <div class="content" data-placement="bottom" id={{Eighth_ConditionAC}}><img id="Image{{Eighth_ConditionAC}}" data-placement="bottom" class = "heightSet" data-toggle = "popover" src="{{url_for('static', filename='images/'+ slug + '/' + Eighth_Image )}}"></br>{{Eighth_ConditionAC}}</div> 
+ {% endif %}</div></p>{%endif%} 
+</br>
+</br>
+
+<div id="openModal" class="modalDialog" data-backdrop="true">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<video width="400" controls>
+		 <source src="{{url_for('static', filename='images/' + slug + '/OrderInstructions.mp4')}}" type="video/mp4">
+		</video>
+	</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+<input type="hidden" name="orderinfo" id="order" value=""> </input>
+<input type="hidden" name="timinginfo" id="time" value=""> </input>
+<input type="hidden" name="totaltiminginfo" id="totaltime" value="0"> </input>
+
+
+<!--This is the submit button row-->
+  <div class="row"></br></br><p><input type="submit"  class="btn btn-lg btn-primary" value="{{Continue_Button}}" /> </p> </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+{{ super()}}
+<!-- In <body> -->
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        
+<script src="{{url_for('.static',filename='screentime.js')}}"></script>
+
+<script type="text/javascript">
+
+$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+var order;
+var adjustment;
+var items;
+var img = document.getElementById('{{First_ConditionAC}}');
+
+$("[id='{{First_ConditionAC}}']").data('state', 'hover');
+$("[id='{{Second_ConditionAC}}']").data('state', 'hover');
+$("[id='{{Third_ConditionAC}}']").data('state', 'hover');
+{% if setup >= 4 %}$("[id='{{Fourth_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 5 %}$("[id='{{Fifth_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 6 %}$("[id='{{Sixth_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 7 %}$("[id='{{Seventh_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 8 %}$("[id='{{Eighth_ConditionAC}}']").data('state', 'hover');{% endif %}
+//changeNumFields(x)
+//Popover info
+
+var timemeasure1 = 0.0;
+var timemeasure2 = 0.0;
+var timemeasure3 = 0.0;
+{% if setup >= 4 %}var timemeasure4 = 0.0; {%endif %}
+{% if setup >= 5 %}var timemeasure5 = 0.0;{%endif %}
+{% if setup >= 6 %}var timemeasure6 = 0.0;{%endif %}
+{% if setup >= 7 %}var timemeasure7 = 0.0;{%endif %}
+{% if setup >= 8 %}var timemeasure8 = 0.0;{%endif %}
+
+
+
+var enterShow = function (x) {
+	//console.log($('#' + x).data)
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('show');
+        //console.time(x);
+        timemeasurex = performance.now();
+
+    }
+    else{
+    
+    $('#' + x).data('state', 'pinned');
+    $('#' + x).popover('show');
+    }
+};
+var exitHide = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('hide');
+        
+        //timemeasurec += console.timeEnd(x)
+        if (x === '{{First_ConditionAC}}'){   timemeasure1 += (performance.now() - timemeasurex);
+        }
+
+		 if(x === '{{Second_ConditionAC}}') {
+		        	timemeasure2 += (performance.now() - timemeasurex);
+					}
+		 if(x === '{{Third_ConditionAC}}') {
+		        	timemeasure3 += (performance.now() - timemeasurex);
+					}
+		 if(x === '{{Fourth_ConditionAC}}') {
+		        	timemeasure4 += (performance.now() - timemeasurex);
+					}
+		 if(x === '{{Fifth_ConditionAC}}') {
+		        	timemeasure5 += (performance.now() - timemeasurex);
+					}
+		 if(x === '{{Sixth_ConditionAC}}') {
+		        	timemeasure6 += (performance.now() - timemeasurex);
+					}
+		 if(x === '{{Seventh_ConditionAC}}') {
+		        	timemeasure7 += (performance.now() - timemeasurex);
+					}
+		if(x === '{{Eighth_ConditionAC}}'){
+		        	timemeasure8 += (performance.now() - timemeasurex);
+					}
+    }
+};
+
+$(document).on('click', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+
+$(document).on('mouseenter', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+
+{% if video >= 1 %}
+var clickToggle = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).data('state', 'pinned');
+        if (x === '{{First_ConditionAC}}'){ document.getElementsByClassName("popover-content")[0].innerHTML =  '<div id = "Cond1"><video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoOne)}}" type="video/mp4"> </video> </div>';
+		}
+		 if(x === '{{Second_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoTwo)}}" type="video/mp4"> </video>';
+		}
+		 if(x === '{{Third_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoThree)}}" type="video/mp4"> </video>';
+		}
+		 if(x === '{{Fourth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoFour)}}" type="video/mp4"> </video>';
+		}
+		 if(x === '{{Fifth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoFive)}}" type="video/mp4"> </video>';
+		}
+		 if(x === '{{Sixth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoSix)}}" type="video/mp4"> </video>';
+		}
+		 if(x === '{{Seventh_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoSeven)}}" type="video/mp4"> </video>';
+		}
+		if(x === '{{Eighth_ConditionAC}}'){
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoEight)}}" type="video/mp4"> </video>';
+		}
+    } else {
+        $('#' + x).data('state', 'hover')
+        if (x === '{{First_ConditionAC}}'){ document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition1}}";
+		}
+		 if(x === '{{Second_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition2}}"
+		}
+		 if(x === '{{Third_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition3}}";
+		}
+		 if(x === '{{Fourth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition4}}";
+		}
+		 if(x === '{{Fifth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition5}}";
+		}
+		 if(x === '{{Sixth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Info_Condition6}}";
+		}
+		 if(x === '{{Seventh_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Info_Condition7}}";
+		}
+		if(x === '{{Eighth_ConditionAC}}'){
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Info_Condition8}}";
+		}
+
+    }
+};
+
+{% endif %}
+var resetclickToggle = function (x) {
+    if ($('#' + x).data('state') === 'pinned') {
+        $('#' + x).data('state', 'hover')
+        if (x === '{{First_ConditionAC}}'){ document.getElementsByClassName("popover-content")[0].innerHTML =  "<div id = 'Cont1' class='fields'>{{Info_Condition1}}</div>";
+		}
+		 if(x === '{{Second_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition2}}"
+		}
+		 if(x === '{{Third_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition3}}";
+		}
+		 if(x === '{{Fourth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition4}}";
+		}
+		 if(x === '{{Fifth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Info_Condition5}}";
+		}
+		 if(x === '{{Sixth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Info_Condition6}}";
+		}
+		 if(x === '{{Seventh_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Info_Condition7}}";
+		}
+		if(x === '{{Eighth_ConditionAC}}'){
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Info_Condition8}}";
+		}
+
+    }
+};
+var touchtime = 0;
+
+$("[id='{{First_ConditionAC}}']").popover({trigger: "manual", container: 'body', html: "true", title: "{{Condition1_Title}}", content: "<div id ='/Cond1'/>{{Info_Condition1}}</div>"})
+    .on('mouseenter', function() { enterShow('{{First_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{First_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() { 
+    	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+ 		 	testtime = (new Date().getTime()) - touchtime;
+  		  if ((testtime) < 4000) {
+    		clickToggle('{{First_ConditionAC}}');
+    		console.log(testtime);
+    		  touchtime = 0;
+    		} else {
+    		    		console.log(testtime);
+
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+$("[id='{{Second_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Condition2_Title}}", content: "{{Info_Condition2}}"})
+    .on('mouseenter', function() { enterShow('{{Second_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{Second_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('{{Second_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+$("[id='{{Third_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Condition3_Title}}", content: "{{Info_Condition3}}"})
+    .on('mouseenter', function() { enterShow('{{Third_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{Third_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('{{Third_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% if setup >= 4 %}
+$("[id='{{Fourth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Condition4_Title}}", content: "{{Info_Condition4}}"})
+    .on('mouseenter', function() { enterShow('{{Fourth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{Fourth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('{{Fourth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 5 %}
+$("[id='{{Fifth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Condition5_Title}}", content: "{{Info_Condition5}}"})
+    .on('mouseenter', function() { enterShow('{{Fifth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{Fifth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('{{Fifth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 6 %}
+$("[id='{{Sixth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Condition6_Title}}", content: "{{Info_Condition6}}"})
+    .on('mouseenter', function() { enterShow('{{Sixth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{Sixth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('{{Sixth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 7 %}
+$("[id='{{Seventh_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Condition7_Title}}", content: "{{Info_Condition7}}"})
+    .on('mouseenter', function() { enterShow('{{Seventh_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{Seventh_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('{{Seventh_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 8 %}
+$("[id='{{Eighth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Condition8_Title}}", content: "{{Info_Condition8}}"})
+    .on('mouseenter', function() { enterShow('{{Eighth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('{{Eighth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('{{Eighth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+//Post data
+
+function handleDropEvent( event, ui ) {
+  var draggable = ui.draggable;
+  $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
+  strhold = "";
+  timehold = ""
+$('.GamblerOrderTarget').each(function() {
+       if ($(this).find('div').length) {
+       //console.log($(this).find('div').attr('id'));
+       stateid = $(this).find('div').attr('id');
+       strhold = strhold + stateid + ",";
+        if (stateid === '{{First_ConditionAC}}'){   
+        timehold = timehold + timemeasure1.toString() + ",";
+        }
+
+		 if(stateid === '{{Second_ConditionAC}}') {
+		        	timehold = timehold + timemeasure2.toString() + ",";
+					}
+		 if(stateid === '{{Third_ConditionAC}}') {
+		        	timehold = timehold + timemeasure3.toString() + ",";
+					}
+		 if(stateid === '{{Fourth_ConditionAC}}') {
+		        	timehold = timehold + timemeasure4.toString() + ",";
+					}
+		 if(stateid === '{{Fifth_ConditionAC}}') {
+		        	timehold = timehold + timemeasure5.toString() + ",";
+					}
+		 if(stateid === '{{Sixth_ConditionAC}}') {
+		        	timehold = timehold + timemeasure6.toString() + ",";
+					}
+		 if(stateid === '{{Seventh_ConditionAC}}') {
+		        	timehold = timehold + timemeasure7.toString() + ",";
+					}
+		if(stateid === '{{Eighth_ConditionAC}}'){
+		        	timehold = timehold + timemeasure8.toString() + ",";
+					}
+       }
+
+});
+$('.GamblerOrderSource').each(function() {
+       if (!$(this).find('div').length) {
+           $(this).hide();
+       }
+
+});
+    items = strhold.slice(0,-1);
+    times = timehold.slice(0,-1);
+ //   console.log("Items: " + items);
+ //   console.log("Times: " + times);
+
+    document.getElementById("order").value =items;
+    document.getElementById("time").value =times;
+
+}
+
+$(document).ready(function() {
+var img = document.getElementById('Image{{First_ConditionAC}}');
+    var width  = img.naturalWidth;
+    var height = img.naturalHeight;
+//    console.log(width)
+//    console.log(height)
+  {% if instructions == 1 %}  
+     location.href = "#openModal";
+
+{%endif%}
+//   $("[id='{{Condition1_Title}}']").draggable();,
+   $("[id='{{Second_ConditionAC}}']").draggable();
+   $("[id='{{Third_ConditionAC}}']").draggable();
+{% if setup > 4 %}
+   $("[id='{{Fourth_ConditionAC}}']").draggable();
+     {% endif %}
+	{% if setup > 5 %}
+   $("[id='{{Fifth_ConditionAC}}']").draggable();
+   {% endif %}
+	{% if setup > 6 %}
+   $("[id='{{Sixth_ConditionAC}}']").draggable();
+   {% endif %}
+	{% if setup > 7 %}
+   $("[id='{{Seventh_ConditionAC}}']").draggable();
+   {% endif %}
+	{% if setup > 8 %}
+   $("[id='{{Eighth_ConditionAC}}']").draggable();
+{% endif %}
+   $(".GamblerOrderTarget").droppable({
+     drop: handleDropEvent
+    });
+   $(".GamblerOrderSource").droppable({
+     drop: handleDropEvent
+    });
+});
+
+    $("#openModal").click( function() {
+        if (!$("#openModal>div").is(":hover")) document.location.href='#';
+    });
+    
+//document.getElementsByClassName("GamblerOrderTarget")[0].height = height;
+//document.getElementsByClassName("GamblerOrderTarget")[0].width = width;
+
+ document.getElementById("order").value = items;
+var curtrack = 0;
+$.screentime({
+  fields: [
+    { selector: '#orderform',
+      name: 'Orderform'
+    },
+        { selector: "#Cond1",
+      name: 'Popover'
+    }
+  ],
+      reportInterval: 1,
+  callback: function(data) {
+  $.each(data, function(key, val) {
+      var $elem = $('#console li[data-field="' + key + '"]');
+      var current = parseFloat($elem.data('time'), 10);
+      curtrack = curtrack + val
+      $elem.data('time', current + val);
+        });
+document.getElementById("totaltime").value=curtrack.toString()
+    // Logs: { Top: 5, Middle: 3 }
+  }
+});
+
+</script>
+{% endblock %}
+
+

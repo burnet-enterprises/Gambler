@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class = "container">
+<form method="POST" action="">
+{{form.csrf_token }}
+<div class="row"><div class="jumbotron"><h3>{{Information_Text}}</h3> </div></div>
+<div class="row"><div class="col-md-4 col-md-offset-4">{{wtf.form_field(form.duserid)}}</div> </div>
+ <div class="row"> <div class="col-md-4 col-md-offset-2">{{wtf.form_field(form.dfirstname)}}</div>
+ <div class="col-md-4">{{wtf.form_field(form.dlastname)}}</div> </div>
+ <div class="row"> <div class="col-md-2 col-md-offset-2">{{wtf.form_field(form.dgender)}}</div>
+ <div class="col-md-2">{{wtf.form_field(form.dage)}}</div>
+  <div class="col-md-3">{{wtf.form_field(form.drace)}}</div> 
+  <div class="col-md-2">{{wtf.form_field(form.dhld)}} </div>
+<div class="row"><br><div class="col-md-4 col-md-offset-4">{{wtf.form_field(form.dinstructions)}}</div> </div>
+
+</div>
+
+<div class="row"><input class="btn btn-primary" type="submit" value = "{{Continue_Button}}"></div>
+<input type="hidden" name="totaltiminginfo" id="totaltime" value="0"> </input>
+
+</form>
+</div>
+{% endblock%}
+
+{% block scripts %}
+{{ super()}}
+<script src="{{url_for('.static',filename='screentime.js')}}"></script>
+<script>
+
+$(document).ready(function(){
+$("#dinstructions").attr('checked', 'checked');
+ //Flask purposes fields  must be readonly
+{% if GRUID == True %} $('#duserid').prop('readonly', true) 
+{% endif %}
+
+{% if DPN == True %} $('#dfirstname').prop('disabled', true)
+$('#dlastname').prop('disabled', true) 
+$('#dfirstname').parent().hide()
+$('#dlastname').parent().hide()
+{% endif %}
+
+{% if DPR == True %}
+$('#drace').prop('disabled', true) 
+$('#dhld').prop('diabled', true)
+$('#drace').parent().hide()
+$('#dhld').parent().hide()
+{% endif %}
+
+{% if DPA == True %}
+$('#dage').prop('diabled', true) 
+$('#dage').parent().hide()
+{% endif %}
+
+{% if DPG == True %}
+$('#dgender').prop('disabled', true) 
+
+$('#dgender').parent().hide()
+{% endif %}
+
+});
+
+var curtrack = 0;
+$.screentime({
+  fields: [
+    { selector: '.container',
+      name: 'Main Page'
+    }
+  ],
+reportInterval: 0.5,
+  callback: function(data) {
+  $.each(data, function(key, val) {
+      var $elem = $('#console li[data-field="' + key + '"]');
+      var current = parseFloat($elem.data('time'), 10);
+      curtrack = curtrack + val
+      $elem.data('time', current + val);
+	});
+document.getElementById("totaltime").value=curtrack.toString()
+    console.log(curtrack);
+    // Logs: { Top: 5, Middle: 3 }
+  }
+});
+</script>
+
+{% endblock%}
+

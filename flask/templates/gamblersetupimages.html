@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles %}
+{{super()}}
+<style type="text/css" >
+.heightSet {
+    max-height: 50px;
+    max-width: 50px;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class = "container" >
+<form method="POST" id="GamblerSetup" action="" enctype="multipart/form-data" {% if showimage == 1 %} novalidate  {% endif %}>
+{{form.csrf_token }}
+<div class="jumbotron">
+<h2> Please upload the icons that match with the respective health state. </h2>
+</div>
+<div class="row">
+<div class="col-md-3" id="image1">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + First_Condition_Image)}}"> <br /> {% endif %}{{Condition1_Title}}<br/>{{wtf.form_field(form.conditionOneimage)}}</div>
+<div class="col-md-3" id="image2">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Second_Condition_Image)}}"> <br />{% endif %}{{Condition2_Title}}<br/>{{wtf.form_field(form.conditionTwoimage)}} </div>
+<div class="col-md-3"id="image3">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Third_Condition_Image)}}">  <br />{% endif %} {{Condition3_Title}}<br/>{{wtf.form_field(form.conditionThreeimage)}}</div>
+<div class="col-md-3"id="image4">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fourth_Condition_Image)}}"> <br />{% endif %}{{Condition4_Title}}<br/>{{wtf.form_field(form.conditionFourimage)}}</div></div>
+<div class="row">
+<div class="col-md-3"id="image5">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fifth_Condition_Image)}}"> <br /> {% endif %} {{Condition5_Title}}<br/>{{wtf.form_field(form.conditionFiveimage)}}</div>
+<div class="col-md-3"id="image6">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Sixth_Condition_Image)}}"> <br /> {% endif %} {{Condition6_Title}}<br/>{{wtf.form_field(form.conditionSiximage)}}</div>
+<div class="col-md-3"id="image7">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Seventh_Condition_Image)}}"> <br />{% endif %} {{Condition7_Title}}<br/>{{wtf.form_field(form.conditionSevenimage)}}</div>
+<div class="col-md-3"id="image8">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Eighth_Condition_Image)}}"> <br /> {% endif %} {{Condition8_Title}}<br/>{{wtf.form_field(form.conditionEightimage)}}</div></div>
+<br/>
+<div class="row"><div class="col-md-6 col-md-offset-3" >{{wtf.form_field(form.conditionSIIS)}}</div></div>
+<div class="row">
+{% if sorder != 0 %}<div class="col-md-6" >{{wtf.form_field(form.conditionORIS)}}</div> {%endif%}
+{% if sintensity != 0 %}<div class="col-md-6" >{{wtf.form_field(form.conditionITIS)}}</div> </div>{%endif%}
+<div class="row">
+{% if sgamble != 0 %} <div class="col-md-6" >{{wtf.form_field(form.conditionSGIS)}}</div> {%endif%}
+{% if stimet != 0 %}<div class="col-md-6" >{{wtf.form_field(form.conditionTTIS)}}</div> </div>{%endif%}
+<br/>
+<div class="row">
+{% if sgamble != 0 %} <div class="col-md-6" >{{wtf.form_field(form.setSGC)}}</div> {%endif%}
+<div class="col-md-6" >{{wtf.form_field(form.setTTC)}}</div> </div>
+<br/>
+
+{% if sgamble != 0 %}
+<div id="SGCfield">
+<div class="row" >
+<div class="col-md-3" id="sgcvideo2">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Second_Condition_Image)}}"> <br /> {% endif %} {{Condition2_Title}}<br/>{{wtf.form_field(form.conditionTwoSGI)}}</div>
+<div class="col-md-3"id="sgcvideo3">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Third_Condition_Image)}}"> <br /> {% endif %}{{Condition3_Title}}<br/>{{wtf.form_field(form.conditionThreeSGI)}}</div>
+<div class="col-md-3"id="sgcvideo4">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fourth_Condition_Image)}}"> <br /> {% endif %}{{Condition4_Title}}<br/>{{wtf.form_field(form.conditionFourSGI)}}</div></div>
+<div class="row">
+<div class="col-md-3"id="sgcvideo5">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fifth_Condition_Image)}}">  <br /> {% endif %}{{Condition5_Title}}<br/>{{wtf.form_field(form.conditionFiveSGI)}}</div>
+<div class="col-md-3"id="sgcvideo6">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Sixth_Condition_Image)}}"> <br />{% endif %}{{Condition6_Title}}<br/>{{wtf.form_field(form.conditionSixSGI)}} </div>
+<div class="col-md-3"id="sgcvideo7">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Seventh_Condition_Image)}}"> <br />{% endif %}{{Condition7_Title}}<br/>{{wtf.form_field(form.conditionSevenSGI)}} </div>
+
+</div>
+</div>
+{%endif%}
+
+{% if stimet != 0 %}
+<div  id="TTCfield">
+<div class="row">
+<div class="col-md-3" id="ttcvideo2">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Second_Condition_Image)}}"> <br />{% endif %}{{Condition2_Title}}<br/>{{wtf.form_field(form.conditionTwoTTI)}} </div>
+<div class="col-md-3"id="ttcvideo3">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Third_Condition_Image)}}"> <br />{% endif %}{{Condition3_Title}}<br/>{{wtf.form_field(form.conditionThreeTTI)}} </div>
+<div class="col-md-3"id="ttcvideo4">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fourth_Condition_Image)}}"> <br />{% endif %}{{Condition4_Title}}<br/>{{wtf.form_field(form.conditionFourTTI)}} </div></div>
+<div class="row">
+<div class="col-md-3"id="ttcvideo5"> {% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fifth_Condition_Image)}}"> <br />{% endif %}{{Condition5_Title}}<br/>{{wtf.form_field(form.conditionFiveTTI)}}</div>
+<div class="col-md-3"id="ttcvideo6">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Sixth_Condition_Image)}}"> <br />{% endif %}{{Condition6_Title}}<br/>{{wtf.form_field(form.conditionSixTTI)}}</div>
+<div class="col-md-3"id="ttcvideo7">{% if showimage == 1 %} <img class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Seventh_Condition_Image)}}"><br />{% endif %}{{Condition7_Title}}<br/>{{wtf.form_field(form.conditionSevenTTI)}}</div>
+
+</div>
+</div>
+{%endif%}
+<input class="btn btn-primary" type="submit" name="Save" value = "Save and Exit">  {% if vidcheck != 0 %} <input class="btn btn-primary" type="submit" name = "SaC" value = "Save and Continue"> {% endif %} 
+{% if form.errors %}
+    {{ form.errors }}
+{% endif %}
+</d1>
+</form>
+</div>
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+<script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+<!-- In <body> -->
+<script type="text/javascript">
+
+// function changeNameField(x){
+// xt = ['First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eight']
+// chs = "Conditional Health State"
+// 
+// 
+// 
+// }
+
+$( document ).ready(function() {
+
+{% if stimet != 0 %}
+if($("#setTTC").is(':checked')) {
+console.log("TTC");
+
+    $("#TTCfield").fadeIn(500);
+  } else {
+    $("#TTCfield").fadeOut(500); 
+  }
+{%endif%}
+{% if sgamble != 0 %}
+if($("#setSGC").is(':checked')) {
+console.log("SGC");
+
+    $("#SGCfield").fadeIn(500);
+  } else {
+    $("#SGCfield").fadeOut(500); 
+  }
+  });
+{%endif%}
+$("#GamblerSetup :input").change(function() {
+console.log("Test");
+{% if stimet != 0 %}
+if($("#setTTC").is(':checked')) {
+console.log("TTC");
+
+    $("#TTCfield").fadeIn(500);
+  } else {
+    $("#TTCfield").fadeOut(500); 
+  }
+{%endif%}
+{% if sgamble != 0 %}
+if($("#setSGC").is(':checked')) {
+console.log("SGC");
+
+    $("#SGCfield").fadeIn(500);
+  } else {
+    $("#SGCfield").fadeOut(500); 
+  }
+  {%endif%}
+  });
+
+function changeNumFields(x){
+    if (x < 3){
+            {% if sgamble != 0 %}$("#sgcvideo2").fadeOut(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo2").fadeOut(500);{%endif%}
+			}
+   	 	else{
+            {% if sgamble != 0 %}$("#sgcvideo2").fadeIn(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo2").fadeIn(500);{%endif%}
+    		}
+    if (x < 4){
+            $("#image4").fadeOut(500);
+            {% if sgamble != 0 %}$("#sgcvideo3").fadeOut(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo3").fadeOut(500);{%endif%}
+			}
+   	 	else{
+            $("#image4").fadeIn(500);
+            {% if sgamble != 0 %}$("#sgcvideo3").fadeIn(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo3").fadeIn(500);{%endif%}
+
+    		}
+
+ if (x < 5){
+            $("#image5").fadeOut(500);
+            {% if sgamble != 0 %}$("#sgcvideo4").fadeOut(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo4").fadeOut(500);{%endif%}
+			}
+   	 	else{
+            $("#image5").fadeIn(500);
+            {% if sgamble != 0 %}$("#sgcvideo4").fadeIn(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo4").fadeIn(500);{%endif%}
+    		}
+		
+ if (x < 6){
+            $("#image6").fadeOut(500);
+            {% if sgamble != 0 %}$("#sgcvideo5").fadeOut(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo5").fadeOut(500);{%endif%}
+			}
+   	 	else{
+            $("#image6").fadeIn(500);
+            {% if sgamble != 0 %}$("#sgcvideo5").fadeIn(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo5").fadeIn(500);{%endif%}
+    		}
+
+ if (x < 7){
+            $("#image7").fadeOut(500);
+            {% if sgamble != 0 %}$("#sgcvideo6").fadeOut(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo6").fadeOut(500);{%endif%}
+			}
+   	 	else{
+            $("#image7").fadeIn(500);
+            {% if sgamble != 0 %}$("#sgcvideo6").fadeIn(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo6").fadeIn(500);{%endif%}
+    		}
+
+ if (x < 8){
+            $("#image8").fadeOut(500);
+            {% if sgamble != 0 %}$("#sgcvideo7").fadeOut(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo7").fadeOut(500);{%endif%}
+			}
+   	 	else{
+            $("#image8").fadeIn(500);
+        	{% if sgamble != 0 %}$("#sgcvideo7").fadeIn(500);{%endif%}
+            {% if stimet != 0 %}$("#ttcvideo7").fadeIn(500);{%endif%}
+    		}
+
+}
+
+changeNumFields({{setup}});
+</script>
+{% endblock %}
+
+

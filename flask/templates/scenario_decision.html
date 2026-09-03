@@ -1,0 +1,476 @@
+<!-- -->
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{%block title %}{{Title_Program}}{%endblock%}
+{% block styles %}
+{{super()}}
+<style type="text/css" >
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+#jumbo {
+  padding: 5px;
+}
+
+p { text-align: center }
+h2 { text-align: center }
+
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
+
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.modalDialog > div {
+	width: 440px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }
+
+.popover { max-width: 45%;
+    position: relative;
+    margin: auto;
+
+ }
+.heightSet {
+    max-height: 40px;
+    max-width: 40px;
+}
+.popover-content {
+    word-wrap: break-word;
+}
+
+</style>
+{% endblock%}
+{% block content %}
+<div  id = "LDMConatiner" class="container">
+<h2 style="margin-top: 0px;">{{Greeting_Text}} {{patientname}}. </h2>
+<div id="jumbo" class="jumbotron">
+<p>
+<div class="more">
+{{Welcome_Statement}}
+<br />
+ <br />
+{{Scenario_Statement}}
+</div>
+ <br />
+{{Choosing_Statement}}
+</p>
+<!--Counter = {{count}}-->
+<!--Flag = {{flag}}-->
+<p><a href="#openModal" id="SGIV">{{Video_Instruction_Text}}</a></p>
+{% if insvidtag != "" %} <p><a href="#openModal" id="MCIV">{{HS_Video_Instruction_Text.replace("{{MainCondition}}",MainCondition)}}</a></p> {% endif %}
+</div>
+
+  <div class="row">
+<div class="col-md-3 col-md-offset-2">
+<img id="MainConditionImageId" data-placement="right"  style="max-width: 35px;"class = "heightSet" data-toggle = "popover1" data-trigger="click" src="{{url_for('static', filename='images/' + slug+ '/' + Main_Image)}}"><br/>{{MainCondition}} </br>100%
+</div>
+
+<div class="col-md-2 col-md-offset-3">
+<img id="LifeConditionImageId" data-placement="left"  data-trigger="click"  class = "heightSet" data-toggle = "popover2" src="{{url_for('static', filename='images/' + slug+ '/' + LifeImage)}}">  &nbsp;&nbsp;
+<br /> {{LifeCondition}} 
+</br> {% if Total_Pills <= 100 %} {{ (Pill_Value)|int }} {%endif%} {%if Total_Pills > 100 %} {{(Pill_Value/Total_Pills * 100)}} {%endif %} % 
+
+</div>
+<div class="col-md-2">
+<img id="DeathConditionImageId" data-placement="left"  data-trigger="click"  class = "heightSet" data-toggle = "popover3" src="{{url_for('static', filename='images/' + slug+ '/' + DeathImage)}}">
+<br /> {{DeathCondition}} 
+</br>  {% if Total_Pills > 100 %}{{(Total_Pills - Pill_Value)/Total_Pills * 100}} {%endif%} {% if Total_Pills <= 100%}{{(Total_Pills - Pill_Value)|int}} {%endif %} %
+
+</div>
+</div>
+<div class="row">
+<div class ="col-md-6"><img id="MainConditionImageId"  style="height: 350px" src="{{url_for('static', filename='images/' + slug+ '/' + Main_Image)}}"></div>
+<div class ="col-md-4 col-md-offset-2">
+ 
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="184" height="350" preserveAspectRatio="xMidYMin meet">
+    <defs>
+      <linearGradient id="horizontal-fade">
+        <stop offset="0" stop-color="black" stop-opacity="1"/>
+        <stop offset="0.01" stop-color="rgb(41,49,51)" stop-opacity="0.6"/>
+        <stop offset="0.03" stop-color="rgb(41,49,51)" stop-opacity="0.5"/>
+        <stop offset="0.07" stop-color="rgb(41,49,51)" stop-opacity="0.4"/>
+        <stop offset="0.12" stop-color="rgb(41,49,51)" stop-opacity="0.3"/>
+        <stop offset="0.18" stop-color="rgb(41,49,51)" stop-opacity="0.2"/>
+        <stop offset="0.25" stop-color="rgb(41,49,51)" stop-opacity="0.1"/>
+        <stop offset="0.33" stop-color="rgb(41,49,51)" stop-opacity="0.05"/>
+        <stop offset="0.41" stop-color="rgb(41,49,51)" stop-opacity="0.1"/>
+        <stop offset="0.59" stop-color="rgb(41,49,51)" stop-opacity="0.2"/>
+        <stop offset="0.75" stop-color="rgb(41,49,51)" stop-opacity="0.3"/>
+        <stop offset="0.88" stop-color="rgb(41,49,51)" stop-opacity="0.4"/>
+        <stop offset="0.97" stop-color="rgb(41,49,51)" stop-opacity="0.5"/>
+        <stop offset="0.99" stop-color="rgb(41,49,51)" stop-opacity="0.6"/>
+        <stop offset="1" stop-color="black" stop-opacity="1"/>
+      </linearGradient>
+      <linearGradient id="vertical-fade" x1="0" x2="0" y1="1" y2="0">
+        <stop offset="0" stop-color="black" stop-opacity="0.62" />
+        <stop offset="0.03" stop-color="rgb(41,49,51)" stop-opacity="0.38" />
+        <stop offset="0.19" stop-color="rgb(41,49,51)" stop-opacity="0.05" />
+        <stop offset="1" stop-color="white" stop-opacity="0" />
+      </linearGradient>
+      <symbol id="blue-pill">
+        <path style="stroke-linejoin:round;stroke:#042d56;stroke-width:2;fill:#074b88" d="m24.289 54.196c-2.085 2.085-11.932 3.644-14.558 2.306-2.6271-1.338-7.1533-10.222-6.6922-13.133 0.4612-2.912 7.5112-9.962 10.422-10.423 2.9117-0.46116 11.795 4.0651 13.133 6.6917 1.3383 2.6266-0.22129 12.474-2.3058 14.558z" transform="matrix(2.1254 .32350 -.32258 2.1194 11.878 -69.888)"/>
+        <path style="fill:#c5dbe0" d="m41.283 29.992q0 5.8557-2.8723 8.9026t-8.4106 3.0469q-5.459 0-8.3789-3.0627-2.9041-3.0627-2.9041-8.9185 0-5.7922 2.8882-8.8391 2.9041-3.0627 8.4265-3.0627 5.5383 0 8.3948 3.031 2.8564 3.031 2.8564 8.9026zm-15.964 0q0 6.7285 4.6814 6.7285 2.3804 0 3.5229-1.6345 1.1584-1.6345 1.1584-5.094 0-3.4753-1.1743-5.1257-1.1584-1.6663-3.4753-1.6663-4.7131 0-4.7131 6.792z"/>
+      </symbol>
+      <symbol id="red-pill">
+        <path style="stroke-linejoin:round;stroke:#293133;stroke-width:2;fill:#e00122" d="m52.882 53.222c-6.568 6.472-39.632 6.229-46.104-0.34-6.4722-6.568-6.2285-39.632 0.3396-46.104 6.5684-6.4722 39.632-6.2285 46.104 0.3397 6.472 6.5683 6.229 39.632-0.34 46.104z"/>
+        <path style="fill:#6e1c1e" d="m41.672 41.6h-7.2522l-4.5227-7.2522-4.4751 7.2522h-7.0935l7.6965-11.87-7.2363-11.331h6.9507l4.1895 7.1729 4.0308-7.1729h7.157l-7.3474 11.823 7.9028 11.378z"/>
+      </symbol>
+      <clipPath id="bottle-clip">
+        <path id="bottle" d="m143 1.2739c-3.5086 25.557 7.2898 30.076 21.739 45.814 7.7842 10.112 15.077 19.517 18.261 45.198v177.38c-1.4922 14.4-14.859 22.621-27.887 23.608h-131.63c-10.961-2.88-20.328-10.15-22.48-23.61v-177.38c1.3859-19.24 9.693-32.637 20.455-45.768 15.274-19.206 27.082-14.785 19.545-45.248 30.461-1.112 68.947-0.22327 102 0z"/>
+      </clipPath>
+    </defs>
+    <g transform="translate(0,40)" id="pill-bottle">
+      <rect x="0" y="40" width="184" height="265" clip-path="url(#bottle-clip)" fill="rgb(41,49,51)"/>
+      <g id="pills" clip-path="url(#bottle-clip)"></g>
+      <use stroke="black" stroke-width="1px" fill="url(#horizontal-fade)" xlink:href="#bottle"/>
+      <use stroke="black" stroke-width="1px" fill="url(#vertical-fade)" xlink:href="#bottle"/>
+    </g>
+    <rect x="22" y="2" width="140" height="40" rx="5" ry="10" fill="rgb(227,227,227)" stroke="rgb(127,132,133)" stroke-width="1px"/>
+    <g stroke-width="2" stroke="rgb(127,132,133)">
+      <line x1="26"  x2="26"  y1="41" y2="10" stroke-width="1.5"/>
+      <line x1="31"  x2="31"  y1="42" y2="10"/>
+      <line x1="38"  x2="38"  y1="42" y2="10"/>
+      <line x1="47"  x2="47"  y1="42" y2="10"/>
+      <line x1="57"  x2="57"  y1="42" y2="10"/>
+      <line x1="68"  x2="68"  y1="42" y2="10"/>
+      <line x1="80"  x2="80"  y1="42" y2="10"/>
+      <line x1="92"  x2="92"  y1="42" y2="10"/>
+      <line x1="104" x2="104" y1="42" y2="10"/>
+      <line x1="116" x2="116" y1="42" y2="10"/>
+      <line x1="127" x2="127" y1="42" y2="10"/>
+      <line x1="137" x2="137" y1="42" y2="10"/>
+      <line x1="146" x2="146" y1="42" y2="10"/>
+      <line x1="153" x2="153" y1="42" y2="10"/>
+      <line x1="158" x2="158" y1="41" y2="10" stroke-width="1.5"/>
+    </g>
+    <rect x="22" y="2" width="140" height="40" rx="5" ry="10" fill="url(#horizontal-fade)" stroke="none"/>
+  </svg>
+  	<div><input id="shaker" type="button" value="{{Shake_Button}}"></div>
+    <div><input id="pillx"  type="hidden" min="0" max="{{Total_Pills}}" step="1" value="{{Pill_Value}}"></div>
+<div><input name="pill-count" type="hidden" value="{{Total_Pills}}"></div>
+</div>
+</div>
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<video width="400" controls>
+		 <source src="{{url_for('static', filename='images/' + slug + '/GambleInstructionsGen.mp4')}}" type="video/mp4">
+		</video>
+	</div>
+</div>
+  <div class="row">
+<form  action="" method="POST">
+<input type="hidden" name="timinginfo" id="time" value=""> </input>
+<input type="hidden" name="totaltiminginfo" id="totaltime" value="0"> </input>
+	<input type="submit" class="btn btn-primary" name="Agreement_Box_A" value="{{Agreement_Statement_A}}" />
+  	<input type="submit" class="btn btn-primary"ame="Agreement_Box_E" value="{{Agreement_Statement_E}}"/>
+  	<input type="submit" class="btn btn-primary"name="Agreement_Box_B" value="{{Agreement_Statement_B}}"/>
+</form> </div>
+
+</div>
+{% endblock%}
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('.static', filename='pillbottle.js')}}"></script>
+<script src="{{url_for('.static',filename='screentime.js')}}"></script>
+<script type="text/javascript">
+
+    $("#openModal").click( function() {
+        if (!$("#openModal>div").is(":hover")) document.location.href='#';
+    });
+    
+
+
+//Video instruciton information
+
+{% if insvidtag != "" %}
+$('#MCIV').click(function() {
+      
+       $("#openModal video").attr("src", "{{url_for('static', filename='images/' + slug + '/GambleInstructions' + insvidtag + '.mp4')}}");
+//Load for posterity sake
+		$("#openModal video").load()
+    });
+{% endif %}
+$('#SGIV').click(function() {
+      
+       $("#openModal video").attr("src", "{{url_for('static', filename='images/' + slug + '/GambleInstructionsGen.mp4')}}");
+//Load for posterity sake
+		$("#openModal video").load()
+    });
+
+$(document).ready(function(){
+{% if instructions == 1 %} location.href = "#openModal"; {%endif%}
+
+//Text display control
+    var showChar = 20;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "{{Show_More_Text}} >";
+    var lesstext = "{{Show_Less_Text}}";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ 
+        if(content.length > showChar) {
+ 			var c = "";
+            for (w =showChar; w< content.length; w++){
+            	if (content[w] == " "){
+            		c = content.substr(0, w);
+            		break;
+            		}
+            
+            }
+            var h = content.substr(w, content.length - w);
+ 
+ {% if flag != 0 %}           var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+ 
+ {% else %}            var html = c + '<span class="moreellipses" style="display: none;">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span style="display: inline;">' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink less">' + lesstext + '</a></span>';
+
+{% endif %}
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+});
+
+
+var timemeasurex = 0.0;
+var timemeasure1 = 0.0;
+var timemeasure2 = 0.0;
+var timemeasure3 = 0.0;
+var touchtime = 0;
+//var $btn2 = $('#MainConditionImageId');
+$('#MainConditionImageId').data('state', 'hover');
+$('#LifeConditionImageId').data('state', 'hover');
+$('#DeathConditionImageId').data('state', 'hover');
+//Methods for hover text
+var enterShow = function (x) {
+	console.log($('#' + x))
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('show');
+        timemeasurex = performance.now();
+    }
+    else{
+    
+    $('#' + x).data('state', 'hover')
+            $('#' + x).popover('show');
+        timemeasurex = performance.now();
+    }
+};
+var exitHide = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('hide');
+        
+    }
+    if (x === 'MainConditionImageId'){   
+    	timemeasure1 += (performance.now() - timemeasurex);
+        }
+	 if(x === 'LifeConditionImageId') {
+		    timemeasure2 += (performance.now() - timemeasurex);
+					}
+		 if(x === 'DeathConditionImageId') {
+		    timemeasure3 += (performance.now() - timemeasurex);
+					}
+	document.getElementById("time").value = timemeasure1.toString() + "," + timemeasure2.toString() + "," +  timemeasure3.toString();
+	console.log(timemeasure1.toString() + "," + timemeasure2.toString() + "," + timemeasure3.toString() )
+};
+
+//Video functions for clicking and hovering.
+
+var clickToggle = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).data('state', 'pinned');
+        if (x === 'MainConditionImageId'){ document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + MainVideo)}}" type="video/mp4"> </video>';
+		}
+		else if(x === 'LifeConditionImageId') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceMain" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + LifeVideo)}}" type="video/mp4"> </video>';
+		}
+		else{
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceDeath" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + DeathVideo)}}" type="video/mp4"> </video>';
+		}
+    } else {
+        $('#' + x).data('state', 'hover');
+        if (x === 'MainConditionImageId') {
+        	document.getElementsByClassName("popover-content")[0].innerHTML =  '{{MainStatusInfo}}'; 
+        	$("#VideoSourceMain").get(0).pause();
+		}else if (x === 'LifeConditionImageId'){
+			document.getElementsByClassName("popover-content")[0].innerHTML =  '{{LifeStatusInfo}}';
+			$("#VideoSourceLife").get(0).pause();
+		}
+		else {
+			document.getElementsByClassName("popover-content")[0].innerHTML =  '{{DeathStatusInfo}}';
+		    $("#VideoSourceDeath").get(0).pause();
+		}
+    }
+};
+
+
+var resetclickToggle = function (x) {
+    if ($('#' + x).data('state') === 'pinned') {
+        $('#' + x).data('state', 'hover')
+        if (x === 'MainConditionImageId') {document.getElementsByClassName("popover-content")[0].innerHTML =  '{{MainStatusInfo}}'; 
+			$("#VideoSourceMain").get(0).pause();
+		}else if (x === 'LifeConditionImageId'){
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '{{LifeStatusInfo}}';
+			$("#VideoSourceLife").get(0).pause();
+		}
+		else {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '{{DeathStatusInfo}}';
+			$("#VideoSourceDeath").get(0).pause();
+		}
+    }
+};
+//Image function for hover text
+
+$('#MainConditionImageId').popover({trigger: 'manual',container: '#LDMConatiner', title: "{{MainCondition}}", content: "{{MainStatusInfo}}"})
+//Container can have link to an idea or to body.
+    .on('mouseenter', function() { enterShow('MainConditionImageId')})
+    .on('mouseleave', function() { exitHide('MainConditionImageId')})
+    .on('click', function() { 	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('MainConditionImageId')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  });
+
+$('#LifeConditionImageId').popover({trigger: 'manual',container: '#LDMConatiner', title: "{{LifeCondition}}", content: "{{LifeStatusInfo}}"})
+    .on('mouseenter', function() { enterShow('LifeConditionImageId')})
+    .on('mouseleave', function() { exitHide('LifeConditionImageId')})
+    .on('click', function() { 	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('LifeConditionImageId')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  });
+
+$('#DeathConditionImageId').popover({trigger: 'manual',container: '#LDMConatiner', title: "{{DeathCondition}}", content: "{{DeathStatusInfo}}"})
+    .on('mouseenter', function() { enterShow('DeathConditionImageId')})
+    .on('mouseleave', function() { exitHide('DeathConditionImageId')})
+    .on('click', function() { 	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('DeathConditionImageId')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  });
+//var array = createArray(Math.ceil(Math.sqrt({{Total_Pills}})),Math.ceil(Math.sqrt({{Total_Pills}})),{{Total_Pills}},{{Pill_Value}});
+//$('.pills').html(array);
+
+$(document).on('click', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+
+$('body').on('mouseover', 'img',function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+var curtrack = 0;
+$.screentime({
+  fields: [
+    { selector: '.container',
+      name: 'MainPage'
+    }
+  ],
+      reportInterval: 1,
+  callback: function(data) {
+  $.each(data, function(key, val) {
+      var $elem = $('#console li[data-field="' + key + '"]');
+      var current = parseFloat($elem.data('time'), 10);
+      curtrack = curtrack + val
+      $elem.data('time', current + val);
+        });
+document.getElementById("totaltime").value=curtrack.toString()
+    // Logs: { Top: 5, Middle: 3 }
+  }
+});
+
+</script>
+{%endblock%}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="container">
+	  <h2>{{Error_Info}}</h2>
+	  <p>{{Error_Statement}}</p>
+ <a href="../gamblersetup" class="btn btn-info" role="button">Modify/Create Gambler Project</a> 
+ <a href="../" class="btn btn-info" role="button">Start a Gambler Assessement</a>
+ </div>
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+{% endblock %}

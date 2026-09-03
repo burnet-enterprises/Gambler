@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ConditionInfo &#8212; The Gambler 3.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for ConditionInfo</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">numpy</span><span class="o">,</span> <span class="nn">cgi</span><span class="o">,</span> <span class="nn">cgitb</span>
+<span class="kn">from</span> <span class="nn">BaseModel</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1">#Get db variable from importing all</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">##Condition info and data relating to condtion</span>
+
+<div class="viewcode-block" id="ConditionInfo"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo">[docs]</a><span class="k">class</span> <span class="nc">ConditionInfo</span><span class="p">:</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="c1">##Mechgamb because of not relying on sessions</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">mechgamb</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+	<span class="c1">##Conditions </span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condOne</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condTwo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condThree</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFour</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFive</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSeven</span> <span class="o">=</span><span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condEight</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+	<span class="c1">##Condition Info</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condOneInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condTwoInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condThreeInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFourInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFiveInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSixInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSevenInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condEightInfo</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+	<span class="c1">##Condition Image Names</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condOneImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condTwoImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condThreeImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFourImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFiveImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSixImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSevenImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condEightImage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<div class="viewcode-block" id="ConditionInfo.load"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo.load">[docs]</a>	<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titleid</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Load health state information, acronyms, image link, and health state name</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str		</span>
+<span class="sd">		:return: Self loaded data from database</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+			<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">GamScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">mechgamb</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">mechgamb</span>
+	<span class="c1">##Conditions </span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condOne</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionOne</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condTwo</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionTwo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condThree</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionThree</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFour</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionFour</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFive</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionFive</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSix</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionSix</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSeven</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionSeven</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condEight</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionEight</span>
+	<span class="c1">##Conditions Acronyms</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condOneAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionOneAC</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condTwoAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionTwoAC</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condThreeAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionThreeAC</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFourAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionFourAC</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFiveAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionFiveAC</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSixAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionSixAC</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSevenAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionSevenAC</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condEightAC</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionEightAC</span>
+	<span class="c1">##Condition Info</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condOneInfo</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionOneInfo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condTwoInfo</span> <span class="o">=</span>  <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionTwoInfo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condThreeInfo</span> <span class="o">=</span>  <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionThreeInfo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFourInfo</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionFourInfo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFiveInfo</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionFiveInfo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSixInfo</span> <span class="o">=</span>  <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionSixInfo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSevenInfo</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionSevenInfo</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condEightInfo</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">conditionEightInfo</span>
+	<span class="c1">##Condition Image Names</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condOneImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageOnename</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condTwoImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageTwoname</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condThreeImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageThreename</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFourImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageFourname</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condFiveImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageFivename</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSixImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageSixname</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condSevenImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageSevenname</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">condEightImage</span> <span class="o">=</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">imageEightname</span></div>
+<div class="viewcode-block" id="ConditionInfo.getmech"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo.getmech">[docs]</a>	<span class="k">def</span> <span class="nf">getmech</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titleid</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Load the mechanism in which the Gambler should operate</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str		</span>
+<span class="sd">		:return: Gambler mechanism data </span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+			<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">GamScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="k">return</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">mechgamb</span></div>
+<div class="viewcode-block" id="ConditionInfo.getdemopref"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo.getdemopref">[docs]</a>	<span class="k">def</span> <span class="nf">getdemopref</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">titleid</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Customizes the demographic page information</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str		</span>
+<span class="sd">		:return: dict</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+				<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">GamScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="k">return</span> <span class="p">{</span><span class="s1">&#39;SMARTOnFHIR&#39;</span><span class="p">:</span><span class="n">GamScen</span><span class="o">.</span><span class="n">SonFHR</span><span class="p">,</span> <span class="s1">&#39;GenerateRandomUserID&#39;</span><span class="p">:</span><span class="n">GamScen</span><span class="o">.</span><span class="n">genranduid</span><span class="p">,</span> <span class="s1">&#39;DisablePatientName&#39;</span><span class="p">:</span><span class="n">GamScen</span><span class="o">.</span><span class="n">disablepatname</span><span class="p">,</span> <span class="s1">&#39;DisablePatientAge&#39;</span><span class="p">:</span><span class="n">GamScen</span><span class="o">.</span><span class="n">disablepatage</span><span class="p">,</span> <span class="s1">&#39;DisablePatientRace&#39;</span><span class="p">:</span><span class="n">GamScen</span><span class="o">.</span><span class="n">disablepatrace</span><span class="p">,</span> <span class="s1">&#39;DisablePatientGender&#39;</span><span class="p">:</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">disablepatgender</span><span class="p">}</span></div>
+<div class="viewcode-block" id="ConditionInfo.savemech"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo.savemech">[docs]</a>	<span class="k">def</span> <span class="nf">savemech</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titleid</span><span class="p">,</span><span class="n">mg</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Save the mechanism in which the Gambler should operate</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str	</span>
+<span class="sd">		:param mg: Gambler Mechanism</span>
+<span class="sd">		:type mg: str			</span>
+<span class="sd">		:return: Gambler mechanism data </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+			<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">GamScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">GamScen</span><span class="o">.</span><span class="n">mechgamb</span> <span class="o">=</span> <span class="n">mg</span>
+		<span class="n">GamScen</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="k">return</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">mechgamb</span></div>
+<div class="viewcode-block" id="ConditionInfo.getprojecttitle"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo.getprojecttitle">[docs]</a>	<span class="k">def</span> <span class="nf">getprojecttitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titleid</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Retrieves title of project</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str		</span>
+<span class="sd">		:return: Title of Gambler project (str)</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+			<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">GamScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="k">return</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">otitleid</span></div>
+<div class="viewcode-block" id="ConditionInfo.getlang"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo.getlang">[docs]</a>	<span class="k">def</span> <span class="nf">getlang</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">titleid</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Retrieves language setting for the project</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str	</span>
+<span class="sd">		:return: Langauge of project (str) </span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+				<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">GamScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="k">return</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">language</span></div>
+<div class="viewcode-block" id="ConditionInfo.getls"><a class="viewcode-back" href="../ConditionInfo.html#ConditionInfo.ConditionInfo.getls">[docs]</a>	<span class="k">def</span> <span class="nf">getls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">titleid</span><span class="p">):</span> <span class="c1">#ls = Local Storage</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Retrieves local storage settings</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str			</span>
+<span class="sd">		:return: Local storage setting (int)</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+				<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">GamScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="k">return</span> <span class="n">GamScen</span><span class="o">.</span><span class="n">localStorage</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">The Gambler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../BaseModel.html">BaseModel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ConditionInfo.html">ConditionInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GamblerSetup.html">GamblerSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ReverseProxy.html">ReverseProxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserData.html">UserData module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserInfo.html">UserInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VideoSetup.html">VideoSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">admin module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gdpr.html">gdpr module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demographics.html">demographics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logic_gambler.html">logic_gambler module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logic_timetradeoff.html">logic_timetradeoff module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../language_pack.html">language_pack module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mainapp.html">mainapp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsgi.html">wsgi module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Adeboye A. Adejare Jr..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

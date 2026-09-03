@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>BaseModel module &#8212; The Gambler 3.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ConditionInfo module" href="ConditionInfo.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="Home.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-BaseModel">
+<span id="basemodel-module"></span><h1>BaseModel module<a class="headerlink" href="#module-BaseModel" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BaseModel.</span></span><span class="sig-name descname"><span class="pre">GamblerInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/BaseModel.html#GamblerInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#BaseModel.GamblerInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#BaseModel.ModelBase" title="BaseModel.ModelBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelBase</span></code></a></p>
+<p>Database model for Gambler project information</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#BaseModel.GamblerInfo.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">GamblerInfoDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.SonFHR">
+<span class="sig-name descname"><span class="pre">SonFHR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.SonFHR&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.SonFHR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionEight">
+<span class="sig-name descname"><span class="pre">conditionEight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionEight&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionEight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionEightAC">
+<span class="sig-name descname"><span class="pre">conditionEightAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionEightAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionEightAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionEightInfo">
+<span class="sig-name descname"><span class="pre">conditionEightInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionEightInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionEightInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionFive">
+<span class="sig-name descname"><span class="pre">conditionFive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionFive&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionFive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionFiveAC">
+<span class="sig-name descname"><span class="pre">conditionFiveAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionFiveAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionFiveAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionFiveInfo">
+<span class="sig-name descname"><span class="pre">conditionFiveInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionFiveInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionFiveInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionFour">
+<span class="sig-name descname"><span class="pre">conditionFour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionFour&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionFour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionFourAC">
+<span class="sig-name descname"><span class="pre">conditionFourAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionFourAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionFourAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionFourInfo">
+<span class="sig-name descname"><span class="pre">conditionFourInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionFourInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionFourInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionOne">
+<span class="sig-name descname"><span class="pre">conditionOne</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionOne&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionOne" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionOneAC">
+<span class="sig-name descname"><span class="pre">conditionOneAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionOneAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionOneAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionOneInfo">
+<span class="sig-name descname"><span class="pre">conditionOneInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionOneInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionOneInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionSeven">
+<span class="sig-name descname"><span class="pre">conditionSeven</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionSeven&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionSeven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionSevenAC">
+<span class="sig-name descname"><span class="pre">conditionSevenAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionSevenAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionSevenAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionSevenInfo">
+<span class="sig-name descname"><span class="pre">conditionSevenInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionSevenInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionSevenInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionSix">
+<span class="sig-name descname"><span class="pre">conditionSix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionSix&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionSix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionSixAC">
+<span class="sig-name descname"><span class="pre">conditionSixAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionSixAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionSixAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionSixInfo">
+<span class="sig-name descname"><span class="pre">conditionSixInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionSixInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionSixInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionThree">
+<span class="sig-name descname"><span class="pre">conditionThree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionThree&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionThree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionThreeAC">
+<span class="sig-name descname"><span class="pre">conditionThreeAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionThreeAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionThreeAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionThreeInfo">
+<span class="sig-name descname"><span class="pre">conditionThreeInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionThreeInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionThreeInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionTwo">
+<span class="sig-name descname"><span class="pre">conditionTwo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionTwo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionTwo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionTwoAC">
+<span class="sig-name descname"><span class="pre">conditionTwoAC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionTwoAC&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionTwoAC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.conditionTwoInfo">
+<span class="sig-name descname"><span class="pre">conditionTwoInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.conditionTwoInfo&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.conditionTwoInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.disablepatage">
+<span class="sig-name descname"><span class="pre">disablepatage</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.disablepatage&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.disablepatage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.disablepatgender">
+<span class="sig-name descname"><span class="pre">disablepatgender</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.disablepatgender&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.disablepatgender" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.disablepatname">
+<span class="sig-name descname"><span class="pre">disablepatname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.disablepatname&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.disablepatname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.disablepatrace">
+<span class="sig-name descname"><span class="pre">disablepatrace</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.disablepatrace&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.disablepatrace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambAgreementA">
+<span class="sig-name descname"><span class="pre">gambAgreementA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambAgreementA&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambAgreementA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambAgreementB">
+<span class="sig-name descname"><span class="pre">gambAgreementB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambAgreementB&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambAgreementB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambAgreementE">
+<span class="sig-name descname"><span class="pre">gambAgreementE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambAgreementE&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambAgreementE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambBenefits">
+<span class="sig-name descname"><span class="pre">gambBenefits</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambBenefits&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambBenefits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambChoosing">
+<span class="sig-name descname"><span class="pre">gambChoosing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambChoosing&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambChoosing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambScenario">
+<span class="sig-name descname"><span class="pre">gambScenario</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambScenario&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambScenario" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambScenarioFive">
+<span class="sig-name descname"><span class="pre">gambScenarioFive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambScenarioFive&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambScenarioFive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambScenarioFour">
+<span class="sig-name descname"><span class="pre">gambScenarioFour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambScenarioFour&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambScenarioFour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambScenarioSeven">
+<span class="sig-name descname"><span class="pre">gambScenarioSeven</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambScenarioSeven&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambScenarioSeven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambScenarioSix">
+<span class="sig-name descname"><span class="pre">gambScenarioSix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambScenarioSix&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambScenarioSix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambScenarioThree">
+<span class="sig-name descname"><span class="pre">gambScenarioThree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambScenarioThree&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambScenarioThree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambSideeffects">
+<span class="sig-name descname"><span class="pre">gambSideeffects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambSideeffects&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambSideeffects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambWelcome">
+<span class="sig-name descname"><span class="pre">gambWelcome</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.gambWelcome&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambWelcome" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.gambleid">
+<span class="sig-name descname"><span class="pre">gambleid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">GamblerInfo.gambleid&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.gambleid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.genranduid">
+<span class="sig-name descname"><span class="pre">genranduid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.genranduid&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.genranduid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageEightname">
+<span class="sig-name descname"><span class="pre">imageEightname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageEightname&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageEightname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageFivename">
+<span class="sig-name descname"><span class="pre">imageFivename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageFivename&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageFivename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageFourname">
+<span class="sig-name descname"><span class="pre">imageFourname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageFourname&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageFourname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageOnename">
+<span class="sig-name descname"><span class="pre">imageOnename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageOnename&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageOnename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageSevenname">
+<span class="sig-name descname"><span class="pre">imageSevenname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageSevenname&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageSevenname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageSixname">
+<span class="sig-name descname"><span class="pre">imageSixname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageSixname&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageSixname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageThreename">
+<span class="sig-name descname"><span class="pre">imageThreename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageThreename&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageThreename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.imageTwoname">
+<span class="sig-name descname"><span class="pre">imageTwoname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.imageTwoname&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.imageTwoname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.initgambThresh">
+<span class="sig-name descname"><span class="pre">initgambThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.initgambThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.initgambThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.inittimeThresh">
+<span class="sig-name descname"><span class="pre">inittimeThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.inittimeThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.inittimeThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.language">
+<span class="sig-name descname"><span class="pre">language</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">GamblerInfo.language&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.language" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.localStorage">
+<span class="sig-name descname"><span class="pre">localStorage</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.localStorage&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.localStorage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.maxgambThresh">
+<span class="sig-name descname"><span class="pre">maxgambThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.maxgambThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.maxgambThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.maxtimetThresh">
+<span class="sig-name descname"><span class="pre">maxtimetThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.maxtimetThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.maxtimetThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.mechgamb">
+<span class="sig-name descname"><span class="pre">mechgamb</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">GamblerInfo.mechgamb&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.mechgamb" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.mingambThresh">
+<span class="sig-name descname"><span class="pre">mingambThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.mingambThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.mingambThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.mintimetThresh">
+<span class="sig-name descname"><span class="pre">mintimetThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.mintimetThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.mintimetThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.neggambThresh">
+<span class="sig-name descname"><span class="pre">neggambThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.neggambThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.neggambThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.negtimetThresh">
+<span class="sig-name descname"><span class="pre">negtimetThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.negtimetThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.negtimetThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.otitleid">
+<span class="sig-name descname"><span class="pre">otitleid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.otitleid&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.otitleid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.posgambThresh">
+<span class="sig-name descname"><span class="pre">posgambThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.posgambThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.posgambThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.postimetThresh">
+<span class="sig-name descname"><span class="pre">postimetThresh</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">GamblerInfo.postimetThresh&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.postimetThresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetAgreementA">
+<span class="sig-name descname"><span class="pre">timetAgreementA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetAgreementA&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetAgreementA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetAgreementB">
+<span class="sig-name descname"><span class="pre">timetAgreementB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetAgreementB&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetAgreementB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetAgreementE">
+<span class="sig-name descname"><span class="pre">timetAgreementE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetAgreementE&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetAgreementE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetBenefits">
+<span class="sig-name descname"><span class="pre">timetBenefits</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetBenefits&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetBenefits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetChoosing">
+<span class="sig-name descname"><span class="pre">timetChoosing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetChoosing&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetChoosing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetScenario">
+<span class="sig-name descname"><span class="pre">timetScenario</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetScenario&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetScenario" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetScenarioFive">
+<span class="sig-name descname"><span class="pre">timetScenarioFive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetScenarioFive&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetScenarioFive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetScenarioFour">
+<span class="sig-name descname"><span class="pre">timetScenarioFour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetScenarioFour&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetScenarioFour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetScenarioSeven">
+<span class="sig-name descname"><span class="pre">timetScenarioSeven</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetScenarioSeven&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetScenarioSeven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetScenarioSix">
+<span class="sig-name descname"><span class="pre">timetScenarioSix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetScenarioSix&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetScenarioSix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetScenarioThree">
+<span class="sig-name descname"><span class="pre">timetScenarioThree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetScenarioThree&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetScenarioThree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetSideeffects">
+<span class="sig-name descname"><span class="pre">timetSideeffects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetSideeffects&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetSideeffects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.timetWelcome">
+<span class="sig-name descname"><span class="pre">timetWelcome</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;TextField:</span> <span class="pre">GamblerInfo.timetWelcome&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.timetWelcome" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.GamblerInfo.titleid">
+<span class="sig-name descname"><span class="pre">titleid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">GamblerInfo.titleid&gt;</span></em><a class="headerlink" href="#BaseModel.GamblerInfo.titleid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="BaseModel.ModelBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">BaseModel.</span></span><span class="sig-name descname"><span class="pre">ModelBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/BaseModel.html#ModelBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#BaseModel.ModelBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Generic model database for Peewee</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.ModelBase.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#BaseModel.ModelBase.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelBaseDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="BaseModel.ModelBase.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">ModelBase.id&gt;</span></em><a class="headerlink" href="#BaseModel.ModelBase.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">The Gambler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BaseModel module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#BaseModel.GamblerInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.SonFHR"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.SonFHR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionEight"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionEight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionEightAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionEightAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionEightInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionEightInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionFive"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionFive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionFiveAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionFiveAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionFiveInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionFiveInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionFour"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionFour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionFourAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionFourAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionFourInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionFourInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionOne"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionOne</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionOneAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionOneAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionOneInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionOneInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionSeven"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionSeven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionSevenAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionSevenAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionSevenInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionSevenInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionSix"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionSix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionSixAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionSixAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionSixInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionSixInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionThree"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionThree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionThreeAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionThreeAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionThreeInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionThreeInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionTwo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionTwo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionTwoAC"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionTwoAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.conditionTwoInfo"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.conditionTwoInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.disablepatage"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.disablepatage</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.disablepatgender"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.disablepatgender</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.disablepatname"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.disablepatname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.disablepatrace"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.disablepatrace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambAgreementA"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambAgreementA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambAgreementB"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambAgreementB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambAgreementE"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambAgreementE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambBenefits"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambBenefits</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambChoosing"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambChoosing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambScenario"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambScenario</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambScenarioFive"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambScenarioFive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambScenarioFour"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambScenarioFour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambScenarioSeven"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambScenarioSeven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambScenarioSix"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambScenarioSix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambScenarioThree"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambScenarioThree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambSideeffects"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambSideeffects</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambWelcome"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambWelcome</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.gambleid"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.gambleid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.genranduid"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.genranduid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageEightname"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageEightname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageFivename"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageFivename</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageFourname"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageFourname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageOnename"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageOnename</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageSevenname"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageSevenname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageSixname"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageSixname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageThreename"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageThreename</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.imageTwoname"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.imageTwoname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.initgambThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.initgambThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.inittimeThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.inittimeThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.language"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.language</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.localStorage"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.localStorage</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.maxgambThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.maxgambThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.maxtimetThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.maxtimetThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.mechgamb"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.mechgamb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.mingambThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.mingambThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.mintimetThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.mintimetThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.neggambThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.neggambThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.negtimetThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.negtimetThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.otitleid"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.otitleid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.posgambThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.posgambThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.postimetThresh"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.postimetThresh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetAgreementA"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetAgreementA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetAgreementB"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetAgreementB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetAgreementE"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetAgreementE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetBenefits"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetBenefits</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetChoosing"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetChoosing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetScenario"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetScenario</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetScenarioFive"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetScenarioFive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetScenarioFour"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetScenarioFour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetScenarioSeven"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetScenarioSeven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetScenarioSix"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetScenarioSix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetScenarioThree"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetScenarioThree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetSideeffects"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetSideeffects</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.timetWelcome"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.timetWelcome</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.GamblerInfo.titleid"><code class="docutils literal notranslate"><span class="pre">GamblerInfo.titleid</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#BaseModel.ModelBase"><code class="docutils literal notranslate"><span class="pre">ModelBase</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.ModelBase.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ModelBase.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BaseModel.ModelBase.id"><code class="docutils literal notranslate"><span class="pre">ModelBase.id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ConditionInfo.html">ConditionInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GamblerSetup.html">GamblerSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReverseProxy.html">ReverseProxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserData.html">UserData module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserInfo.html">UserInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VideoSetup.html">VideoSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">admin module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdpr.html">gdpr module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demographics.html">demographics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic_gambler.html">logic_gambler module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic_timetradeoff.html">logic_timetradeoff module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="language_pack.html">language_pack module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mainapp.html">mainapp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsgi.html">wsgi module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Home.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="ConditionInfo.html" title="next chapter">ConditionInfo module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Adeboye A. Adejare Jr..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/BaseModel.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

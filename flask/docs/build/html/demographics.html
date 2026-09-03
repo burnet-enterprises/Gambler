@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>demographics module &#8212; The Gambler 3.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="logic_gambler module" href="logic_gambler.html" />
+    <link rel="prev" title="gdpr module" href="gdpr.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-demographics">
+<span id="demographics-module"></span><h1>demographics module<a class="headerlink" href="#module-demographics" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="demographics.Demographics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">demographics.</span></span><span class="sig-name descname"><span class="pre">Demographics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/demographics.html#Demographics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#demographics.Demographics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FlaskForm</span></code></p>
+<p>Demographics page class</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.dage">
+<span class="sig-name descname"><span class="pre">dage</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(IntegerField,</span> <span class="pre">('Age',</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;]),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.dage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.dfirstname">
+<span class="sig-name descname"><span class="pre">dfirstname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(TextField,</span> <span class="pre">('Firstname',</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;]),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.dfirstname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.dgender">
+<span class="sig-name descname"><span class="pre">dgender</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SelectField,</span> <span class="pre">('Gender',),</span> <span class="pre">{'choices':</span> <span class="pre">[('F',</span> <span class="pre">'Female'),</span> <span class="pre">('M',</span> <span class="pre">'Male'),</span> <span class="pre">('O',</span> <span class="pre">'Non-binary/Other')],</span> <span class="pre">'default':</span> <span class="pre">'O'})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.dgender" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.dhld">
+<span class="sig-name descname"><span class="pre">dhld</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(BooleanField,</span> <span class="pre">('Hispanic/Latino',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.dhld" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.dinstructions">
+<span class="sig-name descname"><span class="pre">dinstructions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(BooleanField,</span> <span class="pre">('Click</span> <span class="pre">here</span> <span class="pre">to</span> <span class="pre">turn</span> <span class="pre">off</span> <span class="pre">video</span> <span class="pre">instructions',),</span> <span class="pre">{'default':</span> <span class="pre">'checked'})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.dinstructions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.dlastname">
+<span class="sig-name descname"><span class="pre">dlastname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(TextField,</span> <span class="pre">('Lastname',</span> <span class="pre">[&lt;wtforms.validators.DataRequired</span> <span class="pre">object&gt;]),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.dlastname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.drace">
+<span class="sig-name descname"><span class="pre">drace</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(SelectField,</span> <span class="pre">('Race',),</span> <span class="pre">{'choices':</span> <span class="pre">[('blk',</span> <span class="pre">'African/Black</span> <span class="pre">American'),</span> <span class="pre">('asn',</span> <span class="pre">'Asian'),</span> <span class="pre">('hpi',</span> <span class="pre">'Hawaiian/Pacific</span> <span class="pre">Islander'),</span> <span class="pre">('nam',</span> <span class="pre">'Native/Alsaka</span> <span class="pre">American'),</span> <span class="pre">('mna',</span> <span class="pre">'Middle</span> <span class="pre">Eastern/North</span> <span class="pre">African'),</span> <span class="pre">('wht',</span> <span class="pre">'White')]})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.drace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="demographics.Demographics.duserid">
+<span class="sig-name descname"><span class="pre">duserid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;UnboundField(TextField,</span> <span class="pre">('User</span> <span class="pre">ID',),</span> <span class="pre">{})&gt;</span></em><a class="headerlink" href="#demographics.Demographics.duserid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="demographics.Demographics.langload">
+<span class="sig-name descname"><span class="pre">langload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'en-US'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'USA'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/demographics.html#Demographics.langload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#demographics.Demographics.langload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load language for the Demographics page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lang</strong> – Language code</p></li>
+<li><p><strong>country</strong> – Country code</p></li>
+</ul>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded object into self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="demographics.Demographics.savedemo">
+<span class="sig-name descname"><span class="pre">savedemo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gtid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/demographics.html#Demographics.savedemo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#demographics.Demographics.savedemo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save Demographic infomration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gtid</strong> – Gambler project name/folder</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gambler database ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">The Gambler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BaseModel.html">BaseModel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ConditionInfo.html">ConditionInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GamblerSetup.html">GamblerSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReverseProxy.html">ReverseProxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserData.html">UserData module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserInfo.html">UserInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VideoSetup.html">VideoSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">admin module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdpr.html">gdpr module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">demographics module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#demographics.Demographics"><code class="docutils literal notranslate"><span class="pre">Demographics</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.dage"><code class="docutils literal notranslate"><span class="pre">Demographics.dage</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.dfirstname"><code class="docutils literal notranslate"><span class="pre">Demographics.dfirstname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.dgender"><code class="docutils literal notranslate"><span class="pre">Demographics.dgender</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.dhld"><code class="docutils literal notranslate"><span class="pre">Demographics.dhld</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.dinstructions"><code class="docutils literal notranslate"><span class="pre">Demographics.dinstructions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.dlastname"><code class="docutils literal notranslate"><span class="pre">Demographics.dlastname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.drace"><code class="docutils literal notranslate"><span class="pre">Demographics.drace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.duserid"><code class="docutils literal notranslate"><span class="pre">Demographics.duserid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.langload"><code class="docutils literal notranslate"><span class="pre">Demographics.langload()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demographics.Demographics.savedemo"><code class="docutils literal notranslate"><span class="pre">Demographics.savedemo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logic_gambler.html">logic_gambler module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic_timetradeoff.html">logic_timetradeoff module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="language_pack.html">language_pack module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mainapp.html">mainapp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsgi.html">wsgi module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="gdpr.html" title="previous chapter">gdpr module</a></li>
+      <li>Next: <a href="logic_gambler.html" title="next chapter">logic_gambler module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Adeboye A. Adejare Jr..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/demographics.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

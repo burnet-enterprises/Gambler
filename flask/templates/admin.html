@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+<p style="text-align:center"><h2 style="text-align:center">Welcome, please select option.</h2> </p>
+
+<p><a href="{{url_for('admin.gamblerformroute')}}" class="btn btn-primary" role="button">Gambler Project Setup</a></p>
+<p><a href="{{url_for('admin.gambleradminuserdatapage')}}" class="btn btn-primary" role="button">User Data</a></p>
+<p><a href="{{url_for('admin.gambleradminpage')}}/dashboard/" class="btn btn-primary" role="button">Project Data Dashboard</a></p>
+<p><a href="{{url_for('admin.languagesetup')}}" class="btn btn-primary" role="button">Language Setup</a></p>
+
+
+
+
+</div>
+
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+{% endblock %}

@@ -1,0 +1,470 @@
+{%extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<!-- In <head> -->
+<style type="text/css" >
+#imagedis {
+	display: inline-block;
+}
+#textinfo {
+	display: flex;
+	width: 320px;
+    padding: 10px;
+    margin: 0;
+}
+#nextc{text-align:center;}
+
+.heightSet {
+    max-height: 50px;
+}
+
+.popover-content {
+    word-wrap: break-word;
+}
+
+
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+.popover { max-width: 40%; }
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+.modalDialog > div {
+	width: 440px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="jumbotron">
+
+    <p style="text-align:center;"><h3>{{Status_Info}}</h3></p>
+    {% if video >= 1 %}<p style="text-align:center;"><h3>{{Instruction_Text}}</h3></p>{%endif%}
+         {% if video == 5 %}<p style="text-align:center;"> <a href="#openModal">{{Video_Instruction_Text}}</a></p>
+{%endif%}
+  </div>
+
+<table class="table table-bordered table-hover" align="center">
+  <thead>
+    <tr>
+      <th><p style="font-size: 20px">{{Icon_Text}}</p></th>
+      <th><p style="font-size: 20px">{{HS_Text}}</p></th>
+      <th><p style="font-size: 20px">{{HSA_Text}}</p></th>
+      <th><p style="font-size: 20px">{{Information_Text}}</p></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{First_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + First_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{First_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{First_ConditionAC}}</td></p>
+      <td> <p style="font-size: 16px">{{First_Condition_Info}}</td></p>
+    </tr>
+    <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{Second_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Second_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{Second_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{Second_ConditionAC}}</td></p>
+      <td><p style="font-size: 16px">{{Second_Condition_Info}}</td></p>
+    </tr>
+    <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{Third_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Third_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{Third_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{Third_ConditionAC}}</td></p>
+      <td><p style="font-size: 16px">{{Third_Condition_Info}}</td></p>
+    </tr>
+    {% if setup >= 4 %}
+    <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{Fourth_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fourth_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{Fourth_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{Fourth_ConditionAC}}</td></p>
+      <td><p style="font-size: 16px"> {{Fourth_Condition_Info}}</td></p>
+    </tr>
+     {% endif %}
+    {% if setup >= 5 %} <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{Fifth_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Fifth_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{Fifth_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{Fifth_ConditionAC}}</td></p>
+      <td><p style="font-size: 16px">{{Fifth_Condition_Info}}</td></p>
+    {% endif %}
+    {% if setup >= 6 %} <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{Sixth_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Sixth_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{Sixth_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{Sixth_ConditionAC}}</td></p>
+      <td><p style="font-size: 16px">{{Sixth_Condition_Info}}</td></p>
+    {% endif %}
+    {% if setup >= 7 %} <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{Seventh_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Seventh_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{Seventh_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{Seventh_ConditionAC}}</td></p>
+      <td><p style="font-size: 16px">{{Seventh_Condition_Info}}</td></p>
+    {% endif %}
+    {% if setup >= 8 %} <tr>
+      <td><p style="font-size: 16px">  <img id='Image{{Eighth_ConditionAC}}' data-placement="bottom" data-toggle="popover" class="heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Eighth_Condition_Image)}}"></td></p>
+      <td><p style="font-size: 16px">{{Eighth_Condition}}</td></p>
+      <td><p style="font-size: 16px">{{Eighth_ConditionAC}}</td></p>
+      <td><p style="font-size: 16px">{{Eighth_Condition_Info}}</td></p>
+    {% endif %}
+
+  </tbody>
+</table>
+
+{%if video == 5 %}<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<video width="400" controls>
+		 <source src="{{url_for('static', filename='images/' + slug + '/StatusInfoInstructions.mp4')}}" type="video/mp4">
+		</video>
+	</div>
+</div> 
+{%endif%}
+<div id="nextc"><form  id="statusform" method = 'POST'><input type="submit"  class="btn btn-lg btn-primary" value="{{Next_Button}}"></input>
+<input type="hidden" name="totaltiminginfo" id="totaltime" value="0"> </input>
+
+</form></div>
+</div>
+{%endblock%}
+
+{% block scripts %}
+{{ super()}}
+<!-- In <body> -->
+<script src="{{url_for('.static',filename='screentime.js')}}"></script>
+
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+var touchtime = 0;
+  {% if instructions == 1 %}  
+     location.href = "#openModal";
+{%endif%}
+
+    $("#openModal").click( function() {
+        if (!$("#openModal>div").is(":hover")) document.location.href='#';
+    });
+$('body').on('mouseover', 'img',function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+	$(this).data('state', 'hover');
+        }
+    });
+    });
+    
+    
+    $("[id='Image{{First_ConditionAC}}']").data('state', 'hover');
+$("[id='Image{{Second_ConditionAC}}']").data('state', 'hover');
+$("[id='Image{{Third_ConditionAC}}']").data('state', 'hover');
+{% if setup >= 4 %}$("[id='Image{{Fourth_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 5 %}$("[id='Image{{Fifth_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 6 %}$("[id='Image{{Sixth_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 7 %}$("[id='Image{{Seventh_ConditionAC}}']").data('state', 'hover');{% endif %}
+{% if setup >= 8 %}$("[id='Image{{Eighth_ConditionAC}}']").data('state', 'hover');{% endif %}
+//changeNumFields(x)
+//Popover info
+function replaceContentInContainer(matchClass, width,height) {
+    var elems = document.getElementsByTagName('*'), i;
+    for (i in elems) {
+        if((' ' + elems[i].className + ' ').indexOf(' ' + matchClass + ' ')
+                > -1) {
+            elems[i].style.width=(width*2.5) + "px";
+            elems[i].style.height=(height*2.5) + "px";
+	    if (width > 80){
+            	elems[i].style.width=(80) + "px";
+		}
+	    if (height > 80){
+            elems[i].style.width=(80) + "px";
+		}	
+        }	
+    }
+}
+var enterShow = function (x) {
+	//console.log($('#' + x).data)
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('show');
+        //console.time(x);
+        timemeasurex = performance.now();
+    }
+    else{
+    
+    $('#' + x).data('state', 'pinned');
+    $('#' + x).popover('show');
+    }
+};
+var exitHide = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('hide');
+
+    }
+};
+$(document).on('click', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+    });
+});
+$(document).on('mouseenter', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+    });
+});
+{% if video >= 1 %}
+var clickToggle = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).data('state', 'pinned');
+        if (x === 'Image{{First_ConditionAC}}'){ document.getElementsByClassName("popover-content")[0].innerHTML =  '<div id = "Cond1"><video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoOne)}}" type="video/mp4"> </video> </div>';
+		}
+		 if(x === 'Image{{Second_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoTwo)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'Image{{Third_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoThree)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'Image{{Fourth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoFour)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'Image{{Fifth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoFive)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'Image{{Sixth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoSix)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'Image{{Seventh_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoSeven)}}" type="video/mp4"> </video>';
+		}
+		if(x === 'Image{{Eighth_ConditionAC}}'){
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoEight)}}" type="video/mp4"> </video>';
+		}
+    } else {
+        $('#' + x).data('state', 'hover')
+        if (x === 'Image{{First_ConditionAC}}'){ document.getElementsByClassName("popover-content")[0].innerHTML =  "{{First_Condition_Info}}";
+		}
+		 if(x === 'Image{{Second_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Second_Condition_Info}}"
+		}
+		 if(x === 'Image{{Third_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Third_Condition_Info}}";
+		}
+		 if(x === 'Image{{Fourth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Fourth_Condition_Info}}";
+		}
+		 if(x === 'Image{{Fifth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Fifth_Condition_Info}}";
+		}
+		 if(x === 'Image{{Sixth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Sixth_Condition_Info}}";
+		}
+		 if(x === 'Image{{Seventh_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Seventh_Condition_Info}}";
+		}
+		if(x === 'Image{{Eighth_ConditionAC}}'){
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Eighth_Condition_Info}}";
+		}
+    }
+};
+{% endif %}
+var resetclickToggle = function (x) {
+    if ($('#' + x).data('state') === 'pinned') {
+        $('#' + x).data('state', 'hover')
+        if (x === 'Image{{First_ConditionAC}}'){ document.getElementsByClassName("popover-content")[0].innerHTML =  "<div id = 'Cont1' class='fields'>{{First_Condition_Info}}</div>";
+		}
+		 if(x === 'Image{{Second_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Second_Condition_Info}}"
+		}
+		 if(x === 'Image{{Third_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Third_Condition_Info}}";
+		}
+		 if(x === 'Image{{Fourth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Fourth_Condition_Info}}";
+		}
+		 if(x === 'Image{{Fifth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{Fifth_Condition_Info}}";
+		}
+		 if(x === 'Image{{Sixth_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Sixth_Condition_Info}}";
+		}
+		 if(x === 'Image{{Seventh_ConditionAC}}') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Seventh_Condition_Info}}";
+		}
+		if(x === 'Image{{Eighth_ConditionAC}}'){
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{Eighth_Condition_Info}}";
+		}
+    }
+};
+var touchtime = 0;
+$("[id='Image{{First_ConditionAC}}']").popover({trigger: "manual", container: 'body', html: "true", title: "{{First_Condition}}", content: "<div id ='/Cond1'/>{{First_Condition_Info}}</div>"})
+    .on('mouseenter', function() { enterShow('Image{{First_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{First_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() { 
+    	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+ 		 	testtime = (new Date().getTime()) - touchtime;
+  		  if ((testtime) < 4000) {
+    		clickToggle('Image{{First_ConditionAC}}');
+    		console.log(testtime);
+    		  touchtime = 0;
+    		} else {
+    		    		console.log(testtime);
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+$("[id='Image{{Second_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Second_Condition}}", content: "{{Second_Condition_Info}}"})
+    .on('mouseenter', function() { enterShow('Image{{Second_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{Second_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('Image{{Second_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+$("[id='Image{{Third_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Third_Condition}}", content: "{{Third_Condition_Info}}"})
+    .on('mouseenter', function() { enterShow('Image{{Third_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{Third_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('Image{{Third_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% if setup >= 4 %}
+$("[id='Image{{Fourth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Fourth_Condition}}", content: "{{Fourth_Condition_Info}}"})
+    .on('mouseenter', function() { enterShow('Image{{Fourth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{Fourth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('Image{{Fourth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 5 %}
+$("[id='Image{{Fifth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Fifth_Condition}}", content: "{{Fifth_Condition_Info}}"})
+    .on('mouseenter', function() { enterShow('Image{{Fifth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{Fifth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('Image{{Fifth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 6 %}
+$("[id='Image{{Sixth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Sixth_Condition}}", content: "{{Sixth_Condition_Info}}"})
+    .on('mouseenter', function() { enterShow('Image{{Sixth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{Sixth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('Image{{Sixth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 7 %}
+$("[id='Image{{Seventh_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Seventh_Condition}}", content: "{{Seventh_Condition_Info}}"})
+    .on('mouseenter', function() { enterShow('Image{{Seventh_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{Seventh_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('Image{{Seventh_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 8 %}
+$("[id='Image{{Eighth_ConditionAC}}']").popover({trigger: "manual", container: 'body', title: "{{Eighth_Condition}}", content: "{{Eighth_Condition_Info}}"})
+    .on('mouseenter', function() { enterShow('Image{{Eighth_ConditionAC}}')})
+    .on('mouseleave', function() { exitHide('Image{{Eighth_ConditionAC}}')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('Image{{Eighth_ConditionAC}}')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+
+
+var curtrack = 0;
+$.screentime({
+  fields: [
+    { selector: '.container',
+      name: 'Orderform'
+    } ],
+      reportInterval: 1,
+  callback: function(data) {
+
+  $.each(data, function(key, val) {
+      var $elem = $('#console li[data-field="' + key + '"]');
+      var current = parseFloat($elem.data('time'), 10);
+      curtrack = curtrack + val
+      $elem.data('time', current + val);
+        });
+document.getElementById("totaltime").value=curtrack.toString()
+
+    // Logs: { Top: 5, Middle: 3 }
+  }
+});
+
+</script>
+{% endblock %}
+

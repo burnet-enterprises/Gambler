@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>logic_timetradeoff module &#8212; The Gambler 3.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="language_pack module" href="language_pack.html" />
+    <link rel="prev" title="logic_gambler module" href="logic_gambler.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-logic_timetradeoff">
+<span id="logic-timetradeoff-module"></span><h1>logic_timetradeoff module<a class="headerlink" href="#module-logic_timetradeoff" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="logic_timetradeoff.GTimeTradeOff">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logic_timetradeoff.</span></span><span class="sig-name descname"><span class="pre">GTimeTradeOff</span></span><a class="reference internal" href="_modules/logic_timetradeoff.html#GTimeTradeOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.GTimeTradeOff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="logic_timetradeoff.GTimeTradeOff.CBuild">
+<span class="sig-name descname"><span class="pre">CBuild</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#GTimeTradeOff.CBuild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.GTimeTradeOff.CBuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces text with health state for Scenario Statement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>str</em>) – The Health state</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The health state order as it appears on administration page</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Statement with health state</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logic_timetradeoff.GTimeTradeOff.SBuild">
+<span class="sig-name descname"><span class="pre">SBuild</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#GTimeTradeOff.SBuild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.GTimeTradeOff.SBuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces text with health state for Scenario Statement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>str</em>) – The Health state</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – The health state order as it appears on administration page</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Statement with health state</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logic_timetradeoff.GTimeTradeOff.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">titleid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#GTimeTradeOff.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.GTimeTradeOff.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load information for Time Trade off page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>titleid</strong> (<em>str</em>) – The titleid (foldername) of the Gambler project</p></li>
+<li><p><strong>Scenario_Statement</strong> (<em>str</em>) – The scenario statement that includes the second health state as ordered in the admin page</p></li>
+<li><p><strong>Scenario_Statement3</strong> (<em>str</em>) – The scenario statement that includes the third health state as ordered in the admin page</p></li>
+<li><p><strong>Scenario_Statement4</strong> (<em>str</em>) – The scenario statement that includes the fourth health state as ordered in the admin page</p></li>
+<li><p><strong>Scenario_Statement5</strong> (<em>str</em>) – The scenario statement that includes the fifth health state as ordered in the admin page</p></li>
+<li><p><strong>Scenario_Statement6</strong> (<em>str</em>) – The scenario statement that includes the sixth health state as ordered in the admin page</p></li>
+<li><p><strong>Scenario_Statement7</strong> (<em>str</em>) – The scenario statement that includes the seventh health state as ordered in the admin page</p></li>
+<li><p><strong>Choosing_Statement</strong> (<em>str</em>) – This statement explains to users to make the choices in the Gambler health state</p></li>
+<li><p><strong>Benefits_Statement</strong> – This statement explains part of the Tradeoff that’s beneficial to users</p></li>
+<li><p><strong>Sideeffects_Statement</strong> – This statement explains the negative effects of taking the Tradeoff to users</p></li>
+<li><p><strong>Agreement_Statement_A</strong> (<em>str</em>) – Left side button normally used to choose the health state</p></li>
+<li><p><strong>Agreement_Statement_E</strong> (<em>str</em>) – Middle button normally to end the Tradeoff</p></li>
+<li><p><strong>Agreement_Statement_B</strong> (<em>str</em>) – Right side button normally used to choose The Tradeoff</p></li>
+<li><p><strong>Welcome_Statement</strong> (<em>str</em>) – The introduction statement used to welcome patients to the Time Trade off screen</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded information to self</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logic_timetradeoff.</span></span><span class="sig-name descname"><span class="pre">LifeTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#LifeTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.LifeTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="BaseModel.html#BaseModel.ModelBase" title="BaseModel.ModelBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelBase</span></code></a></p>
+<p>CDC Life table database lookup template</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.AA">
+<span class="sig-name descname"><span class="pre">AA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.AA&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.AA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.AAFemale">
+<span class="sig-name descname"><span class="pre">AAFemale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.AAFemale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.AAFemale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.AAMale">
+<span class="sig-name descname"><span class="pre">AAMale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.AAMale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.AAMale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.ASFemale">
+<span class="sig-name descname"><span class="pre">ASFemale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.ASFemale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.ASFemale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.ASMale">
+<span class="sig-name descname"><span class="pre">ASMale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.ASMale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.ASMale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.Age">
+<span class="sig-name descname"><span class="pre">Age</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">LifeTable.Age&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.Age" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.Asian">
+<span class="sig-name descname"><span class="pre">Asian</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.Asian&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.Asian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.Citizen">
+<span class="sig-name descname"><span class="pre">Citizen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.Citizen&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.Citizen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#logic_timetradeoff.LifeTable.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">LifeTableDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.Female">
+<span class="sig-name descname"><span class="pre">Female</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.Female&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.Female" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.Male">
+<span class="sig-name descname"><span class="pre">Male</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.Male&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.Male" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.NAFemale">
+<span class="sig-name descname"><span class="pre">NAFemale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.NAFemale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.NAFemale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.NAMale">
+<span class="sig-name descname"><span class="pre">NAMale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.NAMale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.NAMale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.NAmerican">
+<span class="sig-name descname"><span class="pre">NAmerican</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.NAmerican&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.NAmerican" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.WFemale">
+<span class="sig-name descname"><span class="pre">WFemale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.WFemale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.WFemale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.WHFemale">
+<span class="sig-name descname"><span class="pre">WHFemale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.WHFemale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.WHFemale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.WHMale">
+<span class="sig-name descname"><span class="pre">WHMale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.WHMale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.WHMale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.WHispanic">
+<span class="sig-name descname"><span class="pre">WHispanic</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.WHispanic&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.WHispanic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.WMale">
+<span class="sig-name descname"><span class="pre">WMale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.WMale&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.WMale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="logic_timetradeoff.LifeTable.White">
+<span class="sig-name descname"><span class="pre">White</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">LifeTable.White&gt;</span></em><a class="headerlink" href="#logic_timetradeoff.LifeTable.White" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="logic_timetradeoff.TimeTradeOff">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logic_timetradeoff.</span></span><span class="sig-name descname"><span class="pre">TimeTradeOff</span></span><a class="reference internal" href="_modules/logic_timetradeoff.html#TimeTradeOff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.TimeTradeOff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="logic_timetradeoff.TimeTradeOff.aqle">
+<span class="sig-name descname"><span class="pre">aqle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#TimeTradeOff.aqle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.TimeTradeOff.aqle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aquire life expectancy for users
+:param a: Age of user
+:type a: int
+:param r: Race of user
+:type r: str
+:param h: Hispanic/Latino designation
+:type h: int
+:param g: Gender of user
+:type g: str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Life expectancy of user (int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logic_timetradeoff.TimeTradeOff.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">titleid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#TimeTradeOff.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.TimeTradeOff.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load information to the Gambler for Time trade off</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>titleid</strong> (<em>str</em>) – The titleid (foldername) of the Gambler project</p></li>
+<li><p><strong>a</strong> (<em>int</em>) – Age of user</p></li>
+<li><p><strong>r</strong> (<em>str</em>) – Race of user</p></li>
+<li><p><strong>h</strong> (<em>int</em>) – Hispanic/Latino designation</p></li>
+<li><p><strong>g</strong> (<em>str</em>) – Gender of user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value of whether to do the Time trade off in years (0) or months (1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logic_timetradeoff.TimeTradeOff.refine_threshold">
+<span class="sig-name descname"><span class="pre">refine_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">th</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#TimeTradeOff.refine_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.TimeTradeOff.refine_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the increment of the tradeoff percentage and returns new value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_input</strong> (<em>int</em>) – The user input/button press a person has done for either Alternative A or B</p></li>
+<li><p><strong>count</strong> (<em>int</em>) – How many times a person has clicked either Alternative A or B</p></li>
+<li><p><strong>th</strong> (<em>int</em>) – Current years/months in the trade off</p></li>
+<li><p><strong>mys</strong> (<em>int</em>) – Months or years state for user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="logic_timetradeoff.cospoints">
+<span class="sig-prename descclassname"><span class="pre">logic_timetradeoff.</span></span><span class="sig-name descname"><span class="pre">cospoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">click</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#cospoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.cospoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the swinging by clicks for users.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="logic_timetradeoff.factorial">
+<span class="sig-prename descclassname"><span class="pre">logic_timetradeoff.</span></span><span class="sig-name descname"><span class="pre">factorial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#factorial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.factorial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Part of cospoints</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="logic_timetradeoff.func_cos">
+<span class="sig-prename descclassname"><span class="pre">logic_timetradeoff.</span></span><span class="sig-name descname"><span class="pre">func_cos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/logic_timetradeoff.html#func_cos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#logic_timetradeoff.func_cos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Part of cospoints</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">The Gambler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BaseModel.html">BaseModel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ConditionInfo.html">ConditionInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GamblerSetup.html">GamblerSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReverseProxy.html">ReverseProxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserData.html">UserData module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserInfo.html">UserInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VideoSetup.html">VideoSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">admin module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdpr.html">gdpr module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demographics.html">demographics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic_gambler.html">logic_gambler module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">logic_timetradeoff module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#logic_timetradeoff.GTimeTradeOff"><code class="docutils literal notranslate"><span class="pre">GTimeTradeOff</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.GTimeTradeOff.CBuild"><code class="docutils literal notranslate"><span class="pre">GTimeTradeOff.CBuild()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.GTimeTradeOff.SBuild"><code class="docutils literal notranslate"><span class="pre">GTimeTradeOff.SBuild()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.GTimeTradeOff.load"><code class="docutils literal notranslate"><span class="pre">GTimeTradeOff.load()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logic_timetradeoff.LifeTable"><code class="docutils literal notranslate"><span class="pre">LifeTable</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.AA"><code class="docutils literal notranslate"><span class="pre">LifeTable.AA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.AAFemale"><code class="docutils literal notranslate"><span class="pre">LifeTable.AAFemale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.AAMale"><code class="docutils literal notranslate"><span class="pre">LifeTable.AAMale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.ASFemale"><code class="docutils literal notranslate"><span class="pre">LifeTable.ASFemale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.ASMale"><code class="docutils literal notranslate"><span class="pre">LifeTable.ASMale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.Age"><code class="docutils literal notranslate"><span class="pre">LifeTable.Age</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.Asian"><code class="docutils literal notranslate"><span class="pre">LifeTable.Asian</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.Citizen"><code class="docutils literal notranslate"><span class="pre">LifeTable.Citizen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">LifeTable.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.Female"><code class="docutils literal notranslate"><span class="pre">LifeTable.Female</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.Male"><code class="docutils literal notranslate"><span class="pre">LifeTable.Male</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.NAFemale"><code class="docutils literal notranslate"><span class="pre">LifeTable.NAFemale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.NAMale"><code class="docutils literal notranslate"><span class="pre">LifeTable.NAMale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.NAmerican"><code class="docutils literal notranslate"><span class="pre">LifeTable.NAmerican</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.WFemale"><code class="docutils literal notranslate"><span class="pre">LifeTable.WFemale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.WHFemale"><code class="docutils literal notranslate"><span class="pre">LifeTable.WHFemale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.WHMale"><code class="docutils literal notranslate"><span class="pre">LifeTable.WHMale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.WHispanic"><code class="docutils literal notranslate"><span class="pre">LifeTable.WHispanic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.WMale"><code class="docutils literal notranslate"><span class="pre">LifeTable.WMale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.LifeTable.White"><code class="docutils literal notranslate"><span class="pre">LifeTable.White</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logic_timetradeoff.TimeTradeOff"><code class="docutils literal notranslate"><span class="pre">TimeTradeOff</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.TimeTradeOff.aqle"><code class="docutils literal notranslate"><span class="pre">TimeTradeOff.aqle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.TimeTradeOff.load"><code class="docutils literal notranslate"><span class="pre">TimeTradeOff.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logic_timetradeoff.TimeTradeOff.refine_threshold"><code class="docutils literal notranslate"><span class="pre">TimeTradeOff.refine_threshold()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logic_timetradeoff.cospoints"><code class="docutils literal notranslate"><span class="pre">cospoints()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logic_timetradeoff.factorial"><code class="docutils literal notranslate"><span class="pre">factorial()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logic_timetradeoff.func_cos"><code class="docutils literal notranslate"><span class="pre">func_cos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="language_pack.html">language_pack module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mainapp.html">mainapp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsgi.html">wsgi module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="logic_gambler.html" title="previous chapter">logic_gambler module</a></li>
+      <li>Next: <a href="language_pack.html" title="next chapter">language_pack module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Adeboye A. Adejare Jr..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/logic_timetradeoff.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class = "container" >
+<form method="POST" id="GamblerSetup" action="" enctype="multipart/form-data">
+<div class="jumbotron">
+This form will help create your Gambler project.</br>  Please make sure to follow the directions as they will guide in making the final Gambler form.
+</div>
+{{form.csrf_token }}
+<div class=row> <div class="col-md-4 col-md-offset-4"><h1>Please create a title for your Gambler. </h1>
+{{wtf.form_field(form.ogamblertitle )}} </div> </div>
+<div class=row> <div class="col-md-4 col-md-offset-4"><h1>Please write the access URL for your Gambler with no spaces.</h1>
+{{wtf.form_field(form.gamblertitle )}} </div> </div>
+<div class=row> <div class="col-md-4 col-md-offset-4">{{wtf.form_field(form.selectAmount)}}</div></div>
+<div class=row> <div class="col-md-4 col-md-offset-4"><h1>Select the language the project will be in.</h1>
+{{wtf.form_field(form.selectLanguage)}} </div> </div>
+<h1>Select user information options</h1>
+<div class="row">
+<div class="col-md-2">{{wtf.form_field(form.selectSonFHR)}}  </div>
+<div class="col-md-2">{{wtf.form_field(form.selectGenranduid)}} </div>
+<div class="col-md-2">{{wtf.form_field(form.selectDisablepatname)}} </div> 
+<div class="col-md-2">{{wtf.form_field(form.selectDisablepatage)}} </div>
+<div class="col-md-2">{{wtf.form_field(form.selectDisablepatrace)}} </div>
+<div class="col-md-2">{{wtf.form_field(form.selectDisablepatgender)}} </div></div>
+<div class=row><div class="col-md-2">{{wtf.form_field(form.selectlocalStorage)}} </div> </div>
+<h1>Name your health states for The Gambler</h1>
+<div class="row">
+<div class="col-md-3">{{wtf.form_field(form.conditionOnetext)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionTwotext)}}  </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionThreetext)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionFourtext)}} </div> </div>
+<div class="row"><div class="col-md-3">{{wtf.form_field(form.conditionFivetext)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionSixtext)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionSeventext)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionEighttext)}} </div> </div>
+
+<h1>Name your health state abbreviation</h1>
+<div class="row">
+<div class="col-md-3">{{wtf.form_field(form.conditionOneAC)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionTwoAC)}}  </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionThreeAC)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionFourAC)}} </div> </div>
+<div class="row"><div class="col-md-3">{{wtf.form_field(form.conditionFiveAC)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionSixAC)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionSevenAC)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.conditionEightAC)}} </div> </div>
+
+
+<h1>Write the health states' description.</h1>
+{{wtf.form_field(form.conditionOneInfo)}}
+{{wtf.form_field(form.conditionTwoInfo)}}
+{{wtf.form_field(form.conditionThreeInfo)}}
+{{wtf.form_field(form.conditionFourInfo)}}
+{{wtf.form_field(form.conditionFiveInfo)}}
+{{wtf.form_field(form.conditionSixInfo)}}
+{{wtf.form_field(form.conditionSevenInfo)}}
+{{wtf.form_field(form.conditionEightInfo)}}
+
+<div class="row"><div class="col-md-3">{{wtf.form_field(form.selectOrdinal)}}</div>
+<div class="col-md-3">{{wtf.form_field(form.selectScale)}}</div>
+<div class="col-md-3">{{wtf.form_field(form.selectGambler)}}</div>
+<div class="col-md-3">{{wtf.form_field(form.selectTime)}}</div></div>
+
+
+<div id = "GamblerUseForm">
+<h1>Now, create the parameters for the gambler.</h1>
+<div class=row> <div class="col-md-3">{{wtf.form_field(form.initgambThresh)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.posgambThresh)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.maxgambThresh)}} </div>
+<div class="col-md-3">{{wtf.form_field(form.mingambThresh)}} </div></div>
+{{wtf.form_field(form.gambWelcome)}}
+{{wtf.form_field(form.gambScenario)}} 
+{{wtf.form_field(form.gambScenarioThree)}} 
+{{wtf.form_field(form.gambScenarioFour)}} 
+{{wtf.form_field(form.gambScenarioFive)}} 
+{{wtf.form_field(form.gambScenarioSix)}} 
+{{wtf.form_field(form.gambScenarioSeven)}} 
+{{wtf.form_field(form.gambChoosing)}}
+<div class=row> <div class="col-md-4">{{wtf.form_field(form.gambAgreementA)}}</div>
+<div class="col-md-4">{{wtf.form_field(form.gambAgreementE)}} </div>
+<div class="col-md-4">{{wtf.form_field(form.gambAgreementB)}} </div></div></div>
+
+<div id = "TimeTUseForm">
+<h1>Next, create the paramters for the time trade off.</h1>
+<div class=row> <div class="col-md-3">{{wtf.form_field(form.inittimetThresh)}}</div>
+<div class="col-md-3">{{wtf.form_field(form.postimetThresh)}}</div>
+<div class="col-md-3">{{wtf.form_field(form.maxtimetThresh)}}</div>
+<div class="col-md-3">{{wtf.form_field(form.mintimetThresh)}}</div></div>
+{{wtf.form_field(form.timetWelcome)}}
+{{wtf.form_field(form.timetScenario)}}
+{{wtf.form_field(form.timetScenarioThree)}} 
+{{wtf.form_field(form.timetScenarioFour)}} 
+{{wtf.form_field(form.timetScenarioFive)}} 
+{{wtf.form_field(form.timetScenarioSix)}} 
+{{wtf.form_field(form.timetScenarioSeven)}} 
+{{wtf.form_field(form.timetChoosing)}}
+<div class=row> <div class="col-md-4">{{wtf.form_field(form.timetAgreementA)}} </div>
+<div class="col-md-4">{{wtf.form_field(form.timetAgreementE)}} </div>
+<div class="col-md-4">{{wtf.form_field(form.timetAgreementB)}} </div></div>
+</div>
+<input class="btn btn-primary" type="submit" value = "submit">
+{% if form.errors %}
+    {{ form.errors }}
+{% endif %}
+</d1>
+</form>
+</div>
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+<script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+<!-- In <body> -->
+<script type="text/javascript">
+
+// function changeNameField(x){
+// xt = ['First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eight']
+// chs = "Conditional Health State"
+// 
+// 
+// 
+// }
+function changeNumFields(x){
+    if (x < 4){
+            $("#conditionFourtext").fadeOut(500);
+                $("#conditionFourInfo").fadeOut(500);  
+                 $("#conditionFourAC").fadeOut(500);     
+                $('label[for="conditionFourtext"]').fadeOut(500);
+                $('label[for="conditionFourInfo"]').fadeOut(500);
+				 $('label[for="conditionFourAC"]').fadeOut(500);
+				$("#conditionFourAC").fadeOut(500);   
+				 $('label[for="conditionFourAC"]').fadeOut(500);
+			$('label[for="gambScenarioThree"]').fadeOut(500);
+				$("#gambScenarioThree").fadeOut(500); 
+				$('label[for="timetScenarioThree"]').fadeOut(500);
+				$("#timetScenarioThree").fadeOut(500); 				 
+			$('label[for="gambScenarioThree"]').fadeOut(500);
+				$("#gambScenarioThree").fadeOut(500); 
+				$('label[for="timetScenarioThree"]').fadeOut(500);
+				$("#timetScenarioThree").fadeOut(500); 
+}
+   	 	else{
+            $("#conditionFourtext").fadeIn(500);
+                $("#conditionFourInfo").fadeIn(500);  
+                $('label[for="conditionFourtext"]').fadeIn(500);
+                $('label[for="conditionFourInfo"]').fadeIn(500);
+			$('label[for="gambScenarioThree"]').fadeIn(500);
+				$("#gambScenarioThree").fadeIn(500); 
+				$('label[for="timetScenarioThree"]').fadeIn(500);
+				$("#timetScenarioThree").fadeIn(500); 
+				$('label[for="conditionFourAC"]').fadeIn(500);
+				$("#conditionFourAC").fadeIn(500);
+    }
+
+ if (x < 5){
+            $("#conditionFivetext").fadeOut(500);
+                $("#conditionFiveInfo").fadeOut(500);  
+                $('label[for="conditionFivetext"]').fadeOut(500);
+                $('label[for="conditionFiveInfo"]').fadeOut(500);
+				 $('label[for="conditionFiveAC"]').fadeOut(500);
+				 $("#conditionFiveAC").fadeOut(500); 
+			$('label[for="gambScenarioFour"]').fadeOut(500);
+				$("#gambScenarioFour").fadeOut(500); 
+				$('label[for="timetScenarioFour"]').fadeOut(500);
+				$("#timetScenarioFour").fadeOut(500);   
+			$('label[for="gambScenarioFour"]').fadeOut(500);
+				$("#gambScenarioFour").fadeOut(500); 
+				$('label[for="timetScenarioFour"]').fadeOut(500);
+				$("#timetScenarioFour").fadeOut(500); 
+}
+                else{
+            $("#conditionFivetext").fadeIn(500);
+                $("#conditionFiveInfo").fadeIn(500);  
+                $('label[for="conditionFivetext"]').fadeIn(500);
+                $('label[for="conditionFiveInfo"]').fadeIn(500);
+			$('label[for="conditionFiveAC"]').fadeIn(500);
+				$("#conditionFiveAC").fadeIn(500); 
+			$('label[for="gambScenarioFour"]').fadeIn(500);
+				$("#gambScenarioFour").fadeIn(500); 
+				$('label[for="timetScenarioFour"]').fadeIn(500);
+				$("#timetScenarioFour").fadeIn(500); 
+    }
+
+ if (x < 6){
+            $("#conditionSixtext").fadeOut(500);
+                $("#conditionSixInfo").fadeOut(500);  
+                $('label[for="conditionSixtext"]').fadeOut(500);
+                $('label[for="conditionSixInfo"]').fadeOut(500);
+				 $('label[for="conditionSixAC"]').fadeOut(500);
+				 $("#conditionSixAC").fadeOut(500);   
+				
+				$('label[for="gambScenarioFive"]').fadeOut(500);
+				$("#gambScenarioFive").fadeOut(500); 
+				$('label[for="timetScenarioFive"]').fadeOut(500);
+				$("#timetScenarioFive").fadeOut(500); 
+
+}
+                else{
+            $("#conditionSixtext").fadeIn(500);
+                $("#conditionSixInfo").fadeIn(500);  
+                $('label[for="conditionSixtext"]').fadeIn(500);
+                $('label[for="conditionSixInfo"]').fadeIn(500);
+			$('label[for="conditionSixAC"]').fadeIn(500);
+				$("#conditionSixAC").fadeIn(500); 
+			$('label[for="gambScenarioFive"]').fadeIn(500);
+				$("#gambScenarioFive").fadeIn(500); 
+				$('label[for="timetScenarioFive"]').fadeIn(500);
+				$("#timetScenarioFive").fadeIn(500); 
+
+    }
+
+ if (x < 7){
+            $("#conditionSeventext").fadeOut(500);
+                $("#conditionSevenInfo").fadeOut(500);  
+                $('label[for="conditionSeventext"]').fadeOut(500);
+                $('label[for="conditionSevenInfo"]').fadeOut(500);
+				 $('label[for="conditionSevenAC"]').fadeOut(500);
+				 $("#conditionSevenAC").fadeOut(500);   
+				
+				$('label[for="gambScenarioSix"]').fadeOut(500);
+				$("#gambScenarioSix").fadeOut(500); 
+				$('label[for="timetScenarioSix"]').fadeOut(500);
+				$("#timetScenarioSix").fadeOut(500); 
+
+}
+                else{
+            $("#conditionSeventext").fadeIn(500);
+                $("#conditionSevenInfo").fadeIn(500);  
+                $('label[for="conditionSeventext"]').fadeIn(500);
+                $('label[for="conditionSevenInfo"]').fadeIn(500);
+			$('label[for="conditionSevenAC"]').fadeIn(500);
+				$("#conditionSevenAC").fadeIn(500); 
+				
+				$('label[for="gambScenarioSix"]').fadeIn(500);
+				$("#gambScenarioSix").fadeIn(500); 
+				$('label[for="timetScenarioSix"]').fadeIn(500);
+				$("#timetScenarioSix").fadeIn(500); 
+    }
+
+
+ if (x < 8){
+            $("#conditionEighttext").fadeOut(500);
+                $("#conditionEightInfo").fadeOut(500);  
+                $('label[for="conditionEighttext"]').fadeOut(500);
+                $('label[for="conditionEightInfo"]').fadeOut(500);
+				 $('label[for="conditionEightAC"]').fadeOut(500);
+				 $("#conditionEightAC").fadeOut(500);   
+				
+				$('label[for="gambScenarioSeven"]').fadeOut(500);
+				$("#gambScenarioSeven").fadeOut(500); 
+				$('label[for="timetScenarioSeven"]').fadeOut(500);
+				$("#timetScenarioSeven").fadeOut(500); 
+}
+                else{
+            $("#conditionEighttext").fadeIn(500);
+                $("#conditionEightInfo").fadeIn(500);  
+                $('label[for="conditionEighttext"]').fadeIn(500);
+                $('label[for="conditionEightInfo"]').fadeIn(500);
+			$('label[for="conditionEightAC"]').fadeIn(500);
+				$("#conditionEightAC").fadeIn(500); 
+				
+				$('label[for="gambScenarioSeven"]').fadeIn(500);
+				$("#gambScenarioSeven").fadeIn(500); 
+				$('label[for="timetScenarioSeven"]').fadeIn(500);
+				$("#timetScenarioSeven").fadeIn(500); 
+
+    }
+  
+
+}
+
+changeNumFields($('#selectAmount').val())
+
+$("#GamblerSetup :input").change(function() {
+console.log($("#conditionOnetext").val())
+  if($("#selectGambler").is(':checked')) {
+    $("#GamblerUseForm").fadeIn(500);
+    
+  } else {
+  		
+    $("#GamblerUseForm").fadeOut(500);
+
+  }
+  if($("#selectTime").is(':checked')) {
+    $("#TimeTUseForm").fadeIn(500);
+  } else {
+    $("#TimeTUseForm").fadeOut(500); 
+  }
+  
+changeNumFields($('#selectAmount').val())
+});
+</script>
+{% endblock %}
+
+

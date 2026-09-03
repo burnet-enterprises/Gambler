@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BaseModel &#8212; The Gambler 3.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for BaseModel</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">peewee</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">#Must modify this information before production</span>
+<span class="c1">#Password must be modified.  </span>
+
+<span class="c1">#db = MySQLDatabase(os.getenv(&#39;DB_NAME&#39;, &#39;Gambler&#39;), user=os.getenv(&#39;DB_USER&#39;, &#39;user&#39;), passwd=os.getenv(&#39;DB_PW&#39;, &#39;passwd&#39;))</span>
+<span class="kn">from</span> <span class="nn">playhouse.sqlite_ext</span> <span class="kn">import</span> <span class="n">SqliteExtDatabase</span>
+
+<span class="n">PROJECT_PATH</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="vm">__file__</span> <span class="p">),</span> <span class="s1">&#39;../&#39;</span><span class="p">,</span> <span class="s1">&#39;configfiles&#39;</span><span class="p">))</span>
+<span class="c1"># db = SqliteDatabase(&#39;../configfiles/Gambler.db&#39;, pragmas={&#39;journal_mode&#39;: &#39;wal&#39;})</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SqliteExtDatabase</span><span class="p">(</span><span class="n">PROJECT_PATH</span> <span class="o">+</span> <span class="s1">&#39;/Gambler.db&#39;</span><span class="p">,</span> <span class="n">regexp_function</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                       <span class="n">pragmas</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;journal_mode&#39;</span><span class="p">:</span> <span class="s1">&#39;wal&#39;</span><span class="p">})</span>
+<div class="viewcode-block" id="ModelBase"><a class="viewcode-back" href="../BaseModel.html#BaseModel.ModelBase">[docs]</a><span class="k">class</span> <span class="nc">ModelBase</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Generic model database for Peewee&quot;&quot;&quot;</span>
+	<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+		<span class="n">database</span> <span class="o">=</span> <span class="n">db</span></div>
+
+<div class="viewcode-block" id="GamblerInfo"><a class="viewcode-back" href="../BaseModel.html#BaseModel.GamblerInfo">[docs]</a><span class="k">class</span> <span class="nc">GamblerInfo</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Database model for Gambler project information&quot;&quot;&quot;</span>
+	<span class="n">gambleid</span> <span class="o">=</span> <span class="n">AutoField</span><span class="p">()</span>
+	<span class="n">otitleid</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">titleid</span><span class="o">=</span><span class="n">CharField</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="n">mechgamb</span> <span class="o">=</span><span class="n">CharField</span><span class="p">()</span>
+	<span class="n">conditionOne</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionTwo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionThree</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionFour</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionFive</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionSix</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionSeven</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionEight</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionOneAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionTwoAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionThreeAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionFourAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionFiveAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionSixAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionSevenAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionEightAC</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionOneInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionTwoInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionThreeInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionFourInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionFiveInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionSixInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionSevenInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">conditionEightInfo</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageOnename</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageTwoname</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageThreename</span><span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageFourname</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageFivename</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageSixname</span><span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageSevenname</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">imageEightname</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">initgambThresh</span> <span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">maxgambThresh</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">mingambThresh</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">posgambThresh</span> <span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">neggambThresh</span> <span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">gambChoosing</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambScenario</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambScenarioThree</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambScenarioFour</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambScenarioFive</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambScenarioSix</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambScenarioSeven</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambBenefits</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambSideeffects</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambWelcome</span> <span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambAgreementA</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambAgreementE</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">gambAgreementB</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">inittimeThresh</span> <span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">postimetThresh</span> <span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">negtimetThresh</span> <span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">maxtimetThresh</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">mintimetThresh</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">timetScenario</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetScenarioThree</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetScenarioFour</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetScenarioFive</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetScenarioSix</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetScenarioSeven</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetChoosing</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetBenefits</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetSideeffects</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetWelcome</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetAgreementA</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetAgreementE</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">timetAgreementB</span><span class="o">=</span><span class="n">TextField</span><span class="p">()</span>
+	<span class="n">language</span><span class="o">=</span><span class="n">CharField</span><span class="p">()</span>
+	<span class="n">SonFHR</span><span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span> 
+	<span class="n">genranduid</span><span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">disablepatname</span><span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">disablepatage</span><span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">disablepatgender</span><span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">disablepatrace</span><span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">localStorage</span><span class="o">=</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+		<span class="n">database</span> <span class="o">=</span><span class="n">db</span>
+			<span class="c1">#table_name is table for the data.</span>
+		<span class="n">table_name</span> <span class="o">=</span> <span class="s1">&#39;GamblerInfo&#39;</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">The Gambler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../BaseModel.html">BaseModel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ConditionInfo.html">ConditionInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GamblerSetup.html">GamblerSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ReverseProxy.html">ReverseProxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserData.html">UserData module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserInfo.html">UserInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VideoSetup.html">VideoSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">admin module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gdpr.html">gdpr module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demographics.html">demographics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logic_gambler.html">logic_gambler module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logic_timetradeoff.html">logic_timetradeoff module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../language_pack.html">language_pack module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mainapp.html">mainapp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsgi.html">wsgi module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Adeboye A. Adejare Jr..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

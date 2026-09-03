@@ -1,0 +1,1445 @@
+{% extends "base.html" %}
+{%block title %}{{Title_Program}}{%endblock%}
+
+{% block styles %}
+{{super()}}
+<!-- HTML with JS and Jinja -->
+<!DOCTYPE html>
+
+
+  
+<style text="text/css">
+h1 {text-align:center;}
+p {text-align:center;}
+form {text-align:center;} </style>
+
+    <!-- Bootstrap -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- This is the visual analog scale utility -->
+<!-- In <head> -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<style type="text/css" >
+.popover-content {
+    word-wrap: break-word;
+}
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ .centering {
+  width: 50%;
+  margin: 0 auto;
+}
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+.popover{
+    max-width: 34%; /* Max Width of the popover (depending on the container!) */
+    z-index: 2001;
+}
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+.modalDialog > div {
+	width: 440px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+.heightSet {
+    height: 50px;
+    width: 50px;
+}
+.close:hover { background: #00d9ff; }
+.centering{
+display:flex;
+justify-content:left;
+align-items:center;
+}
+img{
+    z-index: 2000;
+}
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+figure.center {
+    display: block;
+    margin: 0 auto;
+}
+.content {
+    display: inline-block;
+    margin: 0 auto;
+    z-index:2000
+}
+#jumbo {
+  padding: 5px;
+  margin-bottom: 0px
+}
+
+</style>
+{% endblock %}
+
+  {% block content %}
+<form  id="intensityform" method = 'POST'>
+   <div id='GamblerSlider'>
+   <h2 margin-top:"-10px">{{Greeting_Text}} {{patientname}}.</h2>	
+   <div class="container">
+   <div class="row">
+      <div id="jumbo" class="jumbotron">
+      {% set parse_it = Instruction_Text.replace("<br />","<br>").replace("<br/>","<br>").split("<br>")%}
+	<p> {% for para in parse_it %}<h3>{{para}}</h3>{%endfor%}
+
+	</p>
+      <a href="#openModal">{{Video_Instruction_Text}}</a>
+      </div>
+{% if ce ==1 %}
+<div class="alert alert-danger">
+{% set parse_ast = Alert_Selection_Text.replace("<br />","<br>").replace("<br/>","<br>").split("<br>") %}
+{% for paraast in parse_ast %}<strong>{{paraast}}</strong> {%endfor%}</div>
+{%endif%}
+   </div>
+	<div class="row">
+<div class="col-md-3">
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="480"
+   id="drawing"
+   version="1.1"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="thermometer.svg">
+  <metadata
+     id="metadata52">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3063" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1126"
+     inkscape:window-height="694"
+     id="namedview3061"
+     showgrid="false"
+     inkscape:zoom="1"
+     inkscape:cx="60.648401"
+     inkscape:cy="261.46497"
+     inkscape:window-x="21"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g3030"
+     inkscape:measure-start="172,419"
+     inkscape:measure-end="172,136"
+     showguides="false" />
+  <title
+     id="title3027">Visual Analog Scale</title>
+  <g
+     id="g3030"
+     transform="translate(-164.29148,7.4677944)">
+    <title
+       id="title3032">Layer 1</title>
+    <!-- set the height attribute to something between 0 and 10.  Can be floating-point. -->
+    <rect
+       id="svg_2"
+       height="315"
+       width="82"
+       y="54.080898"
+       x="207.27382"
+       style="fill:#ffffff;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <circle
+       id="complete"
+       r="40.224369"
+       cy="53"
+       cx="249"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-dasharray:none"
+       transform="matrix(1.0181075,0,0,1.0181075,-4.4819467,-1.7333411)"
+       inkscape:label="#svg_3"
+       sodipodi:ry="40.224369"
+       sodipodi:rx="40.224369"
+       sodipodi:cy="53"
+       sodipodi:cx="249" />
+    <circle
+       cx="251"
+       cy="384"
+       r="72.249573"
+       id="svg_1"
+       style="fill:#ff0000;stroke:#000000;stroke-width:5"
+       transform="translate(-2,0)"
+       sodipodi:ry="72.249573"
+       sodipodi:rx="72.249573"
+       sodipodi:cy="384"
+       sodipodi:cx="251" />
+    <rect
+       id="svg_4"
+       height="48.386272"
+       width="76.699997"
+       y="53.613728"
+       x="210.70049"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0;stroke-dasharray:none" />
+    <rect
+       id="svg_4-1"
+       height="48.386272"
+       width="76.699997"
+       y="276.89359"
+       x="210.62749"
+       style="fill:#ffffff;stroke:#000000;stroke-width:0;stroke-dasharray:none" />
+    <rect
+       id="temperature"
+       height="7.2690001"
+       width="76.953003"
+       y="323.73111"
+       x="210.50047"
+       style="fill:#ff0000;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       inkscape:label="#rect3059" />
+    <g
+       id="svg_113"
+       transform="matrix(0.5383622,0,0,0.73722857,227.30812,-0.4731425)">
+      <g
+         id="svg_76">
+        <line
+           x1="114.95001"
+           y1="406.95001"
+           x2="67.249039"
+           y2="406.95001"
+           id="svg_14"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+        <line
+           x1="114.62064"
+           y1="439.65454"
+           x2="66.919678"
+           y2="439.65454"
+           id="svg_14-7"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_77">
+        <line
+           x1="115.1004"
+           y1="370.25079"
+           x2="67.399429"
+           y2="370.25079"
+           id="svg_79"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_80">
+        <line
+           x1="115.1004"
+           y1="333.00079"
+           x2="67.399429"
+           y2="333.00079"
+           id="svg_82"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_83">
+        <line
+           x1="115.02423"
+           y1="295.9754"
+           x2="67.323257"
+           y2="295.9754"
+           id="svg_85"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_86">
+        <line
+           x1="115.17462"
+           y1="259.27618"
+           x2="67.473648"
+           y2="259.27618"
+           id="svg_88"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_89">
+        <line
+           x1="115.17462"
+           y1="222.02617"
+           x2="67.473648"
+           y2="222.02617"
+           id="svg_91"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_92">
+        <line
+           x1="115.02423"
+           y1="184.97539"
+           x2="67.323257"
+           y2="184.97539"
+           id="svg_94"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_95">
+        <line
+           x1="115.17462"
+           y1="148.27617"
+           x2="67.473648"
+           y2="148.27617"
+           id="svg_97"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_98">
+        <line
+           x1="115.17462"
+           y1="111.02617"
+           x2="67.473648"
+           y2="111.02617"
+           id="svg_100"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+      <g
+         id="svg_110">
+        <line
+           x1="115.1004"
+           y1="73.998817"
+           x2="67.399429"
+           y2="73.998817"
+           id="svg_112"
+           style="fill:none;stroke:#000000;stroke-width:4" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="330.95212"
+       y="60.361485"
+       id="text3849"><tspan
+         sodipodi:role="line"
+         x="330.95212"
+         y="60.361485"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan3867">100</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="334.6716"
+       y="113.88238"
+       id="text3849-1"><tspan
+         sodipodi:role="line"
+         x="334.6716"
+         y="113.88238"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan3867-7">80</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="333.71027"
+       y="168.98947"
+       id="text3849-1-4"><tspan
+         sodipodi:role="line"
+         x="333.71027"
+         y="168.98947"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan3867-7-0">60</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="334.94214"
+       y="222.5732"
+       id="text3849-1-4-9"><tspan
+         sodipodi:role="line"
+         x="334.94214"
+         y="222.5732"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan3867-7-0-4">40</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="332.75079"
+       y="279.42706"
+       id="text3849-1-4-9-8"><tspan
+         sodipodi:role="line"
+         x="332.75079"
+         y="279.42706"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan3867-7-0-4-8">20</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="444.29147"
+       y="240.53221"
+       id="text904"><tspan
+         sodipodi:role="line"
+         id="tspan902"
+         x="444.29147"
+         y="275.92282"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="335.29147"
+       y="331.5322"
+       id="text950"><tspan
+         sodipodi:role="line"
+         id="tspan948"
+         x="335.29147"
+         y="331.5322">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="334.29147"
+       y="89.532204"
+       id="text954"><tspan
+         sodipodi:role="line"
+         id="tspan952"
+         x="334.29147"
+         y="89.532204">90</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="334.29147"
+       y="141.53221"
+       id="text958"><tspan
+         sodipodi:role="line"
+         id="tspan956"
+         x="334.29147"
+         y="141.53221">70</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="334.29147"
+       y="197.53221"
+       id="text962"><tspan
+         sodipodi:role="line"
+         id="tspan960"
+         x="334.29147"
+         y="197.53221">50</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="333.29147"
+       y="250.53221"
+       id="text966"><tspan
+         sodipodi:role="line"
+         id="tspan964"
+         x="333.29147"
+         y="250.53221">30</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="303.29147"
+       y="73.532204"
+       id="text1002"><tspan
+         sodipodi:role="line"
+         id="tspan1000"
+         x="303.29147"
+         y="73.532204">95</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 290.86359,95.52297 c -28.99138,0 0,0 0,0 z"
+       id="path1057"
+       inkscape:connector-curvature="0" />
+    <image
+       y="67.445808"
+       x="277.99963"
+       id="image1076"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAYAAAAFKSQHAAAABHNCSVQICAgIfAhkiAAAABRJREFU
+CJljZGBg+M9AApCSkvoLADMgAkxi21+aAAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="123.02297"
+       x="276.58542"
+       id="image1096"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAYAAAAFKSQHAAAABHNCSVQICAgIfAhkiAAAABRJREFU
+CJljZGBg+M9AApCSkvoLADMgAkxi21+aAAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="148.97206"
+       x="276.03345"
+       id="image1116"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAIAAACKS7NQAAAAA3NCSVQICAjb4U/gAAAAD0lEQVQI
+mWNgIALIysoCAADWAFiCmlu2AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="175.64954"
+       x="276.10028"
+       id="image1136"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAIAAACKS7NQAAAAA3NCSVQICAjb4U/gAAAAD0lEQVQI
+mWNgIALIysoCAADWAFiCmlu2AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="203.48691"
+       x="275.84735"
+       id="image1156"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAIAAACKS7NQAAAAA3NCSVQICAjb4U/gAAAAD0lEQVQI
+mWNgIALIysoCAADWAFiCmlu2AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="232.16438"
+       x="276.35321"
+       id="image1176"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAIAAACKS7NQAAAAA3NCSVQICAjb4U/gAAAAD0lEQVQI
+mWNgIALIysoCAADWAFiCmlu2AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="257.93491"
+       x="275.71365"
+       id="image1196"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAIAAACKS7NQAAAAA3NCSVQICAjb4U/gAAAAD0lEQVQI
+mWNgIALIysoCAADWAFiCmlu2AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="286.22577"
+       x="277.26019"
+       id="image1216"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAIAAACKS7NQAAAAA3NCSVQICAjb4U/gAAAAD0lEQVQI
+mWNgIALIysoCAADWAFiCmlu2AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <image
+       y="310.44974"
+       x="276.16714"
+       id="image1236"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAABCAIAAACKS7NQAAAAA3NCSVQICAjb4U/gAAAAD0lEQVQI
+mWNgIALIysoCAADWAFiCmlu2AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="1"
+       width="13" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.33333397px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="330.92905"
+       y="307.0545"
+       id="text1283"><tspan
+         sodipodi:role="line"
+         id="tspan1281"
+         x="330.92905"
+         y="307.0545">10</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="303.59756"
+       y="101.56784"
+       id="text1308"><tspan
+         sodipodi:role="line"
+         id="tspan1306"
+         x="303.59756"
+         y="101.56784">85</tspan><tspan
+         sodipodi:role="line"
+         x="303.59756"
+         y="121.56784"
+         id="tspan1310" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="302.70505"
+       y="130.17847"
+       id="text1314"><tspan
+         sodipodi:role="line"
+         id="tspan1312"
+         x="302.70505"
+         y="130.17847">75</tspan><tspan
+         sodipodi:role="line"
+         x="302.70505"
+         y="150.17847"
+         id="tspan1316" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="302.36737"
+       y="156.01974"
+       id="text1320"><tspan
+         sodipodi:role="line"
+         id="tspan1318"
+         x="302.36737"
+         y="156.01974">65</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="302.79877"
+       y="182.26506"
+       id="text1324"><tspan
+         sodipodi:role="line"
+         id="tspan1322"
+         x="302.79877"
+         y="182.26506">55</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="303.0867"
+       y="211.24428"
+       id="text1328"><tspan
+         sodipodi:role="line"
+         id="tspan1326"
+         x="303.0867"
+         y="211.24428">45</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="303.25925"
+       y="237.95009"
+       id="text1332"><tspan
+         sodipodi:role="line"
+         id="tspan1330"
+         x="303.25925"
+         y="237.95009">35</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="303.79147"
+       y="264.0083"
+       id="text1336"><tspan
+         sodipodi:role="line"
+         id="tspan1334"
+         x="303.79147"
+         y="264.0083">25</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="303.07214"
+       y="292.35443"
+       id="text1340"><tspan
+         sodipodi:role="line"
+         id="tspan1338"
+         x="303.07214"
+         y="292.35443">15</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="305.80603"
+       y="316.85858"
+       id="text1344"><tspan
+         sodipodi:role="line"
+         id="tspan1342"
+         x="305.80603"
+         y="316.85858">5</tspan></text>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1" />
+</svg>
+</div>
+<div class="col-md-5">
+			<div id="VASboundary">
+{% for i in range (1,order|length-1) %}
+{% if order[i]|safe == Second_ConditionAC %}				<figure id="slider2" class="content" data-toggle = "popover" data-placement="top" style="top: 318px;  border: 5px solid #ffc40c !important;background-color: #fefcf5 !important;"><img class = "heightSet"  src="{{url_for('static', filename='images/' + slug+ '/' + Second_Image)}}"> <figcaption id = "slider2f" style= "font: 16px">0%</figcaption> </figure>{% endif %}
+{% if order[i]|safe == Third_ConditionAC %}				<figure id="slider3" class="content" data-toggle = "popover" data-placement="top" style="top: 318px;  border: 5px solid #9400d3 !important;background-color: #fefcf5 !important;"><img class = "heightSet" src="{{url_for('static', filename='images/' + slug+ '/' + Third_Image)}}"> <figcaption id = "slider3f" style= "font: 16px">0%</figcaption> </figure>{% endif %}
+{% if order[i]|safe == Fourth_ConditionAC %}				<figure id="slider4" class="content" data-toggle = "popover" data-placement="top"style="top: 318px;  border: 5px solid #606060 !important;background-color: #fefcf5 !important;"><img class = "heightSet" data-placement="top" src="{{url_for('static', filename='images/' + slug+ '/' + Fourth_Image)}}"> <figcaption id = "slider4f" " style= "font: 16px">0%</figcaption> </figure>{% endif %}
+{% if order[i]|safe == Fifth_ConditionAC %}				<figure id="slider5" class="content" data-toggle = "popover" data-placement="top" style="top: 318px;  border: 5px solid #ff51c3 !important;background-color: #fefcf5 !important;"><img class = "heightSet" data-placement="top" src="{{url_for('static', filename='images/' + slug+ '/' + Fifth_Image)}}"> <figcaption id = "slider5f" style= "font: 16px">0%</figcaption> </figure>{% endif %}
+{% if order[i]|safe == Sixth_ConditionAC %}				<figure id="slider6" class="content" data-toggle = "popover" data-placement="top" style="top: 318px;  border: 5px solid #3faef2 !important;background-color: #fefcf5 !important;"><img class = "heightSet"  data-placement="top" src="{{url_for('static', filename='images/' + slug+ '/' + Sixth_Image)}}"> <figcaption id = "slider6f" style= "font: 16px">0%</figcaption> </figure>{% endif %}
+{% if order[i]|safe == Seventh_ConditionAC %}				<figure id="slider7" class="content" data-toggle = "popover" data-placement="top" style="top: 318px;  border: 5px solid #ff8c00 !important;background-color: #fefcf5 !important;"><img class = "heightSet" data-placement="top" src="{{url_for('static', filename='images/' + slug+ '/' + Seventh_Image)}}"> <figcaption id = "slider7f" style= "font: 16px">0%</figcaption> </figure>{% endif %}
+
+{% endfor %}
+				</div>
+
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<video width="400" controls>
+		 <source src="{{url_for('static', filename='images/' + slug + '/VASInstructions.mp4')}}" type="video/mp4">
+		</video>
+	</div>
+</div> 
+</div>
+
+<div class="row"> </div>
+<div class="row" margin-top:"10px">
+   
+   <input type="hidden" name="intensityinfo" id="intensity" value=""> </input>
+<input type="hidden" name="timinginfo" id="time" value=""> </input>
+<input type="hidden" name="totaltiminginfo" id="totaltime" value=""> </input>
+   <input type="submit"   class="btn btn-lg btn-primary" value="{{Continue_Button}}" /> </div>
+   </form>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super()}}
+
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+ <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.13/svg.min.js"></script>
+<script type="text/javascript" src="{{url_for('.static',filename='screentime.js')}}"></script>
+
+<script type="text/javascript">
+var items = [100,0,0,0,0,0,0,0];
+var linedrawpos = [350,400,450,530,580,660]; //Line draw positions
+var rolinedrawpos = [0,0,0,0,0,0]; //Reorder linedraw positions
+//Sider formation and values info
+var max_val = 100;
+var min_val = 0;
+var tch = 0; //PErcent 
+var t_min_y = 323.4; //Bottom y document of thermometer
+var t_min_h = 7.269;
+var t_max_h = 277.465;
+var y_stable = 0;
+
+///Timing information
+var timemeasurex = 0.0;
+var timemeasure1 = 0.0;
+var timemeasure2 = 0.0;
+var timemeasure3 = 0.0;
+{% if setup >= 4 %}var timemeasure4 = 0.0; {%endif %}
+{% if setup >= 5 %}var timemeasure5 = 0.0;{%endif %}
+{% if setup >= 6 %}var timemeasure6 = 0.0;{%endif %}
+{% if setup >= 7 %}var timemeasure7 = 0.0;{%endif %}
+{% if setup >= 8 %}var timemeasure8 = 0.0;{%endif %}
+
+
+//console.log(t_min_h + (t_max_h - t_min_h));
+var change_y = t_min_h + (t_max_h - t_min_h) * tch / max_val;
+$("#temperature").height(t_min_h + (t_max_h - t_min_h) * tch / max_val);
+$("#temperature").attr('y', Math.round(t_min_y + 7.269 - change_y));
+
+var tempbarhold = [0,0,0,0,0,0] //Holds values of tempbars
+var tempbarheight = [0,0,0,0,0,0] //Holds values of tempbar heights
+var pos_hold = 0;
+///Drag bar indicator info
+var dragged = 0;
+var threshold = 2;
+var hold_width =0;
+
+
+var draw = SVG('#drawing')
+var line = [draw.line(51, Math.round(t_min_y + 14 - change_y), 118, Math.round(t_min_y + 14 - change_y)){% if setup >= 4 %},draw.line(51, Math.round(t_min_y + 14 - change_y), 118, Math.round(t_min_y + 14 - change_y)) {%endif%}{% if setup >= 5 %},draw.line(51, Math.round(t_min_y + 14 - change_y), 118, Math.round(t_min_y + 14 - change_y)){%endif%}{% if setup >= 6 %},draw.line(51, Math.round(t_min_y + 14 - change_y), 118, Math.round(t_min_y + 14 - change_y)){%endif%}{% if setup >= 7 %},draw.line(51, Math.round(t_min_y + 14 - change_y), 118, Math.round(t_min_y + 14 - change_y)){%endif%}{% if setup >= 8 %},draw.line(51, Math.round(t_min_y + 14 - change_y), 118, Math.round(t_min_y + 14 - change_y)){%endif%}]
+line[0].stroke({ color: '#ffc40c', width: 5, linecap: 'round' })
+{% if setup >= 4 %}line[1].stroke({ color: '#9400d3', width: 5, linecap: 'round' }){% endif %}
+{% if setup >= 5 %}line[2].stroke({ color: '#606060', width: 5, linecap: 'round' }){% endif %}
+{% if setup >= 6 %}line[3].stroke({ color: '#ff51c3', width: 5, linecap: 'round' }){% endif %}
+{% if setup >= 7 %}line[4].stroke({ color: '#3faef2', width: 5, linecap: 'round' }){% endif %}
+{% if setup >= 8 %}line[5].stroke({ color: '#ff8c00', width: 5, linecap: 'round' }){% endif %}
+{% if order[0]|safe == First_ConditionAC %} var fsths = draw.image("{{url_for('static', filename='images/' + slug+ '/' + First_Image)}}")
+fsths.size(50,50).move(220,40)
+fsths.attr('id',"slider1");
+fsths.attr('data-placement', "top");
+{%endif%} //First health state image 
+{% if order[order|length-1]|safe == Third_ConditionAC %} var lsths = draw.image("{{url_for('static', filename='images/' + slug+ '/' + Third_Image)}}")
+lsths.size(50,50).move(220,320)
+lsths.attr('id',"slider3");
+lsths.attr('data-placement', "bottom");
+{%endif%} //First health state image 
+{% if order[order|length-1]|safe == Fourth_ConditionAC %} var lsths = draw.image("{{url_for('static', filename='images/' + slug+ '/' + Fourth_Image)}}")
+lsths.size(50,50).move(220,320)
+lsths.attr('id',"slider4");
+lsths.attr('data-placement', "bottom");
+{%endif%} //First health state image 
+{% if order[order|length-1]|safe == Fifth_ConditionAC %} var lsths = draw.image("{{url_for('static', filename='images/' + slug+ '/' + Fifth_Image)}}")
+lsths.size(50,50).move(220,320)
+lsths.attr('id',"slider5");
+lsths.attr('data-placement', "bottom");
+{%endif%} //First health state image 
+{% if order[order|length-1]|safe == Sixth_ConditionAC %} var lsths = draw.image("{{url_for('static', filename='images/' + slug+ '/' + Sixth_Image)}}")
+lsths.size(50,50).move(220,320)
+lsths.attr('id',"slider6");
+lsths.attr('data-placement', "bottom");
+{%endif%} //First health state image 
+{% if order[order|length-1]|safe == Seventh_ConditionAC %} var lsths = draw.image("{{url_for('static', filename='images/' + slug+ '/' + Seventh_Image)}}")
+lsths.size(50,50).move(220,320))
+lsths.attr('id',"slider7");
+lsths.attr('data-placement', "bottom");
+{%endif%} //First health state image 
+{% if order[order|length-1]|safe == Eighth_ConditionAC %} var lsths = draw.image("{{url_for('static', filename='images/' + slug+ '/' + Eighth_Image)}}")
+lsths.size(50,50).move(220,320)
+lsths.attr('id',"slider8");
+lsths.attr('data-placement', "bottom");
+{%endif%} //First health state image 
+
+//Id
+$("#slider1").data('state', 'hover');
+$("#slider2").data('state', 'hover');
+$("#slider3").data('state', 'hover');
+{% if setup >= 4 %}$("#slider4").data('state', 'hover');{% endif %}
+{% if setup >= 5 %}$("#slider5").data('state', 'hover');{% endif %}
+{% if setup >= 6 %}$("#slider6").data('state', 'hover');{% endif %}
+{% if setup >= 7 %}$("#slider7").data('state', 'hover');{% endif %}
+{% if setup >= 8 %}$("#slider8").data('state', 'hover');{% endif %}
+
+//Functions
+var changetempheight = function(x,y){
+	$("#temperature").height(tempbarhold[y]);
+	$("#temperature").attr('y', tempbarheight[y])
+	dy = t_min_h + (t_max_h - t_min_h) * (x/max_val)
+	$("#temperature").height(dy);
+	$("#temperature").attr('y', Math.round(t_min_y + 7.269 - dy))
+	tempbarhold[y] = dy;
+	tempbarheight[y] = Math.round(t_min_y + 7.269 - dy);
+	line[y].y(Math.round(t_min_y + 13 - dy))
+
+}
+
+var enterShow = function (x) {
+	//console.log($('#' + x).data)
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('show');
+        //console.time(x);
+        //console.log(x)
+        timemeasurex = performance.now();
+
+    }
+    else{
+    
+    $('#' + x).data('state', 'pinned');
+    $('#' + x).popover('show');
+    }
+};
+
+var exitHide = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('hide');
+        
+        //timemeasurec += console.timeEnd(x)
+        if (x === 'slider1'){   timemeasure1 += (performance.now() - timemeasurex);
+        }
+
+		 if(x === 'slider2') {
+		        	timemeasure2 += (performance.now() - timemeasurex);
+					}
+		 if(x === 'slider3') {
+		        	timemeasure3 += (performance.now() - timemeasurex);
+					}
+		 if(x === 'slider4') {
+		        	timemeasure4 += (performance.now() - timemeasurex);
+					}
+		 if(x === 'slider5') {
+		        	timemeasure5 += (performance.now() - timemeasurex);
+					}
+		 if(x === 'slider6') {
+		        	timemeasure6 += (performance.now() - timemeasurex);
+					}
+		 if(x === 'slider7') {
+		        	timemeasure7 += (performance.now() - timemeasurex);
+					}
+		if(x === 'slider8'){
+		        	timemeasure8 += (performance.now() - timemeasurex);
+					}
+    }
+};
+
+$(document).on('click', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+
+$(document).on('mouseenter', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        //console.log(this.id)
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+
+{% if video >= 1 %}
+var clickToggle = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).data('state', 'pinned');
+        if (x === 'slider1'){ document.getElementsByClassName("popover-content")[0].innerHTML =  '<div id = "Cond1"><video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoOne)}}" type="video/mp4"> </video> </div>';
+		}
+		 if(x === 'slider2') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoTwo)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'slider3') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoThree)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'slider4') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoFour)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'slider5') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoFive)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'slider6') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoSix)}}" type="video/mp4"> </video>';
+		}
+		 if(x === 'slider7') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoSeven)}}" type="video/mp4"> </video>';
+		}
+		if(x === 'slider8'){
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + VideoEight)}}" type="video/mp4"> </video>';
+		}
+    } else {
+        $('#' + x).data('state', 'hover')
+        if (x === 'slider1'){ document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionOneInfo}}";
+		}
+		 if(x === 'slider2') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionTwoInfo}}"
+		}
+		 if(x === 'slider3') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionThreeInfo}}";
+		}
+		 if(x === 'slider4') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionFourInfo}}";
+		}
+		 if(x === 'slider5') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionFiveInfo}}";
+		}
+		 if(x === 'slider6') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{ConditionSixInfo}}";
+		}
+		 if(x === 'slider7') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{ConditionSevenInfo}}";
+		}
+		if(x === 'slider8'){
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{ConditionEightInfo}}";
+		}
+
+    }
+};
+
+{% endif %}
+var resetclickToggle = function (x) {
+    if ($('#' + x).data('state') === 'pinned') {
+        $('#' + x).data('state', 'hover')
+        if (x === 'slider1'){ document.getElementsByClassName("popover-content")[0].innerHTML =  "<div id = 'Cont1' class='fields'>{{ConditionOneInfo}}</div>";
+		}
+		 if(x === 'slider2') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionTwoInfo}}"
+		}
+		 if(x === 'slider3') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionThreeInfo}}";
+		}
+		 if(x === 'slider4') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionFourInfo}}";
+		}
+		 if(x === 'slider5') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  "{{ConditionFiveInfo}}";
+		}
+		 if(x === 'slider6') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{ConditionSixInfo}}";
+		}
+		 if(x === 'slider7') {
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{ConditionSevenInfo}}";
+		}
+		if(x === 'slider8'){
+		document.getElementsByClassName("popover-content")[0].innerHTML = "{{ConditionEightInfo}}";
+		}
+
+    }
+};
+
+
+
+var linereset = function(x){
+        $.each(line,function(idx){
+        line[idx].width(x)
+        });
+}
+
+var touchtime = 0;
+//Post data
+
+
+$("[data-toggle=popover]").mousedown(function(){
+  // toggle popover when link is clicked
+  $(this).popover('toggle');
+});
+
+$("[data-toggle=popover]").draggable({
+  stop:function(){
+    // show popover when drag stops
+    $(this).popover('show');
+  }
+});
+
+$(document).ready(function() {
+y_stable = $("#slider2").offset().top;
+pos_hold = $("#slider2").position().top;
+//console.log(pos_hold);
+hold_width =  67;
+});
+
+  {% if instructions == 1 %}  
+     location.href = "#openModal";
+{%endif%}
+
+
+$('.content').each(function(i, obj) {
+	if (this.id == "slider2"){rolinedrawpos[0]=(linedrawpos[i]);}
+{% if setup > 3 %}	if( this.id == "slider3"){rolinedrawpos[1]=(linedrawpos[i]);} {% endif %}
+{% if setup > 4 %}	if (this.id == "slider4"){rolinedrawpos[2]=(linedrawpos[i]);} {% endif %}
+{% if setup > 5 %}	if (this.id == "slider5"){rolinedrawpos[3]=(linedrawpos[i]);} {% endif %}
+{% if setup > 6 %}	if (this.id == "slider6"){rolinedrawpos[4]=(linedrawpos[i]);} {% endif %}
+{% if setup > 7 %}	if (this.id == "slider7"){rolinedrawpos[5]=(linedrawpos[i]);} {% endif %}
+    //test
+
+});
+$("[id='slider1']").popover({trigger: "manual", container: 'body', html: "true", title: "{{ConditionOne}}", content: "<div id ='/Cond1'/>{{ConditionOneInfo}}</div>"})
+    .on('mouseenter', function() { enterShow('slider1')})
+    .on('mouseleave', function() { exitHide('slider1')})
+    {% if video >= 1 %}.on('click', function() { 
+    	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+ 		 	testtime = (new Date().getTime()) - touchtime;
+  		  if ((testtime) < 4000) {
+    		clickToggle('slider1');
+    //		console.log(testtime);
+    		  touchtime = 0;
+    		} else {
+    		    //		console.log(testtime);
+
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+$("#slider2").popover({trigger: "manual", container: 'body', title: "{{ConditionTwo}}", content: "{{ConditionTwoInfo}}"})
+    .on('mouseenter', function() {enterShow('slider2')})
+    .on('mouseleave', function() { exitHide('slider2')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('slider2')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+$("[id='slider3']").popover({trigger: "manual", container: 'body', title: "{{ConditionThree}}", content: "{{ConditionThreeInfo}}"})
+    .on('mouseenter', function() { enterShow('slider3')})
+    .on('mouseleave', function() { exitHide('slider3')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('slider3')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% if setup >= 4 %}
+$("[id='slider4']").popover({trigger: "manual", container: 'body', title: "{{ConditionFour}}", content: "{{ConditionFourInfo}}"})
+    .on('mouseenter', function() { enterShow('slider4')})
+    .on('mouseleave', function() { exitHide('slider4')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('slider4')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 5 %}
+$("[id='slider5']").popover({trigger: "manual", container: 'body', title: "{{ConditionFive}}", content: "{{ConditionFiveInfo}}"})
+    .on('mouseenter', function() { enterShow('slider5')})
+    .on('mouseleave', function() { exitHide('slider5')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('slider5')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 6 %}
+$("[id='slider6']").popover({trigger: "manual", container: 'body', title: "{{ConditionSix}}", content: "{{ConditionSixInfo}}"})
+    .on('mouseenter', function() { enterShow('slider6')})
+    .on('mouseleave', function() { exitHide('slider6')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('slider6')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 7 %}
+$("[id='slider7']").popover({trigger: "manual", container: 'body', title: "{{ConditionSeven}}", content: "{{ConditionSevenInfo}}"})
+    .on('mouseenter', function() { enterShow('slider7')})
+    .on('mouseleave', function() { exitHide('slider7')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('slider7')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+	{% if setup >= 8 %}
+$("[id='slider8']").popover({trigger: "manual", container: 'body', title: "{{ConditionEight}}", content: "{{ConditionEightInfo}}"})
+    .on('mouseenter', function() { enterShow('slider8')})
+    .on('mouseleave', function() { exitHide('slider8')})
+    {% if video >= 1 %}.on('click', function() {     	 if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('slider8')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}  }); {% endif %}
+{% endif %}
+
+$("#slider2").draggable({
+axis:'y',
+containment: '.col-md-3',
+scroll: false,
+drag: function(event, ui) {
+		ui.position.top = Math.max(39, Math.min(317,ui.position.top))
+        var offset = $(this).offset();
+        var xPos = offset.left;
+        var yPos = offset.top;
+        
+        //console.log(y_stable)
+         //console.log(yPos)
+         if ($(this).offset().top > y_stable){
+         	$(this).css('top','388px');
+         	
+         }
+         if ($(this).offset().top < 119){
+         	$(this).css('top','119 px');
+         	
+         }
+        var ypercheck =  Math.round(((y_stable - yPos)/278) * 100);
+        //console.log("Ypos:"+yPos+ " :Change y Demo: "+change_yDemo + " ypercheck: " + ypercheck)
+        $("figcaption", this).text(ypercheck + "%" )
+        changetempheight(ypercheck,0)
+        items[1] = ypercheck;
+   	 	document.getElementById("intensity").value = items.toString();
+		line[0].width(rolinedrawpos[0]);
+		
+
+		//console.log("Id: " + $(this).attr('id') + " Y: "+ yPos);
+    }
+
+})
+    .mousedown(function() {
+        dragged = 0;
+        linereset(hold_width);
+        
+    })
+    .mousemove(function() {
+        dragged++;
+        
+     })
+    .mouseup(function() {
+        if (dragged < threshold) {
+            $("#throbble").toggle();
+        }
+         linereset(hold_width);
+        dragged = 0;
+    });
+
+$("#slider3").draggable({
+axis:'y',
+scroll: false,
+containment: '.col-md-3',    
+drag: function(event, ui) {
+		ui.position.top = Math.max(39, Math.min(317,ui.position.top))
+        var offset = $(this).offset();
+        var xPos = offset.left;
+        var yPos = offset.top;
+   //     console.log(y_stable)
+     //    console.log(yPos)
+        var ypercheck =  Math.round(((y_stable - yPos)/278) * 100);
+        //console.log("Ypos:"+yPos+ " :Change y Demo: "+change_yDemo + " ypercheck: " + ypercheck)
+        $("figcaption", this).text(ypercheck + "%" )
+        changetempheight(ypercheck,1)
+        items[2] = ypercheck;
+   	 	document.getElementById("intensity").value = items.toString();
+   	 	line[1].width(rolinedrawpos[1]);
+		//console.log("Id: " + $(this).attr('id') + " Y: "+ yPos);
+    }
+
+})
+    .mousedown(function() {
+        dragged = 0;
+     	linereset(hold_width);
+
+        
+    })
+    .mousemove(function() {
+        dragged++;
+        
+     })
+    .mouseup(function() {
+         linereset(hold_width);
+        dragged = 0;
+    });
+$("#slider4").draggable({
+axis:'y',
+containment: '.col-md-3',
+scroll: false,
+drag: function(event, ui) {
+		ui.position.top = Math.max(39, Math.min(317,ui.position.top))
+        var offset = $(this).offset();
+        var xPos = offset.left;
+        var yPos = offset.top;
+ //       console.log(y_stable)
+ //        console.log(yPos)
+        var ypercheck =  Math.round(((y_stable - yPos)/278) * 100);
+        //console.log("Ypos:"+yPos+ " :Change y Demo: "+change_yDemo + " ypercheck: " + ypercheck)
+        $("figcaption", this).text(ypercheck + "%" )
+        changetempheight(ypercheck,2)
+        items[3] = ypercheck;
+   	 	document.getElementById("intensity").value = items.toString();
+   	 	line[2].width(rolinedrawpos[2]);
+
+		//console.log("Id: " + $(this).attr('id') + " Y: "+ yPos);
+    }
+
+})
+    .mousedown(function() {
+        dragged = 0;
+		linereset(hold_width);
+    })
+    .mousemove(function() {
+        dragged++;
+        
+     })
+    .mouseup(function() {
+
+         linereset(hold_width);
+        dragged = 0;
+    });
+    
+$("#slider5").draggable({
+scroll: false,  
+axis:'y',
+containment: '.col-md-3',
+drag: function(event, ui) {
+		ui.position.top = Math.max(39, Math.min(317,ui.position.top))
+        var offset = $(this).offset();
+        var xPos = offset.left;
+        var yPos = offset.top;
+// 		console.log(y_stable)
+// 		 console.log(yPos)
+        var ypercheck =  Math.round(((y_stable - yPos)/278) * 100);
+        //console.log("Ypos:"+yPos+ " :Change y Demo: "+change_yDemo + " ypercheck: " + ypercheck)
+        $("figcaption", this).text(ypercheck + "%" )
+        changetempheight(ypercheck,3)
+        items[4] = ypercheck;
+   	 	document.getElementById("intensity").value = items.toString();
+   	 	line[3].width(rolinedrawpos[3]);
+
+		//console.log("Id: " + $(this).attr('id') + " Y: "+ yPos);
+    }
+
+})
+    .mousedown(function() {
+        dragged = 0;
+        linereset(hold_width);
+        
+    })
+    .mousemove(function() {
+        dragged++;
+        
+     })
+    .mouseup(function() {
+        if (dragged < threshold) {
+            $("#throbble").toggle();
+        }
+         linereset(hold_width);
+        dragged = 0;
+    });
+$("#slider6").draggable({
+ scroll: false,
+axis:'y',
+containment: '.col-md-3',
+drag: function(event, ui) {
+		ui.position.top = Math.max(39, Math.min(317,ui.position.top))
+        var offset = $(this).offset();
+        var xPos = offset.left;
+        var yPos = offset.top;
+//         console.log(y_stable)
+//          console.log(yPos)
+        var ypercheck =  Math.round(((y_stable - yPos)/278) * 100);
+        //console.log("Ypos:"+yPos+ " :Change y Demo: "+change_yDemo + " ypercheck: " + ypercheck)
+        $("figcaption", this).text(ypercheck + "%" )
+        changetempheight(ypercheck,4)
+        items[5] = ypercheck;
+   	 	document.getElementById("intensity").value = items.toString();
+   	 	line[4].width(rolinedrawpos[4]);
+
+		//console.log("Id: " + $(this).attr('id') + " Y: "+ yPos);
+    }
+
+})
+    .mousedown(function() {
+        dragged = 0;
+        linereset(hold_width);
+        
+    })
+    .mousemove(function() {
+        dragged++;
+        
+     })
+    .mouseup(function() {
+         linereset(hold_width);
+        dragged = 0;
+    });
+$("#slider7").draggable({
+axis:'y',
+scroll: false,
+containment: '.col-md-3',
+drag: function(event, ui) {
+		ui.position.top = Math.max(39, Math.min(317,ui.position.top))
+        var offset = $(this).offset();
+        var xPos = offset.left;
+        var yPos = offset.top;
+//         console.log(y_stable)
+//          console.log(yPos)
+        var ypercheck =  Math.round(((y_stable - yPos)/278) * 100);
+        //console.log("Ypos:"+yPos+ " :Change y Demo: "+change_yDemo + " ypercheck: " + ypercheck)
+        $("figcaption", this).text(ypercheck + "%" )
+        changetempheight(ypercheck,5)
+        items[6] = ypercheck;
+   	 	document.getElementById("intensity").value = items.toString();
+   	 	line[5].width(rolinedrawpos[5]);
+		//console.log("Id: " + $(this).attr('id') + " Y: "+ yPos);
+    }
+})
+    .mousedown(function() {
+        dragged = 0;
+        linereset(hold_width);
+        
+    })
+    .mousemove(function() {
+        dragged++;
+        
+     })
+    .mouseup(function() {
+         linereset(hold_width);
+        dragged = 0;
+    });
+
+    $("#openModal").click( function() {
+        if (!$("#openModal>div").is(":hover")) document.location.href='#';
+    });
+    
+var curtrack = 0;
+$.screentime({
+  fields: [
+    { selector: '#intensityform',
+      name: 'Intensity Form'
+    }
+  ],
+      reportInterval: 1,
+  callback: function(data) {
+  $.each(data, function(key, val) {
+      var $elem = $('#console li[data-field="' + key + '"]');
+      var current = parseFloat($elem.data('time'), 10);
+      curtrack = curtrack + val
+      console.log(items)
+      $elem.data('time', current + val);
+        });
+document.getElementById("totaltime").value=curtrack.toString()
+    // Logs: { Top: 5, Middle: 3 }
+  }
+});
+
+
+</script>
+
+  {% endblock %}
+
+</html>
+

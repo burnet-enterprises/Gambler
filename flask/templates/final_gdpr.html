@@ -1,0 +1,121 @@
+{%extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<!-- In <head> -->
+<style type="text/css" >
+#imagedis {
+	display: inline-block;
+}
+#textinfo {
+	display: flex;
+	width: 320px;
+    padding: 10px;
+    margin: 0;
+}
+
+.heightSet {
+    max-height: 50px;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="jumbotron">
+    <p><h3 style="text-align: center;">{{Greeting_Text.replace("{{FirstName}}",FirstName) }}.</h3></p>
+  </div>
+
+<table class="table table-bordered table-hover" align="center">
+  <thead>
+    <tr>
+      <th>{{HS_Text}}</th>
+{% if od != 0 %}      <th>{{OR_Text}}</th> {% endif %}
+{% if vs != 0 %}      <th>{{VAS_Text}}</th> {% endif %}
+{% if gb != 0 %}      <th>{{SG_Text}}</th> {% endif %}
+{% if tt != 0 %}	<th>{{TTO_Text}}</th> {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + First_Condition_Image)}}">
+      <br/>{{First_Condition}}</td>
+{% if od >= 1 %}        <td>{{First_Condition_Order}}</td> {% endif %}
+{% if vs >= 1 %}      <td>{{First_Condition_Intensity}}</td> {% endif %}
+ {% if gb >= 1 %}      <td>{{First_Condition_Gamble}}</td> {% endif %}
+{% if tt >= 1 %}      <td>{{First_Condition_Time}}</td> {% endif %}
+
+    </tr>
+    <tr>
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + Second_Condition_Image)}}">
+      <br />{{Second_Condition}}</td> 
+{% if od >= 2 %}        <td>{{Second_Condition_Order}}</td> {% endif %}
+{% if vs >=2 %}      <td>{{Second_Condition_Intensity}}</td> {% endif %}
+ {% if gb >= 2 %}      <td>{{Second_Condition_Gamble}}</td>  {% endif %}
+{% if tt >=2 %}      <td>{{Second_Condition_Time}}</td> {% endif %}
+ 
+   </tr>
+    <tr>
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + Third_Condition_Image)}}"><br/>{{Third_Condition}}</td>
+ {% if od >=3 %}       <td>{{Third_Condition_Order}}</td> {% endif %}
+ {% if vs >=3 %}     <td>{{Third_Condition_Intensity}}</td> {% endif %}
+ {% if gb >=3 %}      <td>{{Third_Condition_Gamble}}</td> {% endif %}
+ {% if tt >=3 %}     <td>{{Third_Condition_Time}}</td> {% endif %}
+
+    </tr>
+    <tr>
+    {% if setup >= 4 %}
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + Fourth_Condition_Image)}}"><br/>{{Fourth_Condition}}</td>
+{% if od >=4 %}        <td>{{Fourth_Condition_Order}}</td> {% endif %}
+{% if vs >=4 %}       <td>{{Fourth_Condition_Intensity}}</td> {% endif %}
+{% if gb >=4 %}       <td>{{Fourth_Condition_Gamble}}</td> {% endif %}
+{% if tt >=4 %}      <td>{{Fourth_Condition_Time}}</td> {% endif %}
+
+    </tr>
+    {% endif %}
+    {% if setup >= 5 %}
+    <tr>
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + Fifth_Condition_Image)}}"><br/>{{Fifth_Condition}}</td>
+ {% if od >=5 %}      <td>{{Fifth_Condition_Order}}</td> {% endif %}
+ {% if vs >=5 %}      <td>{{Fifth_Condition_Intensity}}</td> {% endif %}
+{% if gb >= 5 %}       <td>{{Fifth_Condition_Gamble}}</td> {% endif %}
+{% if tt >=5 %}      <td>{{Fifth_Condition_Time}}</td> {% endif %}
+
+    </tr>
+        {% endif %}
+    {% if setup >= 6 %}
+    <tr>
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + Sixth_Condition_Image)}}"><br/>{{Sixth_Condition}}</td>
+{% if od >=6 %}       <td>{{Sixth_Condition_Order}}</td> {% endif %}
+ {% if vs >=6 %}      <td>{{Sixth_Condition_Intensity}}</td> {% endif %}
+{% if gb >= 6 %}       <td>{{Sixth_Condition_Gamble}}</td> {% endif %}
+ {% if tt >=6 %}     <td>{{Sixth_Condition_Time}}</td> {% endif %}
+
+    </tr>
+        {% endif %}
+    {% if setup >= 7 %}
+    <tr>
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + Seventh_Condition_Image)}}"><br/>{{Seventh_Condition}}</td>
+{% if od >=7 %}       <td>{{Seventh_Condition_Order}}</td> {% endif %}
+ {% if vs >=7 %}      <td>{{Seventh_Condition_Intensity}}</td> {% endif %}
+ {% if gb >= 7 %}      <td>{{Seventh_Condition_Gamble}}</td> {% endif %}
+{% if tt >=7 %}      <td>{{Seventh_Condition_Time}}</td> {% endif %}
+
+    </tr>
+        {% endif %}
+    {% if setup >= 8 %}
+    <tr>
+      <td>  <img class="heightSet"src="{{url_for('static', filename='images/' + slug+ '/' + Eighth_Condition_Image)}}"><br/>{{Eighth_Condition}}</td>
+{% if od >=8 %}       <td>{{Eighth_Condition_Order}}</td> {% endif %}
+ {% if vs >=8 %}      <td>{{Eighth_Condition_Intensity}}</td> {% endif %}
+{% if gb >=8 %}       <td>{{Eighth_Condition_Gamble}}</td> {% endif %}
+{% if tt >=8 %}      <td>{{Eighth_Condition_Time}}</td> {% endif %}
+
+    </tr>
+        {% endif %}
+  </tbody>
+</table></div>
+<div class="row"><div class="col-md-4 col-md-offset-2"><a href="{{url_for('gdpr.gdprcsv_export', titleid=slug, username=username)}}" class="btn btn-primary" role="button" align="center">{{CSV_Export_Button}}</a></div>
+<div class="col-md-4"><a href="{{url_for('gdpr.gdprend_info', titleid=slug, username=username)}}"" class="btn btn-primary" role="button" align="center">{{Finish_Button}}</a> </div> </div>
+{%endblock%}

@@ -1,0 +1,33 @@
+{%extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<!-- In <head> -->
+<style type="text/css" >
+#imagedis {
+	display: inline-block;
+}
+#textinfo {
+	display: flex;
+	width: 320px;
+    padding: 10px;
+    margin: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-*-*"> <p><img src="{{url_for('static', filename='favicon.ico')}}">    {{Status_Text}}
+{{Status_Text}}
+</div>
+    <div class="col-*-*">{{Status_Text}}</div>
+  </div>
+<div class="row">
+<div class="col-*-*"> <p> <img src="{{url_for('static', filename='DEAD.ICO')}}">  {{Status_Text}} </div> 
+
+</div>
+
+{%endblock%}

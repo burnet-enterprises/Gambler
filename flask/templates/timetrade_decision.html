@@ -1,0 +1,540 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+{%block title %}{{Title_Program}}{%endblock%}
+
+{% block styles %}
+{{super()}}
+<!-- In <head> -->
+<link rel="stylesheet" href="{{url_for('static', filename='nouislider.css')}}">
+<!-- .noUi-connect is life and target is death -->
+<style type="text/css" >
+
+.popover { max-width: 35%;
+    position: relative;
+    margin: auto;
+
+ }
+.heightSet {
+    max-height: 100px;
+}
+.popover-content {
+    word-wrap: break-word;
+}
+#jumbo {
+  padding: 5px;
+  margin-bottom: 10px;
+
+}
+
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
+
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.modalDialog > div {
+	width: 440px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }
+
+#timeslider {
+	margin: 30px;
+	display: inline-block;
+	width: 450px;
+	height: 80px;
+}
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#timeslider .noUi-connect {
+	background:  #BACDE1;
+}
+#timeslider .noUi-target {
+  background: #CC5151;
+}
+
+#timeslider2 {
+        margin: 30px;
+        display: inline-block;
+        width: 450px;
+	height: 80px;
+}
+#timeslider2 .noUi-connect {
+        background:  #CFDBC5;
+}
+#timeslider2 .noUi-target {
+  background: #ffa500;
+}
+[disabled].noUi-target
+{
+ background: #CC5151;
+ 
+ }
+ 
+ /*Legend for color*/
+ .legend { list-style: none; }
+.legend li { float: left; margin-right: 10px; }
+.legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin: 2px; }
+
+
+
+.legend .rectangle1 { background-color: #BACDE1; }
+.legend .rectangle2 { background-color: #CC5151; }
+.legend .rectangle3 { background-color: #CFDBC5; }
+ /* basic positioning */
+
+[disabled]#slider2 .noUi-target
+{
+ background: #ffa500;
+
+ }
+.life-status {
+  position:absolute;
+  left:10px;
+  top:9px;
+  z-index:10;
+}
+.death-status {
+  position:absolute;
+  right:10px;
+  top:9px;
+  z-index: 10;
+}
+
+.equity-status {
+  position:absolute;
+  left:40%;
+  top: 9px; 
+  z-index: 10;//Allows to put things in front or back
+}
+.progress {position: relative; height: 80px;} // we increased it so the text is visible or change font size
+.progress .sr-only { position: relative; }
+.noUi-handle { display:none; }
+.alert {
+  display:inline-block;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+		<h2 style="margin-top: 0px;text-align: center;"> {{Greeting_Text}} {{patientname}}. </h2>
+	<div class="jumbotron" id="jumbo">
+		<p>
+	<div class="more">
+	{{Welcome_Statement}}
+		<br />
+		 <br />
+		{{Scenario_Statement}}
+		</div>
+	</p>
+	<p style="font-size: 16px">
+		 <br />
+		{{Choosing_Statement}}
+
+	</p>
+	<p><a href="#openModal" id="TTIV">{{Video_Instruction_Text}}</a></p>
+{% if insvidtag != "" %}	<p><a href="#openModal" id="MCIV">{{HS_Video_Instruction_Text.replace("{{MainCondition}}",InterConditionStatus)}}</a></p>  {% endif %}
+	</div> 
+	<div class ="row">
+		<div class="col-sm-6"> 	<img id="MainConditionImageId" class = "heightSet" style="max-width: 35px;display: block; margin-left: auto; margin-right: auto;" ata-toggle = "popover1" src="{{url_for('static', filename='images/' + slug+ '/' + InterImage)}}" class="center">
+		</div>
+		<div class="col-sm-3">
+			<img id= "LifeConditionImageId" style="max-width: 35px;display: block; margin-left: auto; margin-right: auto;" data-placement="left" class = "heightSet" data-toggle = "popover2" src="{{url_for('static', filename='images/' + slug+ '/' + LifeImage)}}" class="center">
+
+			</div>
+	<div class="col-sm-3"> <img id="DeathConditionImageId"  style="max-width: 35px;display: block; margin-left: auto; margin-right: auto;" data-placement="left" class = "heightSet" data-toggle = "popover3" src="{{url_for('static', filename='images/' + slug+ '/' + DeathImage)}}" class="center">  </div>
+	</div>
+
+	<div class="row">
+	<div class="col-sm-6"><p style="text-align: center; vertical-align: middle;"><ul class="legend"><li><span class="rectangle3"></span> <strong>{{InterConditionStatus}} {{timetrade_units}}: {{Max_Time|int}} {{timetrade_units}}</strong></li></ul></p></div>
+	<div class="col-sm-3"><p style="text-align: center; vertical-align: middle;"><ul class="legend"><li><span class="rectangle1"></span> <strong>{{LifeCondition}} {{timetrade_units}}: {{Slider_Value|int}} {{timetrade_units}}</strong></li></ul></p></div>
+	<div class="col-sm-3"><p style="text-align: center; vertical-align: middle;"><ul class="legend"><li><span class="rectangle2"></span> <strong>{{DeathCondition}} {{(Max_Time - Slider_Value)|int}} {{timetrade_units}}</strong></li></ul></p></div>
+	
+		<div class="row">
+			<div class="col-sm-6">
+	<div class = 'slider' id='timeslider2' style="margin-top: 15px;">
+	</div> 
+	</div>
+
+	<div class="col-sm-6">
+	<div class = 'slider' id='timeslider' style=" margin-top: 15px;"> 
+	</div>
+	</div>
+	</div>
+	
+	<div class="row">
+	<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<video width="400" controls>
+		 <source src="{{url_for('static', filename='images/' + slug + '/TimeInstructionsGen.mp4')}}" type="video/mp4">
+		</video>
+	</div>
+</div>
+	<form  action="" method="POST">
+	<!-- Submit buttons allow for selection of choices. -->
+	<br/>
+	<br/>
+	<input type="hidden" name="timinginfo" id="time" value=""> </input>
+<input type="hidden" name="totaltiminginfo" id="totaltime" value="0"> </input>
+	 <input type="submit"  class="btn btn-lg btn-primary" name="Agreement_Box_A" value="{{Agreement_Statement_A}}" />
+	  <input type="submit"   class="btn btn-lg btn-primary" name="Agreement_Box_E" value="{{Agreement_Statement_E}}" />
+	  <input type="submit" class="btn btn-lg btn-primary"  name="Agreement_Box_B" value="{{Agreement_Statement_B}}" />
+	</form> </div>
+	</div>
+{% endblock%}
+
+{% block scripts %}
+{{ super()}}
+<script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+<!-- In <body> -->
+<script src="{{url_for('.static', filename='nouislider.js')}}"></script>
+<script src="{{url_for('.static',filename='screentime.js')}}"></script>
+
+<script type="text/javascript">
+var slider = document.getElementById('timeslider');
+
+	noUiSlider.create(slider, {
+		start: {{Slider_Value}},
+		tooltips: true,
+		connect: [true, false],
+		direction: 'ltr', // Put '0' at the bottom of the slider
+		orientation: 'horizontal', // Orient the slider vertically
+		range: {
+			'min': {{Min_Time}},
+			'max': {{Max_Time}}
+		},
+		pips: { // Show a scale with the slider
+		mode: 'steps',
+		stepped: true,
+		density: 4
+	}
+	});
+{% if insvidtag != "" %}
+$('#MCIV').click(function() {
+      
+       $("#openModal video").attr("src", "{{url_for('static', filename='images/' + slug + '/TimeInstructions' + insvidtag + '.mp4')}}");
+//Load for posterity sake
+		$("#openModal video").load()
+    });
+{% endif %}
+
+$('#TTIV').click(function() {
+      
+       $("#openModal video").attr("src", "{{url_for('static', filename='images/' + slug + '/TimeInstructionsGen.mp4')}}");
+//Load for posterity sake
+		$("#openModal video").load()
+    });
+
+$(document).ready(function(){
+{% if instructions == 1 %} location.href = "#openModal"; {%endif%}
+
+
+    var showChar = 20;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "{{Show_More_Text}}>";
+    var lesstext = "{{Show_Less_Text}}";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ 
+        if(content.length > showChar) {
+ 
+ 			var c = "";
+            for (w =showChar; w< content.length; w++){
+            	if (content[w] == " "){
+            		c = content.substr(0, w);
+            		break;
+            		}
+            
+            }
+            var h = content.substr(w, content.length - w);
+ 
+ {% if flag != 0 %}           var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+ 
+ {% else %}            var html = c + '<span class="moreellipses" style="display: none;">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span style="display: inline;">' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink less">' + lesstext + '</a></span>';
+
+{% endif %}
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+});
+
+
+var slider2 = document.getElementById('timeslider2');
+
+        noUiSlider.create(slider2, {
+                start: {{Max_Time}},//{{Slider_Value}},
+                tooltips: true,
+                connect: [true, false],
+                direction: 'ltr', // Put '0' at the bottom of the slider
+                orientation: 'horizontal', // Orient the slider vertically
+                range: {
+                        'min': {{Min_Time}},
+                        'max': {{Max_Time}}
+                },
+                pips: { // Show a scale with the slider
+                mode: 'steps',
+                stepped: true,
+                density: 4
+        }
+        });
+
+slider.setAttribute('disabled', true);
+slider2.setAttribute('disabled', true);
+var hider = slider.getElementsByClassName('.noUi-handle');
+var connect = slider.querySelectorAll('.noUi-connect');
+var classes = ['c-1-color', 'c-2-color'];
+
+for ( var i = 0; i < connect.length; i++ ) {
+    connect[i].classList.add(classes[i]);
+}
+$('#intensityform').on('submit',function () {
+	var jsonData = JSON.stringify(items);	
+    $.ajax({
+        url: '/intenstiy',
+        cache: false,
+        type: 'POST',
+        data : jsonData,
+        success: function(json) {
+            alert('all done');
+        },
+        error: function(){
+         alert('Failure');
+        }
+    });
+});
+
+var timemeasurex = 0.0;
+var timemeasure1 = 0.0;
+var timemeasure2 = 0.0;
+var timemeasure3 = 0.0;
+var touchtime = 0;
+
+
+$('#MainConditionImageId').data('state', 'hover');
+$('#LifeConditionImageId').data('state', 'hover');
+$('#DeathConditionImageId').data('state', 'hover');
+var enterShow = function (x) {
+	console.log(x)
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('show');
+        timemeasurex = performance.now();
+
+    }
+};
+var exitHide = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).popover('hide');
+    }
+        if (x === 'MainConditionImageId'){   
+    	timemeasure1 += (performance.now() - timemeasurex);
+        }
+	 if(x === 'LifeConditionImageId') {
+		    timemeasure2 += (performance.now() - timemeasurex);
+					}
+		 if(x === 'DeathConditionImageId') {
+		    timemeasure3 += (performance.now() - timemeasurex);
+					}
+	document.getElementById("time").value = timemeasure1.toString() + "," + timemeasure2.toString() + "," +  timemeasure3.toString();
+	console.log(timemeasure1.toString() + "," + timemeasure2.toString() + "," + timemeasure3.toString() )
+};
+
+var clickToggle = function (x) {
+    if ($('#' + x).data('state') === 'hover') {
+        $('#' + x).data('state', 'pinned');
+        if (x === 'MainConditionImageId'){ document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + InterVideo)}}" type="video/mp4"> </video>';
+		}
+		else if(x === 'LifeConditionImageId') {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + LifeVideo)}}" type="video/mp4"> </video>';
+		}
+		else{
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '<video id="VideoSourceLife" width="400" controls><source  src="{{url_for("static", filename='images/' + slug+ '/' + LifeVideo)}}" type="video/mp4"> </video>';
+		}
+    } else {
+        $('#' + x).data('state', 'hover')
+        if (x === 'MainConditionImageId') {document.getElementsByClassName("popover-content")[0].innerHTML =  '{{InterStatusInfo}}'; 
+		}else if (x === 'LifeConditionImageId'){
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '{{LifeStatusInfo}}';
+		}
+		else {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '{{DeathStatusInfo}}';
+		}
+    }
+};
+
+var resetclickToggle = function (x) {
+    if ($('#' + x).data('state') === 'pinned') {
+        $('#' + x).data('state', 'hover')
+        if (x === 'MainConditionImageId') {document.getElementsByClassName("popover-content")[0].innerHTML =  '{{InterStatusInfo}}'; 
+		}else if (x === 'LifeConditionImageId'){
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '{{LifeStatusInfo}}';
+		}
+		else {
+		document.getElementsByClassName("popover-content")[0].innerHTML =  '{{DeathStatusInfo}}';
+		}
+    }
+};
+
+$('#MainConditionImageId').popover({trigger: 'manual',container: 'body', title: "{{InterConditionStatus}}", content: "{{InterStatusInfo}}"})
+    .on('mouseenter', function() { enterShow('MainConditionImageId')})
+    .on('mouseleave', function() { exitHide('MainConditionImageId')})
+    .on('click', function() {if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('MainConditionImageId')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}});
+
+$('#LifeConditionImageId').popover({trigger: 'manual',container: 'body', title: "{{LifeCondition}}", content: "{{LifeStatusInfo}}"})
+    .on('mouseenter', function() { enterShow('LifeConditionImageId')})
+    .on('mouseleave', function() { exitHide('LifeConditionImageId')})
+    .on('click', function() { if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('LifeConditionImageId')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}} );
+
+$('#DeathConditionImageId').popover({trigger: 'manual',container: 'body', title: "{{DeathCondition}}", content: "{{DeathStatusInfo}}"})
+    .on('mouseenter', function() { enterShow('DeathConditionImageId')})
+    .on('mouseleave', function() { exitHide('DeathConditionImageId')})
+    .on('click', function() { if (touchtime == 0) {
+  			  touchtime = new Date().getTime();
+ 		 } else {
+  		  if (((new Date().getTime()) - touchtime) < 4000) {
+    		clickToggle('DeathConditionImageId')
+    		  touchtime = 0;
+    		} else {
+     		 touchtime = 0;
+   			 }
+  		}});
+    
+ $("#openModal").click( function() {
+        if (!$("#openModal>div").is(":hover")) document.location.href='#';
+    });
+    
+$(document).on('click', function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+
+$('body').on('mouseover', 'img',function (e) {
+    $('[data-toggle="popover"],[data-original-title]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+           resetclickToggle(this.id);
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+
+    });
+});
+var curtrack = 0;
+$.screentime({
+  fields: [
+    { selector: '.container',
+      name: 'MainPage'
+    },
+        { selector: "#Cond1",
+      name: 'Popover'
+    }
+  ],
+      reportInterval: 1,
+  callback: function(data) {
+  $.each(data, function(key, val) {
+      var $elem = $('#console li[data-field="' + key + '"]');
+      var current = parseFloat($elem.data('time'), 10);
+      curtrack = curtrack + val
+      $elem.data('time', current + val);
+        });
+document.getElementById("totaltime").value=curtrack.toString()
+    // Logs: { Top: 5, Middle: 3 }
+  }
+});
+
+
+</script>
+{% endblock %}

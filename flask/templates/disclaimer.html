@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="container">
+DISCLAIMER: University of Cincinnati Clinical Decision Support Tools are intended for use by patients or by physicians trained in the respective clinical areas along with the patient. These tools are designed to facilitate discussions between the physician and the patient. The user accepts responsibility for appropriate application of these tools.
+
+</div>
+</form>
+
+{% endblock%}
+{% block scripts %}
+{{ super()}}
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        
+
+<script type="text/javascript">
+async function getRequest(url = '') {
+    const response = await fetch(url, {
+        method: 'GET',
+        cache: 'no-cache'
+    })
+    return response.json()
+}
+document.addEventListener('DOMContentLoaded', function () {
+    let url = document.location
+    let route = "/flaskwebgui-keep-server-alive"
+    let interval_request = 3 * 1000 //sec
+    function keep_alive_server() {
+        getRequest(url + route)
+            .then(data => console.log(data))
+    }
+    setInterval(keep_alive_server, interval_request)()
+})
+</script>
+{% endblock %}

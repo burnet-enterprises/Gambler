@@ -1,0 +1,12 @@
+<!-- HTML with JS and Jinja -->
+{% extends "base.html" %}
+{%block content%}
+<form action="intro" method="POST">
+<div class="container">
+  <div class="jumbotron">
+    <h1>{{Title_Program}}</h1><p>{{Project_Name}} </p><p>{{Status_Text}}</p> </div></div>
+<p><button  class="btn btn-lg btn-primary" type="submit">{{Start_Button}}</button></p>
+<p></p>
+<footer><p style="text-align:left;">DISCLAIMER: University of Cincinnati Clinical Decision Support Tools are intended for use by patients or by physicians trained in the respective clinical areas along with the patient. These tools are designed to facilitate discussions between the physician and the patient. The user accepts responsibility for appropriate application of these tools. Best used in Chrome.</p></footer>
+
+{% endblock%}

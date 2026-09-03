@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>logic_timetradeoff &#8212; The Gambler 3.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for logic_timetradeoff</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">numpy</span><span class="o">,</span> <span class="nn">cgi</span><span class="o">,</span> <span class="nn">cgitb</span>
+<span class="c1">#Create a class for scenario building</span>
+<span class="c1">#GScenario = GamblerTimeTradeOff</span>
+<span class="kn">from</span> <span class="nn">BaseModel</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1">#Swinging calculations for Time Trade off mechanism</span>
+<div class="viewcode-block" id="factorial"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.factorial">[docs]</a><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Part of cospoints&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">1</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
+ 
+		
+<div class="viewcode-block" id="func_cos"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.func_cos">[docs]</a><span class="k">def</span> <span class="nf">func_cos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Part of cospoints&quot;&quot;&quot;</span>
+	<span class="n">cos_approx</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="n">coef</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">i</span>
+		<span class="n">num</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+		<span class="n">denom</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+		<span class="n">cos_approx</span> <span class="o">+=</span> <span class="p">(</span> <span class="n">coef</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">denom</span><span class="p">)</span> <span class="p">)</span>
+	<span class="k">return</span> <span class="n">cos_approx</span></div>
+
+
+<div class="viewcode-block" id="cospoints"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.cospoints">[docs]</a><span class="k">def</span> <span class="nf">cospoints</span><span class="p">(</span><span class="n">click</span><span class="p">,</span><span class="n">points</span><span class="p">):</span>
+<span class="c1">#Tradeoff function</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot; Calculate the swinging by clicks for users. &quot;&quot;&quot;</span>
+	<span class="n">decm</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">.1</span><span class="o">*</span><span class="n">points</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#Used to make sure that swings are gradual and within boundaries</span>
+	<span class="k">if</span> <span class="n">click</span> <span class="o">&lt;=</span> <span class="n">decm</span><span class="p">:</span>
+		<span class="n">adj</span> <span class="o">=</span> <span class="n">points</span> <span class="o">-</span> <span class="mi">1</span>
+	<span class="k">elif</span> <span class="n">click</span> <span class="o">&gt;</span> <span class="n">decm</span> <span class="ow">and</span> <span class="n">click</span> <span class="o">&lt;</span> <span class="n">points</span><span class="p">:</span>
+		<span class="n">adj</span> <span class="o">=</span> <span class="n">points</span> <span class="o">-</span> <span class="n">click</span> <span class="o">+</span> <span class="n">decm</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">adj</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">g</span> <span class="o">=</span> <span class="mi">90</span><span class="o">*</span><span class="p">(</span><span class="n">adj</span><span class="o">/</span><span class="n">points</span><span class="p">)</span>
+	<span class="n">angle_rad</span> <span class="o">=</span> <span class="n">g</span> <span class="o">*</span> <span class="mf">3.141592653589793</span> <span class="o">/</span> <span class="mi">180</span>
+	<span class="n">out</span> <span class="o">=</span>  <span class="nb">round</span><span class="p">(</span><span class="n">func_cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+	<span class="n">out</span> <span class="o">=</span>  <span class="nb">round</span><span class="p">(</span><span class="n">func_cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="n">points</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+	<span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">out</span><span class="p">))</span></div>
+	
+	
+<span class="c1">#################################################################################</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#							Time Trade Off Logic 								#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#																				</span>
+<span class="c1">#################################################################################</span>
+
+
+<span class="c1">#################################################################################</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#							Life Table Lookups 									#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#																				</span>
+<span class="c1">#################################################################################</span>
+
+<span class="c1">#################################################################################</span>
+<span class="c1">#Not full representation of Life tables for each race, but this template should allow you to know how to modify it </span>
+<div class="viewcode-block" id="LifeTable"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.LifeTable">[docs]</a><span class="k">class</span> <span class="nc">LifeTable</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;CDC Life table database lookup template&quot;&quot;&quot;</span>
+	<span class="n">Age</span> <span class="o">=</span> <span class="n">AutoField</span><span class="p">()</span>
+	<span class="n">Citizen</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span> <span class="c1">#Generic </span>
+	<span class="n">Male</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">Female</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">White</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span> <span class="c1">#White</span>
+	<span class="n">WMale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">WFemale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">NAmerican</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span> <span class="c1">#Native American</span>
+	<span class="n">NAMale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">NAFemale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">Asian</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span> <span class="c1">#Asian/Pacific Islander</span>
+	<span class="n">ASMale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">ASFemale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">AA</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">AAMale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span> <span class="c1">#African American</span>
+	<span class="n">AAFemale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">WHispanic</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span> <span class="c1">#Hispanic</span>
+	<span class="n">WHMale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="n">WHFemale</span>  <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span>
+	<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+			<span class="n">database</span> <span class="o">=</span><span class="n">db</span>
+			<span class="c1">#db_table is table for the data.</span>
+			<span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;LifeTable&#39;</span></div>
+	
+<span class="c1">#################################################################################</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#					Time Trade Off Wording Class								#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#																				</span>
+<span class="c1">#################################################################################</span>
+
+<span class="c1">#################################################################################</span>
+<div class="viewcode-block" id="GTimeTradeOff"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.GTimeTradeOff">[docs]</a><span class="k">class</span> <span class="nc">GTimeTradeOff</span><span class="p">:</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement</span> <span class="o">=</span><span class="s2">&quot;This is a scenario statement.</span><span class="se">\n</span><span class="s2">It will tell you that you have @#@ pills out of &amp;#&amp; pills.</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement3</span> <span class="o">=</span><span class="s2">&quot;This is a scenario statement.</span><span class="se">\n</span><span class="s2">It wil tell you about the condition of @#@</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement4</span> <span class="o">=</span><span class="s2">&quot;This is a scenario statement.</span><span class="se">\n</span><span class="s2">It wil tell you about the condition of @#@</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement5</span> <span class="o">=</span><span class="s2">&quot;This is a scenario statement.</span><span class="se">\n</span><span class="s2">It wil tell you about the condition of @#@</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement6</span> <span class="o">=</span><span class="s2">&quot;This is a scenario statement.</span><span class="se">\n</span><span class="s2">It wil tell you about the condition of @#@</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement7</span> <span class="o">=</span><span class="s2">&quot;This is a scenario statement.</span><span class="se">\n</span><span class="s2">It wil tell you about the condition of @#@</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Choosing_Statement</span> <span class="o">=</span> <span class="s2">&quot;This is the choosing statment.</span><span class="se">\n</span><span class="s2">It will ask you if you would want to choose the scenario.  Click Yes for yes and No for no.</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Sideeffects_Statement</span><span class="o">=</span> <span class="s2">&quot;This is the side effect statement.</span><span class="se">\n</span><span class="s2">It will list the side effects.</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Benefits_Statement</span> <span class="o">=</span> <span class="s2">&quot;This is the benefits statement.</span><span class="se">\n</span><span class="s2">It will list the benefits.</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Agreement_Statement_A</span><span class="o">=</span> <span class="s2">&quot;Alternative A&quot;</span> <span class="c1">#This is a positive as in yes label</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Agreement_Statement_E</span> <span class="o">=</span> <span class="s2">&quot;Equal&quot;</span> <span class="c1">#This is a neutral as in I don&#39;t know or meh label.</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Agreement_Statement_B</span> <span class="o">=</span> <span class="s2">&quot;Alternative B&quot;</span> <span class="c1">#This is a negative as in no label.</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Welcome_Statement</span> <span class="o">=</span> <span class="s2">&quot;This is a welcoming statement to bring the user comfortably into the decision.&quot;</span>
+
+	<span class="c1">##Build a secnearion SBuild = Secnario build</span>
+	<span class="c1">#X is condtion, y is which statement to replace</span>
+<div class="viewcode-block" id="GTimeTradeOff.SBuild"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.GTimeTradeOff.SBuild">[docs]</a>	<span class="k">def</span> <span class="nf">SBuild</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Replaces text with health state for Scenario Statement</span>
+<span class="sd">		</span>
+<span class="sd">		:param x: The Health state</span>
+<span class="sd">		:type x: str	</span>
+<span class="sd">		:param y: The health state order as it appears on administration page</span>
+<span class="sd">		:type y: int				</span>
+<span class="sd">		</span>
+<span class="sd">		:returns: Statement with health state</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+
+		<span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">3</span> <span class="p">:</span>
+				<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement3</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@#@&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+				<span class="k">return</span> <span class="n">z</span>
+		<span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">4</span> <span class="p">:</span>
+				<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement4</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@#@&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+				<span class="k">return</span> <span class="n">z</span>
+		<span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">5</span> <span class="p">:</span>
+				<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement5</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@#@&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+				<span class="k">return</span> <span class="n">z</span>
+		<span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">6</span> <span class="p">:</span>
+				<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement6</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@#@&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+				<span class="k">return</span> <span class="n">z</span>
+		<span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">7</span> <span class="p">:</span>
+				<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement7</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@#@&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+				<span class="k">return</span> <span class="n">z</span>
+		<span class="k">else</span><span class="p">:</span>
+				<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@#@&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+				<span class="k">return</span> <span class="n">z</span></div>
+
+	<span class="c1">##Build a secnearion CBuild = Choosing Statement build</span>
+	<span class="c1">#X is condtion, y is which statement to replace	</span>
+<span class="c1">#	Describe Choice for User. \&quot;$#$ *#*  out of &amp;#&amp; for The Life Time with *#* being time units and %#% *#* out of &amp;#&amp; *#* for The Dead Time  with *#* being time units.\&quot; to describe the choice and \&quot; or suffer from $#$ \&quot;. to designate the place for the health state</span>
+<span class="c1">## @#@ &lt;- Live Time &amp;#&amp; &lt;-Total Time %#% &lt;-Dead Time @#@ &lt;-Intermediate Health state  *#* &lt;-Timetrade units</span>
+<div class="viewcode-block" id="GTimeTradeOff.CBuild"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.GTimeTradeOff.CBuild">[docs]</a>	<span class="k">def</span> <span class="nf">CBuild</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">w</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Replaces text with health state for Scenario Statement</span>
+<span class="sd">		</span>
+<span class="sd">		:param x: The Health state</span>
+<span class="sd">		:type x: str	</span>
+<span class="sd">		:param y: The health state order as it appears on administration page</span>
+<span class="sd">		:type y: int				</span>
+<span class="sd">		</span>
+<span class="sd">		:returns: Statement with health state</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+
+		<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Choosing_Statement</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;$#$&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+		<span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;#&amp;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+		<span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@#@&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+		<span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;*#*&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+		<span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%#%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">)))</span>
+		<span class="k">return</span> <span class="n">z</span></div>
+		
+<div class="viewcode-block" id="GTimeTradeOff.load"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.GTimeTradeOff.load">[docs]</a>	<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titleid</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">		Load information for Time Trade off page</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str	</span>
+<span class="sd">		:param Scenario_Statement: The scenario statement that includes the second health state as ordered in the admin page</span>
+<span class="sd">		:type Scenario_Statement: str</span>
+<span class="sd">		:param Scenario_Statement3: The scenario statement that includes the third health state as ordered in the admin page</span>
+<span class="sd">		:type Scenario_Statement3: str</span>
+<span class="sd">		:param Scenario_Statement4: The scenario statement that includes the fourth health state as ordered in the admin page</span>
+<span class="sd">		:type Scenario_Statement4: str</span>
+<span class="sd">		:param Scenario_Statement5: The scenario statement that includes the fifth health state as ordered in the admin page</span>
+<span class="sd">		:type Scenario_Statement5: str</span>
+<span class="sd">		:param Scenario_Statement6: The scenario statement that includes the sixth health state as ordered in the admin page</span>
+<span class="sd">		:type Scenario_Statement6: str</span>
+<span class="sd">		:param Scenario_Statement7: The scenario statement that includes the seventh health state as ordered in the admin page</span>
+<span class="sd">		:type Scenario_Statement7: str		</span>
+<span class="sd">		:param Choosing_Statement: This statement explains to users to make the choices in the Gambler health state</span>
+<span class="sd">		:type Choosing_Statement: str</span>
+<span class="sd">		:param Benefits_Statement: This statement explains part of the Tradeoff that&#39;s beneficial to users</span>
+<span class="sd">		:type Scenario_Statement: str</span>
+<span class="sd">		:param Sideeffects_Statement: This statement explains the negative effects of taking the Tradeoff to users</span>
+<span class="sd">		:type Scenario_Statement: str		</span>
+<span class="sd">		:param Agreement_Statement_A: Left side button normally used to choose the health state</span>
+<span class="sd">		:type Agreement_Statement_A: str		</span>
+<span class="sd">		:param Agreement_Statement_E: Middle button normally to end the Tradeoff</span>
+<span class="sd">		:type Agreement_Statement_E: str		</span>
+<span class="sd">		:param Agreement_Statement_B: Right side button normally used to choose The Tradeoff</span>
+<span class="sd">		:type Agreement_Statement_B: str	</span>
+<span class="sd">		:param Welcome_Statement: The introduction statement used to welcome patients to the Time Trade off screen</span>
+<span class="sd">		:type Welcome_Statement: str				</span>
+<span class="sd">		</span>
+<span class="sd">		:returns: Loaded information to self</span>
+
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+			<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">TimeScen</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetScenario</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement3</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetScenarioThree</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement4</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetScenarioFour</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement5</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetScenarioFive</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement6</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetScenarioSix</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Scenario_Statement7</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetScenarioSeven</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">Choosing_Statement</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetChoosing</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Sideeffects_Statement</span><span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetSideeffects</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Benefits_Statement</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetBenefits</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Agreement_Statement_A</span><span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetAgreementA</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Agreement_Statement_E</span><span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetAgreementE</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Agreement_Statement_B</span><span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetAgreementB</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Welcome_Statement</span> <span class="o">=</span> <span class="n">TimeScen</span><span class="o">.</span><span class="n">timetWelcome</span></div></div>
+
+<span class="c1">#################################################################################</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#							Time Trade Off Calculations							#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#</span>
+<span class="c1">#																				#																				</span>
+<span class="c1">#################################################################################</span>
+
+<span class="c1">#################################################################################</span>
+<span class="c1">#Creating a class for the Time Tradeoff so that values are accessible as an object</span>
+<span class="c1">#By doing this class setup now, it should be easy to import values</span>
+<span class="c1">#More importantly, it should make for cleaner code</span>
+<span class="c1">#TimeTradeOff has </span>
+<div class="viewcode-block" id="TimeTradeOff"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.TimeTradeOff">[docs]</a><span class="k">class</span> <span class="nc">TimeTradeOff</span><span class="p">:</span>
+	<span class="c1">#When speaking of iterative that means you iterate or update values </span>
+	<span class="c1">#</span>
+	<span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="mi">40</span>  <span class="c1">#Starting and iterative time threshold</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">thresh_step_high</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#High increment of stepping for best value</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">threshold_max</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">#math.ceiling value</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">threshold_min</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#math.floor value</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">thresh_step_refine</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#Small increment refinement</span>
+<span class="c1">#################################################################################</span>
+<span class="c1">#Load Information</span>
+<div class="viewcode-block" id="TimeTradeOff.load"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.TimeTradeOff.load">[docs]</a>	<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titleid</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">g</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Load information to the Gambler for Time trade off</span>
+<span class="sd">		</span>
+<span class="sd">		:param titleid: The titleid (foldername) of the Gambler project</span>
+<span class="sd">		:type titleid: str	</span>
+<span class="sd">		:param a: Age of user</span>
+<span class="sd">		:type a: int	</span>
+<span class="sd">		:param r: Race of user</span>
+<span class="sd">		:type r: str	</span>
+<span class="sd">		:param h: Hispanic/Latino designation</span>
+<span class="sd">		:type h: int	</span>
+<span class="sd">		:param g: Gender of user</span>
+<span class="sd">		:type g: str</span>
+<span class="sd">				</span>
+<span class="sd">		:return: Value of whether to do the Time trade off in years (0) or months (1)</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+			<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">TimeTLog</span> <span class="o">=</span> <span class="n">GamblerInfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">GamblerInfo</span><span class="o">.</span><span class="n">titleid</span><span class="o">==</span><span class="n">titleid</span><span class="p">)</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aqle</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="p">(</span><span class="n">TimeTLog</span><span class="o">.</span><span class="n">inittimeThresh</span><span class="o">/</span><span class="mf">100.0</span><span class="p">))</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">thresh_step_high</span> <span class="o">=</span> <span class="p">(</span><span class="n">TimeTLog</span><span class="o">.</span><span class="n">postimetThresh</span><span class="p">)</span> <span class="c1">#High increment of stepping for best value</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">thresh_step_refine</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1">#Refining stepping for best value</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">threshold_max</span> <span class="o">=</span> <span class="n">z</span>
+		<span class="c1">##POsisble bug, figure out how to do min time trhesh</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">threshold_min</span> <span class="o">=</span> <span class="n">TimeTLog</span><span class="o">.</span><span class="n">mintimetThresh</span>  <span class="c1">#math.floor valu  	</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">z</span> <span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">*</span><span class="mf">12.0</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">threshold_max</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span><span class="mf">12.0</span> <span class="c1">#math.ceiling value</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">threshold_min</span> <span class="o">=</span> <span class="n">TimeTLog</span><span class="o">.</span><span class="n">mintimetThresh</span><span class="o">*</span><span class="mf">12.0</span>  <span class="c1">#math.floor valuue</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">thresh_step_refine</span> <span class="o">=</span> <span class="mi">1</span> 
+			<span class="k">return</span> <span class="mi">1</span>
+		<span class="k">return</span> <span class="mi">0</span></div>
+<span class="c1">#################################################################################</span>
+<span class="c1">#Aquire the life expectancy</span>
+<div class="viewcode-block" id="TimeTradeOff.aqle"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.TimeTradeOff.aqle">[docs]</a>	<span class="k">def</span> <span class="nf">aqle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">g</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Aquire life expectancy for users </span>
+<span class="sd">		:param a: Age of user</span>
+<span class="sd">		:type a: int	</span>
+<span class="sd">		:param r: Race of user</span>
+<span class="sd">		:type r: str	</span>
+<span class="sd">		:param h: Hispanic/Latino designation</span>
+<span class="sd">		:type h: int	</span>
+<span class="sd">		:param g: Gender of user</span>
+<span class="sd">		:type g: str</span>
+<span class="sd">				</span>
+<span class="sd">		:return: Life expectancy of user (int)</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">is_closed</span><span class="p">()</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+			<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+		<span class="n">q</span> <span class="o">=</span> <span class="n">LifeTable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">LifeTable</span><span class="o">.</span><span class="n">Age</span> <span class="o">==</span><span class="n">a</span><span class="p">)</span>	
+		<span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>		
+		<span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="s1">&#39;blk&#39;</span><span class="p">:</span> <span class="c1">#African American/Black Patients</span>
+			<span class="k">if</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;M&quot;</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">AAMale</span><span class="p">)</span>			
+			<span class="k">elif</span> <span class="n">g</span><span class="o">==</span><span class="s2">&quot;F&quot;</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">AAFemale</span><span class="p">)</span>		
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">r</span> <span class="o">==</span><span class="s1">&#39;asn&#39;</span><span class="p">:</span> <span class="c1">#ASIAN Paitnets</span>
+			<span class="k">if</span> <span class="n">h</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;M&quot;</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">ASMale</span><span class="p">)</span>		
+				<span class="k">elif</span> <span class="n">g</span><span class="o">==</span><span class="s2">&quot;F&quot;</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">ASFemale</span><span class="p">)</span>		
+				<span class="k">else</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">Asian</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">r</span> <span class="o">==</span><span class="s1">&#39;hpi&#39;</span><span class="p">:</span> <span class="c1">#Pacific Islander Patients</span>
+			<span class="k">if</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;M&quot;</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">ASMale</span><span class="p">)</span>		
+			<span class="k">elif</span> <span class="n">g</span><span class="o">==</span><span class="s2">&quot;F&quot;</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">ASFemale</span><span class="p">)</span>		
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">Asian</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">r</span> <span class="o">==</span><span class="s1">&#39;NAmerican&#39;</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;M&quot;</span><span class="p">:</span><span class="c1">#Native/Alaskan Indigenous  Patients</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">NAMale</span><span class="p">)</span>		
+			<span class="k">elif</span> <span class="n">g</span><span class="o">==</span><span class="s2">&quot;F&quot;</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">NAFemale</span><span class="p">)</span>		
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">NAmerican</span><span class="p">)</span>	
+		<span class="k">elif</span> <span class="n">r</span> <span class="o">==</span><span class="s1">&#39;wht&#39;</span><span class="p">:</span> <span class="c1">#White Patients</span>
+			<span class="k">if</span> <span class="n">h</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;M&quot;</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">WHMale</span><span class="p">)</span>		
+				<span class="k">elif</span> <span class="n">g</span><span class="o">==</span><span class="s2">&quot;F&quot;</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">WHFemale</span><span class="p">)</span>		
+				<span class="k">else</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">WHispanic</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;M&quot;</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">WMale</span><span class="p">)</span>		
+				<span class="k">elif</span> <span class="n">g</span><span class="o">==</span><span class="s2">&quot;F&quot;</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">WFemale</span><span class="p">)</span>		
+				<span class="k">else</span><span class="p">:</span>
+					<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">White</span><span class="p">)</span>		
+		<span class="k">else</span><span class="p">:</span> <span class="c1">#Generic Infromation</span>
+			<span class="k">if</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;M&quot;</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">Male</span><span class="p">)</span>		
+			<span class="k">elif</span> <span class="n">g</span> <span class="o">==</span><span class="s2">&quot;F&quot;</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">Female</span><span class="p">)</span>		
+
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">Citizen</span><span class="p">)</span>		</div>
+
+<span class="c1">#################################################################################</span>
+<span class="c1">#Calculating the time trade off		</span>
+<div class="viewcode-block" id="TimeTradeOff.refine_threshold"><a class="viewcode-back" href="../logic_timetradeoff.html#logic_timetradeoff.TimeTradeOff.refine_threshold">[docs]</a>	<span class="k">def</span> <span class="nf">refine_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span><span class="n">mys</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span> 	<span class="c1">#mys = months year switch</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Calculates the increment of the tradeoff percentage and returns new value</span>
+<span class="sd">		</span>
+<span class="sd">		:param user_input: The user input/button press a person has done for either Alternative A or B</span>
+<span class="sd">		:type user_input: int</span>
+<span class="sd">		:param count: How many times a person has clicked either Alternative A or B</span>
+<span class="sd">		:type count: int</span>
+<span class="sd">		:param th: Current years/months in the trade off</span>
+<span class="sd">		:type th: int</span>
+<span class="sd">		:param mys: Months or years state for user</span>
+<span class="sd">		:type mys: int</span>
+<span class="sd">						</span>
+<span class="sd">		:return: int</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="n">fvalue</span> <span class="o">=</span> <span class="mi">0</span>
+		
+		<span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+			<span class="n">fvalue</span> <span class="o">=</span>  <span class="n">th</span> <span class="o">+</span> <span class="n">user_input</span><span class="o">*</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threshold_max</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thresh_step_high</span><span class="o">/</span><span class="mf">100.0</span><span class="p">))</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="c1">#We&#39;re going to make an estimation that noone&#39;s going to want to swing more than 25% of the years when refining.</span>
+			<span class="c1">#Create a holder</span>
+			<span class="n">thr</span> <span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">user_input</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cospoints</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threshold_max</span><span class="o">*</span><span class="mf">0.25</span><span class="p">)))</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+				<span class="n">thr</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">user_input</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span> <span class="c1">#We&#39;re going to make an educated guess that the next number jump will be 1 if the value of thr is 0 This is optimum for &lt; 100 afterwards, it doesn&#39;t really matter</span>
+			<span class="n">fvalue</span> <span class="o">=</span> <span class="n">th</span> <span class="o">+</span> <span class="n">thr</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">fvalue</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold_max</span><span class="p">):</span>
+			<span class="n">fvalue</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold_max</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="n">fvalue</span>  <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold_min</span><span class="p">):</span>
+			<span class="n">fvalue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold_min</span>
+			
+<span class="c1">#This rounds to either full months if calculating by fraction of years if calculating by years</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">mys</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+			<span class="n">fvalue</span> <span class="o">=</span>  <span class="nb">round</span><span class="p">(</span><span class="n">fvalue</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">fvalue</span> <span class="o">=</span>  <span class="nb">round</span><span class="p">(</span><span class="n">fvalue</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>		
+
+		<span class="k">return</span> <span class="n">fvalue</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">The Gambler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../BaseModel.html">BaseModel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ConditionInfo.html">ConditionInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GamblerSetup.html">GamblerSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ReverseProxy.html">ReverseProxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserData.html">UserData module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserInfo.html">UserInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../VideoSetup.html">VideoSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin.html">admin module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gdpr.html">gdpr module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demographics.html">demographics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logic_gambler.html">logic_gambler module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logic_timetradeoff.html">logic_timetradeoff module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../language_pack.html">language_pack module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mainapp.html">mainapp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsgi.html">wsgi module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Adeboye A. Adejare Jr..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

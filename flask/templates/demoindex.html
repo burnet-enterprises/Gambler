@@ -1,0 +1,9 @@
+<!-- HTML with JS and Jinja -->
+{% extends "base.html" %}
+{%block content%}
+<form action="intro" method="POST">
+<div class="container">
+  <div class="jumbotron">
+    <h1>The Gambler</h1><p>{{Title_Program}} </p><p>{{Status_Text}}</p> </div></div>
+<p><button  class="btn btn-lg btn-primary" type="submit">Start</button></p>
+{% endblock%}

@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>UserInfo module &#8212; The Gambler 3.7 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VideoSetup module" href="VideoSetup.html" />
+    <link rel="prev" title="UserData module" href="UserData.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-UserInfo">
+<span id="userinfo-module"></span><h1>UserInfo module<a class="headerlink" href="#module-UserInfo" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="UserInfo.UserInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">UserInfo.</span></span><span class="sig-name descname"><span class="pre">UserInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/UserInfo.html#UserInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#UserInfo.UserInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="BaseModel.html#BaseModel.ModelBase" title="BaseModel.ModelBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelBase</span></code></a></p>
+<p>Databaase model for user information including demographics and health utilities.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#UserInfo.UserInfo.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">UserInfoDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.age">
+<span class="sig-name descname"><span class="pre">age</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.age&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.age" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambEight">
+<span class="sig-name descname"><span class="pre">finalconditionGambEight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambEight&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambEight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambFive">
+<span class="sig-name descname"><span class="pre">finalconditionGambFive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambFive&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambFive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambFour">
+<span class="sig-name descname"><span class="pre">finalconditionGambFour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambFour&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambFour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambOne">
+<span class="sig-name descname"><span class="pre">finalconditionGambOne</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambOne&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambOne" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambSeven">
+<span class="sig-name descname"><span class="pre">finalconditionGambSeven</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambSeven&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambSeven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambSix">
+<span class="sig-name descname"><span class="pre">finalconditionGambSix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambSix&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambSix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambThree">
+<span class="sig-name descname"><span class="pre">finalconditionGambThree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambThree&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambThree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionGambTwo">
+<span class="sig-name descname"><span class="pre">finalconditionGambTwo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionGambTwo&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionGambTwo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensityEight">
+<span class="sig-name descname"><span class="pre">finalconditionIntensityEight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensityEight&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensityEight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensityFive">
+<span class="sig-name descname"><span class="pre">finalconditionIntensityFive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensityFive&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensityFive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensityFour">
+<span class="sig-name descname"><span class="pre">finalconditionIntensityFour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensityFour&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensityFour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensityOne">
+<span class="sig-name descname"><span class="pre">finalconditionIntensityOne</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensityOne&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensityOne" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensitySeven">
+<span class="sig-name descname"><span class="pre">finalconditionIntensitySeven</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensitySeven&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensitySeven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensitySix">
+<span class="sig-name descname"><span class="pre">finalconditionIntensitySix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensitySix&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensitySix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensityThree">
+<span class="sig-name descname"><span class="pre">finalconditionIntensityThree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensityThree&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensityThree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionIntensityTwo">
+<span class="sig-name descname"><span class="pre">finalconditionIntensityTwo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionIntensityTwo&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionIntensityTwo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderEight">
+<span class="sig-name descname"><span class="pre">finalconditionOrderEight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderEight&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderEight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderFive">
+<span class="sig-name descname"><span class="pre">finalconditionOrderFive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderFive&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderFive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderFour">
+<span class="sig-name descname"><span class="pre">finalconditionOrderFour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderFour&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderFour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderOne">
+<span class="sig-name descname"><span class="pre">finalconditionOrderOne</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderOne&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderOne" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderSeven">
+<span class="sig-name descname"><span class="pre">finalconditionOrderSeven</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderSeven&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderSeven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderSix">
+<span class="sig-name descname"><span class="pre">finalconditionOrderSix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderSix&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderSix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderThree">
+<span class="sig-name descname"><span class="pre">finalconditionOrderThree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderThree&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderThree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionOrderTwo">
+<span class="sig-name descname"><span class="pre">finalconditionOrderTwo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.finalconditionOrderTwo&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionOrderTwo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTEight">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTEight</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTEight&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTEight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTFive">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTFive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTFive&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTFive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTFour">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTFour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTFour&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTFour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTOne">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTOne</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTOne&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTOne" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTSeven">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTSeven</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTSeven&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTSeven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTSix">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTSix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTSix&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTSix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTThree">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTThree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTThree&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTThree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.finalconditionTimeTTwo">
+<span class="sig-name descname"><span class="pre">finalconditionTimeTTwo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.finalconditionTimeTTwo&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.finalconditionTimeTTwo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.firstname">
+<span class="sig-name descname"><span class="pre">firstname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.firstname&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.firstname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.gender">
+<span class="sig-name descname"><span class="pre">gender</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.gender&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.gender" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.hld">
+<span class="sig-name descname"><span class="pre">hld</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserInfo.hld&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.hld" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.lastname">
+<span class="sig-name descname"><span class="pre">lastname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.lastname&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.lastname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.race">
+<span class="sig-name descname"><span class="pre">race</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.race&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.race" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.titleid">
+<span class="sig-name descname"><span class="pre">titleid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.titleid&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.titleid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.uid">
+<span class="sig-name descname"><span class="pre">uid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">UserInfo.uid&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.uid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserInfo.userid">
+<span class="sig-name descname"><span class="pre">userid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserInfo.userid&gt;</span></em><a class="headerlink" href="#UserInfo.UserInfo.userid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">UserInfo.</span></span><span class="sig-name descname"><span class="pre">UserMetaData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/UserInfo.html#UserMetaData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#UserInfo.UserMetaData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="BaseModel.html#BaseModel.ModelBase" title="BaseModel.ModelBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelBase</span></code></a></p>
+<p>Database model for user meta data including the project and what they clicked on.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#UserInfo.UserMetaData.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">UserMetaDataDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.buttonPress">
+<span class="sig-name descname"><span class="pre">buttonPress</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserMetaData.buttonPress&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.buttonPress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionEightTime">
+<span class="sig-name descname"><span class="pre">conditionEightTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionEightTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionEightTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionEightVideoTime">
+<span class="sig-name descname"><span class="pre">conditionEightVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionEightVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionEightVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionFiveTime">
+<span class="sig-name descname"><span class="pre">conditionFiveTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionFiveTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionFiveTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionFiveVideoTime">
+<span class="sig-name descname"><span class="pre">conditionFiveVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionFiveVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionFiveVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionFourTime">
+<span class="sig-name descname"><span class="pre">conditionFourTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionFourTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionFourTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionFourVideoTime">
+<span class="sig-name descname"><span class="pre">conditionFourVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionFourVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionFourVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionOneTime">
+<span class="sig-name descname"><span class="pre">conditionOneTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionOneTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionOneTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionOneVideoTime">
+<span class="sig-name descname"><span class="pre">conditionOneVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionOneVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionOneVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionSevenTime">
+<span class="sig-name descname"><span class="pre">conditionSevenTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionSevenTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionSevenTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionSevenVideoTime">
+<span class="sig-name descname"><span class="pre">conditionSevenVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionSevenVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionSevenVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionSixTime">
+<span class="sig-name descname"><span class="pre">conditionSixTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionSixTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionSixTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionSixVideoTime">
+<span class="sig-name descname"><span class="pre">conditionSixVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionSixVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionSixVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionThreeTime">
+<span class="sig-name descname"><span class="pre">conditionThreeTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionThreeTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionThreeTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionThreeVideoTime">
+<span class="sig-name descname"><span class="pre">conditionThreeVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionThreeVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionThreeVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionTwoTime">
+<span class="sig-name descname"><span class="pre">conditionTwoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionTwoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionTwoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.conditionTwoVideoTime">
+<span class="sig-name descname"><span class="pre">conditionTwoVideoTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;DoubleField:</span> <span class="pre">UserMetaData.conditionTwoVideoTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.conditionTwoVideoTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.currentPage">
+<span class="sig-name descname"><span class="pre">currentPage</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserMetaData.currentPage&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.currentPage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.entryid">
+<span class="sig-name descname"><span class="pre">entryid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">UserMetaData.entryid&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.entryid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.gambleid">
+<span class="sig-name descname"><span class="pre">gambleid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserMetaData.gambleid&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.gambleid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.titleid">
+<span class="sig-name descname"><span class="pre">titleid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserMetaData.titleid&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.titleid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.totalTime">
+<span class="sig-name descname"><span class="pre">totalTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">UserMetaData.totalTime&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.totalTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserInfo.UserMetaData.userid">
+<span class="sig-name descname"><span class="pre">userid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">UserMetaData.userid&gt;</span></em><a class="headerlink" href="#UserInfo.UserMetaData.userid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">The Gambler</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BaseModel.html">BaseModel module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ConditionInfo.html">ConditionInfo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GamblerSetup.html">GamblerSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReverseProxy.html">ReverseProxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UserData.html">UserData module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">UserInfo module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#UserInfo.UserInfo"><code class="docutils literal notranslate"><span class="pre">UserInfo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">UserInfo.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.age"><code class="docutils literal notranslate"><span class="pre">UserInfo.age</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambEight"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambEight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambFive"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambFive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambFour"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambFour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambOne"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambOne</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambSeven"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambSeven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambSix"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambSix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambThree"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambThree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionGambTwo"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionGambTwo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensityEight"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensityEight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensityFive"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensityFive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensityFour"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensityFour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensityOne"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensityOne</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensitySeven"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensitySeven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensitySix"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensitySix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensityThree"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensityThree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionIntensityTwo"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionIntensityTwo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderEight"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderEight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderFive"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderFive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderFour"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderFour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderOne"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderOne</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderSeven"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderSeven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderSix"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderSix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderThree"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderThree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionOrderTwo"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionOrderTwo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTEight"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTEight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTFive"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTFive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTFour"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTFour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTOne"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTOne</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTSeven"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTSeven</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTSix"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTSix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTThree"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTThree</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.finalconditionTimeTTwo"><code class="docutils literal notranslate"><span class="pre">UserInfo.finalconditionTimeTTwo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.firstname"><code class="docutils literal notranslate"><span class="pre">UserInfo.firstname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.gender"><code class="docutils literal notranslate"><span class="pre">UserInfo.gender</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.hld"><code class="docutils literal notranslate"><span class="pre">UserInfo.hld</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.lastname"><code class="docutils literal notranslate"><span class="pre">UserInfo.lastname</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.race"><code class="docutils literal notranslate"><span class="pre">UserInfo.race</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.titleid"><code class="docutils literal notranslate"><span class="pre">UserInfo.titleid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.uid"><code class="docutils literal notranslate"><span class="pre">UserInfo.uid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserInfo.userid"><code class="docutils literal notranslate"><span class="pre">UserInfo.userid</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#UserInfo.UserMetaData"><code class="docutils literal notranslate"><span class="pre">UserMetaData</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">UserMetaData.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.buttonPress"><code class="docutils literal notranslate"><span class="pre">UserMetaData.buttonPress</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionEightTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionEightTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionEightVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionEightVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionFiveTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionFiveTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionFiveVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionFiveVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionFourTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionFourTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionFourVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionFourVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionOneTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionOneTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionOneVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionOneVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionSevenTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionSevenTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionSevenVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionSevenVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionSixTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionSixTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionSixVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionSixVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionThreeTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionThreeTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionThreeVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionThreeVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionTwoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionTwoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.conditionTwoVideoTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.conditionTwoVideoTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.currentPage"><code class="docutils literal notranslate"><span class="pre">UserMetaData.currentPage</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.entryid"><code class="docutils literal notranslate"><span class="pre">UserMetaData.entryid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.gambleid"><code class="docutils literal notranslate"><span class="pre">UserMetaData.gambleid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.titleid"><code class="docutils literal notranslate"><span class="pre">UserMetaData.titleid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.totalTime"><code class="docutils literal notranslate"><span class="pre">UserMetaData.totalTime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UserInfo.UserMetaData.userid"><code class="docutils literal notranslate"><span class="pre">UserMetaData.userid</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VideoSetup.html">VideoSetup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">admin module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdpr.html">gdpr module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demographics.html">demographics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic_gambler.html">logic_gambler module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logic_timetradeoff.html">logic_timetradeoff module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="language_pack.html">language_pack module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mainapp.html">mainapp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsgi.html">wsgi module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="UserData.html" title="previous chapter">UserData module</a></li>
+      <li>Next: <a href="VideoSetup.html" title="next chapter">VideoSetup module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Adeboye A. Adejare Jr..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/UserInfo.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

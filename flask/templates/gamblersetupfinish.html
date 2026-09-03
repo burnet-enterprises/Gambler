@@ -1,0 +1,30 @@
+{%extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<!-- In <head> -->
+<style type="text/css" >
+#imagedis {
+	display: inline-block;
+}
+#textinfo {
+	display: flex;
+	width: 320px;
+    padding: 10px;
+    margin: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h2>{{Status_Text}}</h2>
+  </div>
+<a href="../" class="btn btn-info" role="button">Home</a> <a href="../gamblersetup" class="btn btn-info" role="button">Create/Edit Gambler Project</a>
+
+ </div> 
+
+
+{%endblock%}
